@@ -1,0 +1,510 @@
+TAppleScript
+v7
+r0
+t322399511.331270
+cCheck dependencies
+cProcessInfoPlistFile /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Info.plist Info.plist
+cCpResource build/Development/AppleScript.plugin/Contents/Resources/English.lproj/AppleScript.xml English.lproj/AppleScript.xml
+cStripNIB /Users/oni/Downloads/AppleScript/English.lproj/AppleScriptUI.nib
+cCpResource build/Development/AppleScript.plugin/Contents/Resources/AppleScriptKit.sdef AppleScriptKit.sdef
+cProcessPCH /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppleScript_Prefix-aldpwntjxpwqrjabhoogvknnfspl/AppleScript_Prefix.pch.gch AppleScript_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cOSACompile Application.applescript
+cCompileC build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScript.o /Users/oni/Downloads/AppleScript/AppleScript.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScriptPrincipal.o /Users/oni/Downloads/AppleScript/AppleScriptPrincipal.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScriptUI.o /Users/oni/Downloads/AppleScript/AppleScriptUI.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/MacOS/AppleScript normal x86_64
+cPhaseScriptExecution Install /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Script-2BA4226B0BFBAF8300DE1E36.sh
+cTouch /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin
+
+N/Developer/SDKs/MacOSX10.6.sdk
+c000000004CAA740B00000000000000EE
+t1286239243
+s238
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/AppKit.framework/Headers/AppKit.h
+c000000004C23BD2900000000000017ED
+t1277410601
+s6125
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/AppleScriptKit.framework/AppleScriptKit
+c000000004CAA74040000000000026C50
+t1286239236
+s158800
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/AppleScriptKit.framework/Headers/ASKPluginObject.h
+c000000004C23D3E400000000000000C1
+t1277416420
+s193
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
+c0000000040C4AA6800000000000001E5
+t1086630504
+s485
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004C23AA0400000000000013E6
+t1277405700
+s5094
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSAppleScript.h
+c000000004C23AA040000000000000C44
+t1277405700
+s3140
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/CVBase.h
+c000000004C23B7E7000000000000001E
+t1277409255
+s30
+
+N/System/Library/Frameworks/AppKit.framework/AppKit
+c000000004C623FBF0000000002B48610
+t1281507263
+s45385232
+
+N/System/Library/Frameworks/Cocoa.framework/Cocoa
+c000000004A1F2D63000000000000A5E0
+t1243557219
+s42464
+
+N/System/Library/Frameworks/CoreData.framework/CoreData
+c000000004B7485DE000000000052F740
+t1265927646
+s5437248
+
+N/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004CA8DA260000000000B3E910
+t1286134310
+s11790608
+
+N/System/Library/Frameworks/OpenGL.framework/OpenGL
+c000000004D22BC490000000000043330
+t1294122057
+s275248
+
+N/System/Library/Frameworks/Quartz.framework/Quartz
+c000000004A1249D4000000000000A5F0
+t1242712532
+s42480
+
+N/Users/oni/Downloads/AppleScript/AppleScript.h
+c000000004BF9F5E1000000000000020D
+t1274672609
+s525
+i"QCPatch.h"
+i"QCOpenGLContext.h"
+i"QCStringPort.h"
+
+N/Users/oni/Downloads/AppleScript/AppleScript.m
+c000000004BFB035500000000000004AE
+t1274741589
+s1198
+i"AppleScript.h"
+i"AppleScriptUI.h"
+i<AppKit/AppKit.h>
+i<Foundation/Foundation.h>
+i<Foundation/NSAppleScript.h>
+i<AppleScriptKit/ASKPluginObject.h>
+
+N/Users/oni/Downloads/AppleScript/AppleScriptKit.sdef
+c000000004A1F2E390000000000030B65
+t1243557433
+s199525
+
+N/Users/oni/Downloads/AppleScript/AppleScriptPrincipal.h
+c000000004BF9F57B00000000000000B1
+t1274672507
+s177
+i"QCProtocols.h"
+i"GFNodeManager.h"
+
+N/Users/oni/Downloads/AppleScript/AppleScriptPrincipal.m
+c000000004BF9F57B0000000000000198
+t1274672507
+s408
+i"AppleScriptPrincipal.h"
+i"AppleScript.h"
+
+N/Users/oni/Downloads/AppleScript/AppleScriptUI.h
+c000000004BF9F57B0000000000000099
+t1274672507
+s153
+i<Cocoa/Cocoa.h>
+i"QCPatch.h"
+i"QCInspector.h"
+
+N/Users/oni/Downloads/AppleScript/AppleScriptUI.m
+c000000004BF9F57B0000000000000127
+t1274672507
+s295
+i"AppleScriptUI.h"
+
+N/Users/oni/Downloads/AppleScript/AppleScript_Prefix.pch
+c000000004BF9F57B000000000000009A
+t1274672507
+s154
+i<Cocoa/Cocoa.h>
+
+N/Users/oni/Downloads/AppleScript/Application.applescript
+c000000004ABD51D9000000000000000D
+t1253921241
+s13
+
+N/Users/oni/Downloads/AppleScript/English.lproj/AppleScript.xml
+c000000004BF9F7B30000000000000317
+t1274673075
+s791
+
+N/Users/oni/Downloads/AppleScript/English.lproj/AppleScriptUI.nib
+c000000004BF9F57B00000000000000AA
+t1274672507
+s170
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/GFGraph.h
+c000000004BF9F57B00000000000009A2
+t1274672507
+s2466
+i<GFNode.h>
+i<GFList.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/GFList.h
+c000000004BF9F57B0000000000000861
+t1274672507
+s2145
+i"QCTypes.h"
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/GFNode.h
+c000000004BF9F57B0000000000000D2C
+t1274672507
+s3372
+i<QCProtocols.h>
+i<GFList.h>
+i<GFNodeClassDescription.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/GFNodeClassDescription.h
+c000000004BF9F57B00000000000002A7
+t1274672507
+s679
+i<GFList.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/GFNodeManager.h
+c000000004BF9F57B000000000000062C
+t1274672507
+s1580
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/GFPort.h
+c000000004BF9F57B00000000000003F9
+t1274672507
+s1017
+i<GFNode.h>
+i<GFPort.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCBooleanPort.h
+c000000004BF9F57B000000000000038B
+t1274672507
+s907
+i<QCPort.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCCGLContext.h
+c000000004BF9F57B0000000000000E2C
+t1274672507
+s3628
+i<QCResource.h>
+i<QCPixelFormat.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCCache.h
+c000000004BF9F57B0000000000000DC4
+t1274672507
+s3524
+i<QCProtocols.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCContext.h
+c000000004BF9F57B00000000000003A1
+t1274672507
+s929
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCGraphicsContext.h
+c000000004BF9F57B00000000000006B5
+t1274672507
+s1717
+i<QCContext.h>
+i<QCImageManager.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCImageManager.h
+c000000004BF9F57B0000000000001741
+t1274672507
+s5953
+i<QCProtocols.h>
+i<QCCGLContext.h>
+i<QCResourcePool.h>
+i<GFList.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCInspector.h
+c000000004BF9F57B0000000000000175
+t1274672507
+s373
+i<QCPatch.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCNumberPort.h
+c000000004BF9F57B0000000000000416
+t1274672507
+s1046
+i<QCPort.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCOpenGLContext.h
+c000000004BF9F57B0000000000000C6C
+t1274672507
+s3180
+i<QCGraphicsContext.h>
+i<QCCGLContext.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCPatch.h
+c000000004BF9F57B0000000000001EE6
+t1274672507
+s7910
+i<GFGraph.h>
+i<QCPatchRenderingInfo.h>
+i<QCRenderState.h>
+i<QCBooleanPort.h>
+i<QCNumberPort.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCPatchRenderingInfo.h
+c000000004BF9F57B000000000000021F
+t1274672507
+s543
+i<QCContext.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCPixelFormat.h
+c000000004BF9F57B00000000000002D7
+t1274672507
+s727
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCPort.h
+c000000004BF9F57B0000000000000966
+t1274672507
+s2406
+i<GFPort.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCProtocols.h
+c000000004BF9F57B000000000000157D
+t1274672507
+s5501
+i<QCTypes.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCRenderState.h
+c000000004BF9F57B00000000000000F7
+t1274672507
+s247
+i<QCContext.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCResource.h
+c000000004BF9F57B0000000000000187
+t1274672507
+s391
+i<QCResourcePool.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCResourcePool.h
+c000000004BF9F57B00000000000000C5
+t1274672507
+s197
+i<QCCache.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCStringPort.h
+c000000004BF9F57B0000000000000360
+t1274672507
+s864
+i<QCPort.h>
+
+N/Users/oni/Downloads/AppleScript/QuartzComposer/QCTypes.h
+c000000004BF9F57B00000000000008B1
+t1274672507
+s2225
+i<QuartzCore/CVBase.h>
+
+N/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScript.LinkFileList
+c000000004D872540000000000000017C
+t1300702528
+s380
+
+N/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScript.o
+t1300702536
+s29996
+
+N/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScriptPrincipal.o
+t1300702536
+s13340
+
+N/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScriptUI.o
+t1300702536
+s7516
+
+N/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Script-2BA4226B0BFBAF8300DE1E36.sh
+c000000004D87359600000000000000EE
+t1300706710
+s238
+
+N/Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin
+t2
+s0
+
+N/Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Info.plist
+t2
+s0
+
+N/Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/MacOS/AppleScript
+t2
+s0
+
+N/Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Resources/AppleScriptKit.sdef
+t2
+s0
+
+N/Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Resources/Application.scpt
+t2
+s0
+
+N/Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Resources/English.lproj/AppleScript.xml
+t2
+s0
+
+N/Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Resources/English.lproj/AppleScriptUI.nib
+t2
+s0
+
+N/var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppleScript_Prefix-aldpwntjxpwqrjabhoogvknnfspl/AppleScript_Prefix.pch.gch
+t1300702535
+s54220528
+
+NInfo.plist
+c000000004BF9F57B0000000000000316
+t1274672507
+s790
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies322399510#322399510#0(0"0(0#1#0"8624451072#0"0#
+
+CCompileC build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScript.o /Users/oni/Downloads/AppleScript/AppleScript.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s322395336.146231
+e322395336.616258
+r1
+xCompileC
+xbuild/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScript.o
+x/Users/oni/Downloads/AppleScript/AppleScript.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@54"Compile /Users/oni/Downloads/AppleScript/AppleScript.m322395336#322395336#0(0"0(0#0#46"/Users/oni/Downloads/AppleScript/AppleScript.m8619391264#1121"    cd /Users/oni/Downloads/AppleScript    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/AppleScript.hmap -F/Users/oni/Downloads/AppleScript/build/Development -I/Users/oni/Downloads/AppleScript/build/Development/include -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources/x86_64 -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources -include /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppleScript_Prefix-aldpwntjxpwqrjabhoogvknnfspl/AppleScript_Prefix.pch -c /Users/oni/Downloads/AppleScript/AppleScript.m -o /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScript.o0#
+
+CCompileC build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScriptPrincipal.o /Users/oni/Downloads/AppleScript/AppleScriptPrincipal.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s322395336.147014
+e322395336.543804
+r1
+xCompileC
+xbuild/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScriptPrincipal.o
+x/Users/oni/Downloads/AppleScript/AppleScriptPrincipal.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@63"Compile /Users/oni/Downloads/AppleScript/AppleScriptPrincipal.m322395336#322395336#0(0"0(0#0#55"/Users/oni/Downloads/AppleScript/AppleScriptPrincipal.m8603749792#1139"    cd /Users/oni/Downloads/AppleScript    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/AppleScript.hmap -F/Users/oni/Downloads/AppleScript/build/Development -I/Users/oni/Downloads/AppleScript/build/Development/include -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources/x86_64 -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources -include /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppleScript_Prefix-aldpwntjxpwqrjabhoogvknnfspl/AppleScript_Prefix.pch -c /Users/oni/Downloads/AppleScript/AppleScriptPrincipal.m -o /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScriptPrincipal.o0#
+
+CCompileC build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScriptUI.o /Users/oni/Downloads/AppleScript/AppleScriptUI.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s322395336.147901
+e322395336.544012
+r1
+xCompileC
+xbuild/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScriptUI.o
+x/Users/oni/Downloads/AppleScript/AppleScriptUI.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@56"Compile /Users/oni/Downloads/AppleScript/AppleScriptUI.m322395336#322395336#0(0"0(0#0#48"/Users/oni/Downloads/AppleScript/AppleScriptUI.m8619651872#1125"    cd /Users/oni/Downloads/AppleScript    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/AppleScript.hmap -F/Users/oni/Downloads/AppleScript/build/Development -I/Users/oni/Downloads/AppleScript/build/Development/include -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources/x86_64 -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources -include /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppleScript_Prefix-aldpwntjxpwqrjabhoogvknnfspl/AppleScript_Prefix.pch -c /Users/oni/Downloads/AppleScript/AppleScriptUI.m -o /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScriptUI.o0#
+
+CCpResource build/Development/AppleScript.plugin/Contents/Resources/AppleScriptKit.sdef AppleScriptKit.sdef
+s322399510.584406
+e322399510.616075
+r1
+xCpResource
+xbuild/Development/AppleScript.plugin/Contents/Resources/AppleScriptKit.sdef
+xAppleScriptKit.sdef
+lSLF07#2@24"Copy AppleScriptKit.sdef322399510#322399510#0(0"0(0#0#52"/Users/oni/Downloads/AppleScript/AppleScriptKit.sdef8618482656#344"    cd /Users/oni/Downloads/AppleScript    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/oni/Downloads/AppleScript/AppleScriptKit.sdef /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Resources0#
+
+CCpResource build/Development/AppleScript.plugin/Contents/Resources/English.lproj/AppleScript.xml English.lproj/AppleScript.xml
+s322399510.583325
+e322399510.606170
+r1
+xCpResource
+xbuild/Development/AppleScript.plugin/Contents/Resources/English.lproj/AppleScript.xml
+xEnglish.lproj/AppleScript.xml
+lSLF07#2@34"Copy English.lproj/AppleScript.xml322399510#322399510#0(0"0(0#0#62"/Users/oni/Downloads/AppleScript/English.lproj/AppleScript.xml8619730784#368"    cd /Users/oni/Downloads/AppleScript    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -resolve-src-symlinks /Users/oni/Downloads/AppleScript/English.lproj/AppleScript.xml /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Resources/English.lproj0#
+
+CLd /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/MacOS/AppleScript normal x86_64
+s322399510.938398
+e322399511.245888
+r1
+xLd
+x/Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/MacOS/AppleScript
+xnormal
+xx86_64
+lSLF07#2@101"Link /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/MacOS/AppleScript322399510#322399511#0(0"0(0#0#0"8602580832#749"    cd /Users/oni/Downloads/AppleScript    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -bundle -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/oni/Downloads/AppleScript/build/Development -F/Users/oni/Downloads/AppleScript/build/Development -filelist /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScript.LinkFileList -mmacosx-version-min=10.6 -framework Cocoa -framework OpenGL -framework Quartz -framework AppKit -framework CoreData -framework Foundation -framework AppleScriptKit -framework AppKit -framework CoreData -framework Foundation -o /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/MacOS/AppleScript0#
+
+COSACompile Application.applescript
+s322399510.937294
+e322399511.183548
+r1
+xOSACompile
+xApplication.applescript
+o2011-03-21 11:25:11.107 osacompile[21235:607] Error loading /Library/ScriptingAdditions/Adobe Unit Types.osax/Contents/MacOS/Adobe Unit Types:  dlopen(/Library/ScriptingAdditions/Adobe Unit Types.osax/Contents/MacOS/Adobe Unit Types, 262): no suitable image found.  Did find:
+o	/Library/ScriptingAdditions/Adobe Unit Types.osax/Contents/MacOS/Adobe Unit Types: no matching architecture in universal wrapper
+oosacompile: OpenScripting.framework - scripting addition "/Library/ScriptingAdditions/Adobe Unit Types.osax" declares no loadable handlers.
+lSLF07#2@31"Compile Application.applescript322399510#322399511#0(546"2011-03-21 11:25:11.107 osacompile[21235:607] Error loading /Library/ScriptingAdditions/Adobe Unit Types.osax/Contents/MacOS/Adobe Unit Types:  dlopen(/Library/ScriptingAdditions/Adobe Unit Types.osax/Contents/MacOS/Adobe Unit Types, 262): no suitable image found.  Did find:	/Library/ScriptingAdditions/Adobe Unit Types.osax/Contents/MacOS/Adobe Unit Types: no matching architecture in universal wrapperosacompile: OpenScripting.framework - scripting addition "/Library/ScriptingAdditions/Adobe Unit Types.osax" declares no loadable handlers.0(0#0#0"8608261280#215"    cd /Users/oni/Downloads/AppleScript    /usr/bin/osacompile -l AppleScript -d -o /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Resources/Application.scpt Application.applescript0#
+
+CPhaseScriptExecution Install /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Script-2BA4226B0BFBAF8300DE1E36.sh
+s322399511.245979
+e322399511.328860
+r1
+xPhaseScriptExecution
+xInstall
+x/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Script-2BA4226B0BFBAF8300DE1E36.sh
+lSLF07#2@33"Run custom shell script 'Install'322399511#322399511#0(0"0(0#0#0"8624510016#16332"    cd /Users/oni/Downloads/AppleScript    setenv ACTION build    setenv ALTERNATE_GROUP staff    setenv ALTERNATE_MODE u+w,go-w,a+rX    setenv ALTERNATE_OWNER oni    setenv ALWAYS_SEARCH_USER_PATHS YES    setenv APPLE_INTERNAL_DEVELOPER_DIR /AppleInternal/Developer    setenv APPLE_INTERNAL_DIR /AppleInternal    setenv APPLE_INTERNAL_DOCUMENTATION_DIR /AppleInternal/Documentation    setenv APPLE_INTERNAL_LIBRARY_DIR /AppleInternal/Library    setenv APPLE_INTERNAL_TOOLS /AppleInternal/Developer/Tools    setenv APPLY_RULES_IN_COPY_FILES NO    setenv ARCHS x86_64    setenv ARCHS_STANDARD_32_64_BIT "x86_64 i386 ppc"    setenv ARCHS_STANDARD_32_BIT "i386 ppc"    setenv ARCHS_STANDARD_64_BIT x86_64    setenv BUILD_COMPONENTS "headers build"    setenv BUILD_DIR /Users/oni/Downloads/AppleScript/build    setenv BUILD_ROOT /Users/oni/Downloads/AppleScript/build    setenv BUILD_STYLE Development    setenv BUILD_VARIANTS normal    setenv BUILT_PRODUCTS_DIR /Users/oni/Downloads/AppleScript/build/Development    setenv CACHE_ROOT /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501    setenv CCHROOT /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501    setenv CHMOD /bin/chmod    setenv CHOWN /usr/sbin/chown    setenv CLASS_FILE_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/JavaClasses    setenv CLEAN_PRECOMPS YES    setenv CLONE_HEADERS NO    setenv CODESIGNING_FOLDER_PATH /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin    setenv CODE_SIGNING_ALLOWED YES    setenv COMMAND_MODE legacy    setenv COMPOSITE_SDK_DIRS /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/CompositeSDKs    setenv CONFIGURATION Development    setenv CONFIGURATION_BUILD_DIR /Users/oni/Downloads/AppleScript/build/Development    setenv CONFIGURATION_TEMP_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development    setenv CONTENTS_FOLDER_PATH AppleScript.plugin/Contents    setenv COPYING_PRESERVES_HFS_DATA NO    setenv COPY_PHASE_STRIP NO    setenv COPY_RESOURCES_FROM_STATIC_FRAMEWORKS YES    setenv CP /bin/cp    setenv CURRENT_ARCH x86_64    setenv CURRENT_VARIANT normal    setenv DEAD_CODE_STRIPPING NO    setenv DEBUGGING_SYMBOLS YES    setenv DEBUG_INFORMATION_FORMAT dwarf    setenv DEPLOYMENT_LOCATION NO    setenv DEPLOYMENT_POSTPROCESSING NO    setenv DERIVED_FILES_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources    setenv DERIVED_FILE_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources    setenv DERIVED_SOURCES_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources    setenv DEVELOPER_APPLICATIONS_DIR /Developer/Applications    setenv DEVELOPER_BIN_DIR /Developer/usr/bin    setenv DEVELOPER_DIR /Developer    setenv DEVELOPER_FRAMEWORKS_DIR /Developer/Library/Frameworks    setenv DEVELOPER_FRAMEWORKS_DIR_QUOTED "\"/Developer/Library/Frameworks\""    setenv DEVELOPER_LIBRARY_DIR /Developer/Library    setenv DEVELOPER_SDK_DIR /Developer/SDKs    setenv DEVELOPER_TOOLS_DIR /Developer/Tools    setenv DEVELOPER_USR_DIR /Developer/usr    setenv DEVELOPMENT_LANGUAGE English    setenv DOCUMENTATION_FOLDER_PATH AppleScript.plugin/Contents/Resources/English.lproj/Documentation    setenv DO_HEADER_SCANNING_IN_JAM NO    setenv DSTROOT /tmp/AppleScript.dst    setenv DWARF_DSYM_FILE_NAME AppleScript.plugin.dSYM    setenv DWARF_DSYM_FOLDER_PATH /Users/oni/Downloads/AppleScript/build/Development    setenv ENABLE_HEADER_DEPENDENCIES YES    setenv ENABLE_OPENMP_SUPPORT NO    setenv EXCLUDED_INSTALLSRC_SUBDIRECTORY_PATTERNS ".svn .git CVS"    setenv EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES "*.nib *.lproj *.framework *.gch (*) CVS .svn .git *.xcodeproj *.xcode *.pbproj *.pbxproj"    setenv EXECUTABLES_FOLDER_PATH AppleScript.plugin/Contents/Executables    setenv EXECUTABLE_FOLDER_PATH AppleScript.plugin/Contents/MacOS    setenv EXECUTABLE_NAME AppleScript    setenv EXECUTABLE_PATH AppleScript.plugin/Contents/MacOS/AppleScript    setenv FILE_LIST /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects/LinkFileList    setenv FIXED_FILES_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/FixedFiles    setenv FRAMEWORKS_FOLDER_PATH AppleScript.plugin/Contents/Frameworks    setenv FRAMEWORK_FLAG_PREFIX -framework    setenv FRAMEWORK_SEARCH_PATHS "\"/Users/oni/Downloads/AppleScript/build/Development\" "    setenv FRAMEWORK_VERSION A    setenv FULL_PRODUCT_NAME AppleScript.plugin    setenv GCC3_VERSION 3.3    setenv GCC_DYNAMIC_NO_PIC NO    setenv GCC_ENABLE_FIX_AND_CONTINUE YES    setenv GCC_GENERATE_DEBUGGING_SYMBOLS YES    setenv GCC_INLINES_ARE_PRIVATE_EXTERN YES    setenv GCC_MODEL_TUNING G5    setenv GCC_OPTIMIZATION_LEVEL 0    setenv GCC_PFE_FILE_C_DIALECTS "c objective-c c++ objective-c++"    setenv GCC_PRECOMPILE_PREFIX_HEADER YES    setenv GCC_PREFIX_HEADER AppleScript_Prefix.pch    setenv GCC_TREAT_WARNINGS_AS_ERRORS NO    setenv GCC_VERSION 4.2    setenv GCC_WARN_ABOUT_RETURN_TYPE YES    setenv GCC_WARN_UNUSED_VARIABLE YES    setenv GENERATE_MASTER_OBJECT_FILE NO    setenv GENERATE_PKGINFO_FILE NO    setenv GENERATE_PROFILING_CODE NO    setenv GID 20    setenv GROUP staff    setenv HEADERMAP_INCLUDES_FLAT_ENTRIES_FOR_TARGET_BEING_BUILT YES    setenv HEADERMAP_INCLUDES_FRAMEWORK_ENTRIES_FOR_ALL_PRODUCT_TYPES YES    setenv HEADERMAP_INCLUDES_NONPUBLIC_NONPRIVATE_HEADERS YES    setenv HEADERMAP_INCLUDES_PROJECT_HEADERS YES    setenv HEADER_SEARCH_PATHS "\"/Users/oni/Downloads/AppleScript/build/Development/include\" "    setenv ICONV /usr/bin/iconv    setenv INFOPLIST_EXPAND_BUILD_SETTINGS YES    setenv INFOPLIST_FILE Info.plist    setenv INFOPLIST_OUTPUT_FORMAT same-as-input    setenv INFOPLIST_PATH AppleScript.plugin/Contents/Info.plist    setenv INFOPLIST_PREPROCESS NO    setenv INFOSTRINGS_PATH AppleScript.plugin/Contents/Resources/English.lproj/InfoPlist.strings    setenv INSTALL_DIR /tmp/AppleScript.dst/Users/oni/Library/Bundles    setenv INSTALL_GROUP staff    setenv INSTALL_MODE_FLAG u+w,go-w,a+rX    setenv INSTALL_OWNER oni    setenv INSTALL_PATH /Users/oni/Library/Bundles    setenv INSTALL_ROOT /tmp/AppleScript.dst    setenv JAVAC_DEFAULT_FLAGS "-J-Xms64m -J-XX:NewSize=4M -J-Dfile.encoding=UTF8"    setenv JAVA_APP_STUB /System/Library/Frameworks/JavaVM.framework/Resources/MacOS/JavaApplicationStub    setenv JAVA_ARCHIVE_CLASSES YES    setenv JAVA_ARCHIVE_TYPE JAR    setenv JAVA_COMPILER /usr/bin/javac    setenv JAVA_FOLDER_PATH AppleScript.plugin/Contents/Resources/Java    setenv JAVA_FRAMEWORK_RESOURCES_DIRS Resources    setenv JAVA_JAR_FLAGS cv    setenv JAVA_SOURCE_SUBDIR .    setenv JAVA_USE_DEPENDENCIES YES    setenv JAVA_ZIP_FLAGS -urg    setenv JIKES_DEFAULT_FLAGS "+E +OLDCSO"    setenv KEEP_PRIVATE_EXTERNS NO    setenv LD_GENERATE_MAP_FILE NO    setenv LD_MAP_FILE_PATH /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/AppleScript-LinkMap-normal-x86_64.txt    setenv LD_OPENMP_FLAGS -fopenmp    setenv LEX /Developer/usr/bin/lex    setenv LIBRARY_FLAG_NOSPACE YES    setenv LIBRARY_FLAG_PREFIX -l    setenv LIBRARY_SEARCH_PATHS "\"/Users/oni/Downloads/AppleScript/build/Development\" "    setenv LINKER_DISPLAYS_MANGLED_NAMES NO    setenv LINK_FILE_LIST_normal_x86_64 /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects-normal/x86_64/AppleScript.LinkFileList    setenv LINK_WITH_STANDARD_LIBRARIES YES    setenv LOCALIZED_RESOURCES_FOLDER_PATH AppleScript.plugin/Contents/Resources/English.lproj    setenv LOCAL_ADMIN_APPS_DIR /Applications/Utilities    setenv LOCAL_APPS_DIR /Applications    setenv LOCAL_DEVELOPER_DIR /Library/Developer    setenv LOCAL_LIBRARY_DIR /Library    setenv MACH_O_TYPE mh_bundle    setenv MACOSX_DEPLOYMENT_TARGET 10.6    setenv MAC_OS_X_VERSION_ACTUAL 1066    setenv MAC_OS_X_VERSION_MAJOR 1060    setenv MAC_OS_X_VERSION_MINOR 0606    setenv NATIVE_ARCH i386    setenv NATIVE_ARCH_32_BIT i386    setenv NATIVE_ARCH_64_BIT x86_64    setenv NATIVE_ARCH_ACTUAL x86_64    setenv NO_COMMON YES    setenv OBJECT_FILE_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects    setenv OBJECT_FILE_DIR_normal /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Objects-normal    setenv OBJROOT /Users/oni/Downloads/AppleScript/build    setenv ONLY_ACTIVE_ARCH NO    setenv OPTIMIZATION_LEVEL 0    setenv OS MACOS    setenv OSAC /usr/bin/osacompile    setenv PACKAGE_TYPE com.apple.package-type.wrapper    setenv PASCAL_STRINGS YES    setenv PATH_PREFIXES_EXCLUDED_FROM_HEADER_DEPENDENCIES "/usr/include /usr/local/include /System/Library/Frameworks /System/Library/PrivateFrameworks /Developer/Headers /Developer/SDKs /Developer/Platforms"    setenv PBDEVELOPMENTPLIST_PATH AppleScript.plugin/Contents/pbdevelopment.plist    setenv PFE_FILE_C_DIALECTS objective-c    setenv PKGINFO_FILE_PATH /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/PkgInfo    setenv PKGINFO_PATH AppleScript.plugin/Contents/PkgInfo    setenv PLATFORM_DEVELOPER_APPLICATIONS_DIR /Developer/Applications    setenv PLATFORM_DEVELOPER_BIN_DIR /Developer/usr/bin    setenv PLATFORM_DEVELOPER_LIBRARY_DIR /Developer/Library    setenv PLATFORM_DEVELOPER_SDK_DIR /Developer/SDKs    setenv PLATFORM_DEVELOPER_TOOLS_DIR /Developer/Tools    setenv PLATFORM_DEVELOPER_USR_DIR /Developer/usr    setenv PLATFORM_NAME macosx    setenv PLATFORM_PRODUCT_BUILD_VERSION 10M2423    setenv PLIST_FILE_OUTPUT_FORMAT same-as-input    setenv PLUGINS_FOLDER_PATH AppleScript.plugin/Contents/PlugIns    setenv PREBINDING NO    setenv PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR YES    setenv PRECOMP_DESTINATION_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/PrefixHeaders    setenv PRESERVE_DEAD_CODE_INITS_AND_TERMS NO    setenv PRIVATE_HEADERS_FOLDER_PATH AppleScript.plugin/Contents/PrivateHeaders    setenv PRODUCT_NAME AppleScript    setenv PRODUCT_SETTINGS_PATH /Users/oni/Downloads/AppleScript/Info.plist    setenv PRODUCT_TYPE com.apple.product-type.bundle    setenv PROFILING_CODE NO    setenv PROJECT AppleScript    setenv PROJECT_DERIVED_FILE_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/DerivedSources    setenv PROJECT_DIR /Users/oni/Downloads/AppleScript    setenv PROJECT_FILE_PATH /Users/oni/Downloads/AppleScript/AppleScript.xcodeproj    setenv PROJECT_NAME AppleScript    setenv PROJECT_TEMP_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build    setenv PUBLIC_HEADERS_FOLDER_PATH AppleScript.plugin/Contents/Headers    setenv RECURSIVE_SEARCH_PATHS_FOLLOW_SYMLINKS YES    setenv REMOVE_CVS_FROM_RESOURCES YES    setenv REMOVE_GIT_FROM_RESOURCES YES    setenv REMOVE_SVN_FROM_RESOURCES YES    setenv REZ_COLLECTOR_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/ResourceManagerResources    setenv REZ_OBJECTS_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/ResourceManagerResources/Objects    setenv REZ_SEARCH_PATHS "\"/Users/oni/Downloads/AppleScript/build/Development\" "    setenv RUN_CLANG_STATIC_ANALYZER NO    setenv SCAN_ALL_SOURCE_FILES_FOR_INCLUDES NO    setenv SCRIPTS_FOLDER_PATH AppleScript.plugin/Contents/Resources/Scripts    setenv SCRIPT_INPUT_FILE_COUNT 0    setenv SCRIPT_OUTPUT_FILE_COUNT 0    setenv SDKROOT /Developer/SDKs/MacOSX10.6.sdk    setenv SDK_DIR /Developer/SDKs/MacOSX10.6.sdk    setenv SDK_NAME macosx10.6    setenv SED /usr/bin/sed    setenv SEPARATE_STRIP NO    setenv SEPARATE_SYMBOL_EDIT NO    setenv SET_DIR_MODE_OWNER_GROUP YES    setenv SET_FILE_MODE_OWNER_GROUP NO    setenv SHARED_DERIVED_FILE_DIR /Users/oni/Downloads/AppleScript/build/Development/DerivedSources    setenv SHARED_FRAMEWORKS_FOLDER_PATH AppleScript.plugin/Contents/SharedFrameworks    setenv SHARED_PRECOMPS_DIR /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders    setenv SHARED_SUPPORT_FOLDER_PATH AppleScript.plugin/Contents/SharedSupport    setenv SKIP_INSTALL NO    setenv SOURCE_ROOT /Users/oni/Downloads/AppleScript    setenv SRCROOT /Users/oni/Downloads/AppleScript    setenv STANDARD_C_PLUS_PLUS_LIBRARY_TYPE dynamic    setenv STRINGS_FILE_OUTPUT_ENCODING UTF-16    setenv STRIP_INSTALLED_PRODUCT YES    setenv STRIP_STYLE non-global    setenv SYMBOL_REPOSITORY_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/SymbolRepositories    setenv SYMROOT /Users/oni/Downloads/AppleScript/build    setenv SYSTEM_ADMIN_APPS_DIR /Applications/Utilities    setenv SYSTEM_APPS_DIR /Applications    setenv SYSTEM_CORE_SERVICES_DIR /System/Library/CoreServices    setenv SYSTEM_DEMOS_DIR /Applications/Extras    setenv SYSTEM_DEVELOPER_APPS_DIR /Developer/Applications    setenv SYSTEM_DEVELOPER_BIN_DIR /Developer/usr/bin    setenv SYSTEM_DEVELOPER_DEMOS_DIR "/Developer/Applications/Utilities/Built Examples"    setenv SYSTEM_DEVELOPER_DIR /Developer    setenv SYSTEM_DEVELOPER_DOC_DIR "/Developer/ADC Reference Library"    setenv SYSTEM_DEVELOPER_GRAPHICS_TOOLS_DIR "/Developer/Applications/Graphics Tools"    setenv SYSTEM_DEVELOPER_JAVA_TOOLS_DIR "/Developer/Applications/Java Tools"    setenv SYSTEM_DEVELOPER_PERFORMANCE_TOOLS_DIR "/Developer/Applications/Performance Tools"    setenv SYSTEM_DEVELOPER_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes"    setenv SYSTEM_DEVELOPER_TOOLS /Developer/Tools    setenv SYSTEM_DEVELOPER_TOOLS_DOC_DIR "/Developer/ADC Reference Library/documentation/DeveloperTools"    setenv SYSTEM_DEVELOPER_TOOLS_RELEASENOTES_DIR "/Developer/ADC Reference Library/releasenotes/DeveloperTools"    setenv SYSTEM_DEVELOPER_USR_DIR /Developer/usr    setenv SYSTEM_DEVELOPER_UTILITIES_DIR /Developer/Applications/Utilities    setenv SYSTEM_DOCUMENTATION_DIR /Library/Documentation    setenv SYSTEM_LIBRARY_DIR /System/Library    setenv TARGETNAME AppleScript    setenv TARGET_BUILD_DIR /Users/oni/Downloads/AppleScript/build/Development    setenv TARGET_NAME AppleScript    setenv TARGET_TEMP_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build    setenv TEMP_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build    setenv TEMP_FILES_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build    setenv TEMP_FILE_DIR /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build    setenv TEMP_ROOT /Users/oni/Downloads/AppleScript/build    setenv UID 501    setenv UNLOCALIZED_RESOURCES_FOLDER_PATH AppleScript.plugin/Contents/Resources    setenv UNSTRIPPED_PRODUCT NO    setenv USER oni    setenv USER_APPS_DIR /Users/oni/Applications    setenv USER_LIBRARY_DIR /Users/oni/Library    setenv USE_DYNAMIC_NO_PIC YES    setenv USE_HEADERMAP YES    setenv USE_HEADER_SYMLINKS NO    setenv VALIDATE_PRODUCT NO    setenv VALID_ARCHS "x86_64 i386"    setenv VERBOSE_PBXCP NO    setenv VERSIONPLIST_PATH AppleScript.plugin/Contents/version.plist    setenv VERSION_INFO_BUILDER oni    setenv VERSION_INFO_FILE AppleScript_vers.c    setenv VERSION_INFO_STRING "\"@(#)PROGRAM:AppleScript  PROJECT:AppleScript-\""    setenv WRAPPER_EXTENSION plugin    setenv WRAPPER_NAME AppleScript.plugin    setenv WRAPPER_SUFFIX .plugin    setenv XCODE_APP_SUPPORT_DIR /Developer/Library/Xcode    setenv XCODE_PRODUCT_BUILD_VERSION 10M2423    setenv XCODE_VERSION_ACTUAL 0325    setenv XCODE_VERSION_MAJOR 0300    setenv XCODE_VERSION_MINOR 0320    setenv YACC /Developer/usr/bin/yacc    setenv ZERO_LINK NO    setenv _REAL_SDKROOT macosx10.6    /bin/sh -c /Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/Script-2BA4226B0BFBAF8300DE1E36.sh0#
+
+CProcessInfoPlistFile /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Info.plist Info.plist
+s322399510.580840
+e322399510.583264
+r1
+xProcessInfoPlistFile
+x/Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Info.plist
+xInfo.plist
+lSLF07#2@18"Process Info.plist322399510#322399510#0(0"0(0#0#43"/Users/oni/Downloads/AppleScript/Info.plist8620429632#211"    cd /Users/oni/Downloads/AppleScript    builtin-infoPlistUtility Info.plist -expandbuildsettings -platform macosx -o /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Info.plist0#
+
+CProcessPCH /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppleScript_Prefix-aldpwntjxpwqrjabhoogvknnfspl/AppleScript_Prefix.pch.gch AppleScript_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s322395330.134035
+e322395336.145374
+r1
+xProcessPCH
+x/var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppleScript_Prefix-aldpwntjxpwqrjabhoogvknnfspl/AppleScript_Prefix.pch.gch
+xAppleScript_Prefix.pch
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@33"Precompile AppleScript_Prefix.pch322395330#322395336#0(0"0(0#0#55"/Users/oni/Downloads/AppleScript/AppleScript_Prefix.pch8618898400#1009"    cd /Users/oni/Downloads/AppleScript    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/AppleScript.hmap -F/Users/oni/Downloads/AppleScript/build/Development -I/Users/oni/Downloads/AppleScript/build/Development/include -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources/x86_64 -I/Users/oni/Downloads/AppleScript/build/AppleScript.build/Development/AppleScript.build/DerivedSources -c /Users/oni/Downloads/AppleScript/AppleScript_Prefix.pch -o /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/AppleScript_Prefix-aldpwntjxpwqrjabhoogvknnfspl/AppleScript_Prefix.pch.gch0#
+
+CStripNIB /Users/oni/Downloads/AppleScript/English.lproj/AppleScriptUI.nib
+s322399510.583948
+e322399510.937085
+r1
+xStripNIB
+x/Users/oni/Downloads/AppleScript/English.lproj/AppleScriptUI.nib
+lSLF07#2@40"StripNIB English.lproj/AppleScriptUI.nib322399510#322399510#0(0"0(0#0#64"/Users/oni/Downloads/AppleScript/English.lproj/AppleScriptUI.nib8618979360#300"    cd /Users/oni/Downloads/AppleScript    /Developer/usr/bin/ibtool --strip /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin/Contents/Resources/English.lproj/AppleScriptUI.nib --output-format human-readable-text /Users/oni/Downloads/AppleScript/English.lproj/AppleScriptUI.nib0#
+
+CTouch /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin
+s322399511.328944
+e322399511.331227
+r1
+xTouch
+x/Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin
+lSLF07#2@75"Touch /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin322399511#322399511#0(0"0(0#0#0"8624259424#132"    cd /Users/oni/Downloads/AppleScript    /usr/bin/touch -c /Users/oni/Downloads/AppleScript/build/Development/AppleScript.plugin0#
+
