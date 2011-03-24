@@ -1,26 +1,24 @@
-#import "QCPatch.h"
-#import "QCOpenGLContext.h"
-
-
-#import "QCStringPort.h"
-
 @interface SoftShadows : QCPatch
 {
-
-
+	QCNumberPort	*inputLightX;
+	
+	QCOpenGLPort_Color	*inputLightColor;
+	
+	QCBooleanPort	*inputBypass;
+	
+	QCNumberPort	*inputXRotation;
+	QCNumberPort	*inputYRotation;
+	QCNumberPort	*inputZRotation;
+	
+	
+	//QCImagePort		*outputImage;
 }
 
 
-+ (BOOL)allowsSubpatches;
++(BOOL)isSafe;
++(BOOL)allowsSubpatchesWithIdentifier:(id)identifier;
 
+-(id)initWithIdentifier:(id)identifier;
+-(BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)arguments;
 
-- (id)initWithIdentifier:(id)fp8;
-
-- (id)setup:(QCOpenGLContext *)context;
-- (void)cleanup:(QCOpenGLContext *)context;
-
-- (void)enable:(QCOpenGLContext *)context;
-- (void)disable:(QCOpenGLContext *)context;
-
-- (BOOL)execute:(QCOpenGLContext *)context time:(double)time arguments:(NSDictionary *)arguments;
 @end

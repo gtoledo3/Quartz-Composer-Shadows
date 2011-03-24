@@ -1,6 +1,3 @@
-#import "QCProtocols.h"
-#import "GFNodeManager.h"
-
-@interface SoftShadowsPlugin : NSObject <GFPlugInRegistration>
-+ (void)registerNodesWithManager:(GFNodeManager*)manager;
+@interface SoftShadowsPrincipal : NSObject <GFPlugInRegistration>
++(void)registerNodesWithManager:(QCNodeManager*)manager;
 @end

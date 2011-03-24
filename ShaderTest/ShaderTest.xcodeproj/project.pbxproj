@@ -1,0 +1,305 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7533202D10091AF0003756A8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7533202C10091AF0003756A8 /* OpenGL.framework */; };
+		7533202F10091AF0003756A8 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7533202E10091AF0003756A8 /* Quartz.framework */; };
+		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		8F0348B6133A36B600D11E06 /* ShaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0348B3133A36B600D11E06 /* ShaderTest.m */; };
+		8F0348B7133A36B600D11E06 /* ShaderTestPrincipal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0348B5133A36B600D11E06 /* ShaderTestPrincipal.m */; };
+		8F034A9E133A37F200D11E06 /* ShaderTest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8F034A9D133A37F200D11E06 /* ShaderTest.xml */; };
+		8F034AA9133A394000D11E06 /* ShaderTestUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F034AA8133A394000D11E06 /* ShaderTestUI.m */; };
+		8F034AC0133A39AB00D11E06 /* ShaderTestUI.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F034ABE133A39AB00D11E06 /* ShaderTestUI.nib */; };
+		8F190DB3133A42E900A2A338 /* S9FBO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F190DB2133A42E900A2A338 /* S9FBO.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		2AA7F9E110D13B7000A2DD16 /* SkankySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkankySDK.framework; path = /Library/Frameworks/SkankySDK.framework; sourceTree = "<absolute>"; };
+		7533202C10091AF0003756A8 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		7533202E10091AF0003756A8 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
+		8D5B49B6048680CD000E48DA /* ShaderTest.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShaderTest.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F0348B2133A36B600D11E06 /* ShaderTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTest.h; sourceTree = "<group>"; };
+		8F0348B3133A36B600D11E06 /* ShaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderTest.m; sourceTree = "<group>"; };
+		8F0348B4133A36B600D11E06 /* ShaderTestPrincipal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTestPrincipal.h; sourceTree = "<group>"; };
+		8F0348B5133A36B600D11E06 /* ShaderTestPrincipal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderTestPrincipal.m; sourceTree = "<group>"; };
+		8F034A92133A374800D11E06 /* ShaderTest_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTest_Prefix.pch; sourceTree = "<group>"; };
+		8F034A9D133A37F200D11E06 /* ShaderTest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ShaderTest.xml; sourceTree = "<group>"; };
+		8F034AA7133A394000D11E06 /* ShaderTestUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTestUI.h; sourceTree = "<group>"; };
+		8F034AA8133A394000D11E06 /* ShaderTestUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderTestUI.m; sourceTree = "<group>"; };
+		8F034ABF133A39AB00D11E06 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/ShaderTestUI.nib; sourceTree = "<group>"; };
+		8F190DB1133A42E900A2A338 /* S9FBO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S9FBO.h; sourceTree = "<group>"; };
+		8F190DB2133A42E900A2A338 /* S9FBO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S9FBO.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D5B49B3048680CD000E48DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
+				7533202D10091AF0003756A8 /* OpenGL.framework in Frameworks */,
+				7533202F10091AF0003756A8 /* Quartz.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		089C166AFE841209C02AAC07 /* HelloWorld */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AFFE84173DC02AAC07 /* Classes */,
+				089C167CFE841241C02AAC07 /* Resources */,
+				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				32C88E010371C26100C91783 /* Other Sources */,
+				19C28FB8FE9D52D311CA2CBB /* Products */,
+			);
+			name = HelloWorld;
+			sourceTree = "<group>";
+		};
+		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
+			);
+			name = "Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		089C167CFE841241C02AAC07 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8F034ABE133A39AB00D11E06 /* ShaderTestUI.nib */,
+				8F034A9D133A37F200D11E06 /* ShaderTest.xml */,
+				8D5B49B7048680CD000E48DA /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		08FB77AFFE84173DC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8F190D95133A429D00A2A338 /* Helpers */,
+				8F0348B4133A36B600D11E06 /* ShaderTestPrincipal.h */,
+				8F0348B5133A36B600D11E06 /* ShaderTestPrincipal.m */,
+				75AA971B10093C25000986A3 /* Patches */,
+				8F034AA7133A394000D11E06 /* ShaderTestUI.h */,
+				8F034AA8133A394000D11E06 /* ShaderTestUI.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2AA7F9E110D13B7000A2DD16 /* SkankySDK.framework */,
+				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+				7533202C10091AF0003756A8 /* OpenGL.framework */,
+				7533202E10091AF0003756A8 /* Quartz.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FB8FE9D52D311CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D5B49B6048680CD000E48DA /* ShaderTest.plugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		32C88E010371C26100C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				8F034A92133A374800D11E06 /* ShaderTest_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		75AA971B10093C25000986A3 /* Patches */ = {
+			isa = PBXGroup;
+			children = (
+				8F0348B2133A36B600D11E06 /* ShaderTest.h */,
+				8F0348B3133A36B600D11E06 /* ShaderTest.m */,
+			);
+			name = Patches;
+			sourceTree = "<group>";
+		};
+		8F190D95133A429D00A2A338 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8F190DB1133A42E900A2A338 /* S9FBO.h */,
+				8F190DB2133A42E900A2A338 /* S9FBO.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D5B49AC048680CD000E48DA /* ShaderTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "ShaderTest" */;
+			buildPhases = (
+				8D5B49B1048680CD000E48DA /* Sources */,
+				8D5B49B3048680CD000E48DA /* Frameworks */,
+				8D5B49AF048680CD000E48DA /* Resources */,
+				7533205110091C18003756A8 /* PostProcessing */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShaderTest;
+			productInstallPath = "$(HOME)/Library/Bundles";
+			productName = HelloWorld;
+			productReference = 8D5B49B6048680CD000E48DA /* ShaderTest.plugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "ShaderTest" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* HelloWorld */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D5B49AC048680CD000E48DA /* ShaderTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D5B49AF048680CD000E48DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F034A9E133A37F200D11E06 /* ShaderTest.xml in Resources */,
+				8F034AC0133A39AB00D11E06 /* ShaderTestUI.nib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7533205110091C18003756A8 /* PostProcessing */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = PostProcessing;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "php /Library/Frameworks/SkankySDK.framework/Resources/plugin-postprocess.php \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D5B49B1048680CD000E48DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F0348B6133A36B600D11E06 /* ShaderTest.m in Sources */,
+				8F0348B7133A36B600D11E06 /* ShaderTestPrincipal.m in Sources */,
+				8F034AA9133A394000D11E06 /* ShaderTestUI.m in Sources */,
+				8F190DB3133A42E900A2A338 /* S9FBO.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8F034ABE133A39AB00D11E06 /* ShaderTestUI.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F034ABF133A39AB00D11E06 /* English */,
+			);
+			name = ShaderTestUI.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB913C08733D840010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = ShaderTest_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = ShaderTest;
+			};
+			name = Release;
+		};
+		1DEB914008733D840010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_AUTO_VECTORIZATION = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_MODEL_TUNING = G5;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_STRICT_ALIASING = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACH_O_TYPE = mh_bundle;
+				PREBINDING = NO;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx10.5;
+				SYMROOT = $TMPDIR/build;
+				WRAPPER_EXTENSION = plugin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "ShaderTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB913C08733D840010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "ShaderTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB914008733D840010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}

@@ -1,0 +1,201 @@
+TTestRig
+v7
+r0
+t322571165.454583
+cCheck dependencies
+cProcessInfoPlistFile /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Info.plist TestRig-Info.plist
+cCopyStringsFile /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+cCompileXIB /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/English.lproj/MainMenu.xib
+cProcessPCH /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TestRig_Prefix-fkkielytvspwrtdukidwbksbzklj/TestRig_Prefix.pch.gch TestRig_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/main.o /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/TestRigAppDelegate.o /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRigAppDelegate.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cLd /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/MacOS/TestRig normal x86_64
+cTouch /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app
+
+N/Developer/SDKs/MacOSX10.6.sdk
+c000000004CAA740B00000000000000EE
+t1286239243
+s238
+
+N/Developer/SDKs/MacOSX10.6.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
+c0000000040C4AA6800000000000001E5
+t1086630504
+s485
+
+N/System/Library/Frameworks/Cocoa.framework/Cocoa
+c000000004A1F2D63000000000000A5E0
+t1243557219
+s42464
+
+N/System/Library/Frameworks/QuartzCore.framework/QuartzCore
+c000000004CBF770C0000000000D00CA0
+t1287616268
+s13634720
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/English.lproj/InfoPlist.strings
+c000000004D89D2E3000000000000002D
+t1300878051
+s45
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/English.lproj/MainMenu.xib
+c000000004D89D2E3000000000002BB6B
+t1300878051
+s179051
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRigAppDelegate.h
+c000000004D89D2E3000000000000013A
+t1300878051
+s314
+i<Cocoa/Cocoa.h>
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRigAppDelegate.m
+c000000004D89D2E3000000000000016F
+t1300878051
+s367
+i"TestRigAppDelegate.h"
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRig_Prefix.pch
+c000000004D89D2E30000000000000091
+t1300878051
+s145
+i<Cocoa/Cocoa.h>
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app
+t1300878365
+s102
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Info.plist
+t1300878353
+s886
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/MacOS/TestRig
+t1300878365
+s14672
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/PkgInfo
+t1300878353
+s8
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Resources/English.lproj/InfoPlist.strings
+t1300878355
+s92
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Resources/English.lproj/MainMenu.nib
+t1300878355
+s34382
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/TestRig.LinkFileList
+c000000004D89D4110000000000000138
+t1300878353
+s312
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/TestRigAppDelegate.o
+t1300878364
+s21184
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/main.o
+t1300878364
+s5072
+
+N/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/main.m
+c000000004D89D2E300000000000000FC
+t1300878051
+s252
+i<Cocoa/Cocoa.h>
+
+N/var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TestRig_Prefix-fkkielytvspwrtdukidwbksbzklj/TestRig_Prefix.pch.gch
+t1300878363
+s54306576
+
+NTestRig-Info.plist
+c000000004D89D2E300000000000003EA
+t1300878051
+s1002
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies322571153#322571153#0(0"0(0#1#0"8621891264#0"0#
+
+CCompileC build/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/TestRigAppDelegate.o /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRigAppDelegate.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s322571164.519656
+e322571164.705723
+r1
+xCompileC
+xbuild/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/TestRigAppDelegate.o
+x/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRigAppDelegate.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@108"Compile /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRigAppDelegate.m322571164#322571164#0(0"0(0#0#100"/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRigAppDelegate.m8617956128#1929"    cd /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-generated-files.hmap -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-own-target-headers.hmap -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-all-target-headers.hmap -iquote /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-project-headers.hmap -F/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/include -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/DerivedSources/x86_64 -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/DerivedSources -include /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TestRig_Prefix-fkkielytvspwrtdukidwbksbzklj/TestRig_Prefix.pch -c /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRigAppDelegate.m -o /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/TestRigAppDelegate.o0#
+
+CCompileC build/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/main.o /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/main.m normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s322571164.518774
+e322571164.705492
+r1
+xCompileC
+xbuild/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/main.o
+x/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/main.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@94"Compile /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/main.m322571164#322571164#0(0"0(0#0#86"/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/main.m8618169760#1901"    cd /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-generated-files.hmap -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-own-target-headers.hmap -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-all-target-headers.hmap -iquote /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-project-headers.hmap -F/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/include -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/DerivedSources/x86_64 -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/DerivedSources -include /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TestRig_Prefix-fkkielytvspwrtdukidwbksbzklj/TestRig_Prefix.pch -c /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/main.m -o /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/main.o0#
+
+CCompileXIB /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/English.lproj/MainMenu.xib
+s322571153.859594
+e322571155.687321
+r1
+xCompileXIB
+x/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/English.lproj/MainMenu.xib
+lSLF07#2@37"CompileXIB English.lproj/MainMenu.xib322571153#322571155#0(0"0(0#0#106"/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/English.lproj/MainMenu.xib8621642848#487"    cd /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Resources/English.lproj/MainMenu.nib /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/English.lproj/MainMenu.xib --sdk /Developer/SDKs/MacOSX10.6.sdk0#
+
+CCopyStringsFile /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Resources/English.lproj/InfoPlist.strings English.lproj/InfoPlist.strings
+s322571153.858763
+e322571155.647094
+r1
+xCopyStringsFile
+x/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Resources/English.lproj/InfoPlist.strings
+xEnglish.lproj/InfoPlist.strings
+lSLF07#2@36"Copy English.lproj/InfoPlist.strings322571153#322571155#0(0"0(0#0#111"/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/English.lproj/InfoPlist.strings8621729312#447"    cd /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-8 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Resources/English.lproj0#
+
+CLd /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/MacOS/TestRig normal x86_64
+s322571164.705776
+e322571165.443842
+r1
+xLd
+x/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/MacOS/TestRig
+xnormal
+xx86_64
+lSLF07#2@131"Link /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/MacOS/TestRig322571164#322571165#0(0"0(0#0#0"8621781824#769"    cd /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug -F/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug -filelist /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/Objects-normal/x86_64/TestRig.LinkFileList -mmacosx-version-min=10.6 -framework Cocoa -framework QuartzCore -o /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/MacOS/TestRig0#
+
+CProcessInfoPlistFile /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Info.plist TestRig-Info.plist
+s322571153.843410
+e322571153.858642
+r1
+xProcessInfoPlistFile
+x/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Info.plist
+xTestRig-Info.plist
+lSLF07#2@26"Process TestRig-Info.plist322571153#322571153#0(0"0(0#0#98"/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRig-Info.plist8622143360#433"    cd /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig    builtin-infoPlistUtility TestRig-Info.plist -genpkginfo /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/PkgInfo -expandbuildsettings -platform macosx -o /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app/Contents/Info.plist0#
+
+CProcessPCH /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TestRig_Prefix-fkkielytvspwrtdukidwbksbzklj/TestRig_Prefix.pch.gch TestRig_Prefix.pch normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s322571155.687464
+e322571164.518560
+r1
+xProcessPCH
+x/var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TestRig_Prefix-fkkielytvspwrtdukidwbksbzklj/TestRig_Prefix.pch.gch
+xTestRig_Prefix.pch
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@29"Precompile TestRig_Prefix.pch322571155#322571164#0(0"0(0#0#98"/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRig_Prefix.pch8618492800#1766"    cd /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c-header -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-generated-files.hmap -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-own-target-headers.hmap -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-all-target-headers.hmap -iquote /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/TestRig-project-headers.hmap -F/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/include -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/DerivedSources/x86_64 -I/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/TestRig.build/Debug/TestRig.build/DerivedSources -c /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/TestRig_Prefix.pch -o /var/folders/Qu/QuFeXdEnFnSE7HwKKzkxbk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/TestRig_Prefix-fkkielytvspwrtdukidwbksbzklj/TestRig_Prefix.pch.gch0#
+
+CTouch /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app
+s322571165.443954
+e322571165.454531
+r1
+xTouch
+x/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app
+lSLF07#2@109"Touch /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app322571165#322571165#0(0"0(0#0#0"8618643136#213"    cd /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig    /usr/bin/touch -c /Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/TestRig/TestRig/build/Debug/TestRig.app0#
+

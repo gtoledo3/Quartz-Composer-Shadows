@@ -1,7 +1,6 @@
-//
-// Prefix header for all source files of the 'AppleScript' target in the 'AppleScript' project.
-//
+// Prefix header for all source files of the 'SoftShadows' target in the 'SoftShadows' project.
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+    #import <SkankySDK/SkankySDK.h>
 #endif

@@ -1,96 +1,111 @@
 #import "SoftShadows.h"
 #import "SoftShadowsUI.h"
 
+#import <OpenGL/gl.h>
+#import <OpenGL/OpenGL.h>
+#import <OpenGL/CGLMacro.h>
 
 
-@implementation SoftShadows : QCPatch
-
-+ (int)executionModeWithIdentifier:(id)fp8
-{
-	return 1;
-}
+@implementation SoftShadows
 
 
-+ (BOOL)allowsSubpatchesWithIdentifier:(id)fp8
-{
-	return NO;
-}
-+ (BOOL)allowsSubpatches
-{
-	return NO;
-}
-
-+ (int)timeModeWithIdentifier:(id)fp8
-{
-	return 1;
-}
-
-+ (BOOL)isSafe
-{
++(BOOL)isSafe {
 	return YES;
 }
 
-/* If you don't want an inspector panel, simply comment out this function */
-+ (Class)inspectorClassWithIdentifier:(id)fp8
-{
++(BOOL)allowsSubpatchesWithIdentifier:(id)identifier {
+	return YES;
+}
+
+// It appears that when we have a consumer within this patch, it will convert itself to a consumer! How odd?
+
++(int)executionModeWithIdentifier:(id)identifier {
+	return 1;
+}
+
++(int)timeModeWithIdentifier:(id)identifier {
+	return 0;
+}
+
+-(id)initWithIdentifier:(id)identifier {
+	if(self = [super initWithIdentifier:identifier]) {
+		[[self userInfo] setObject:@"Soft Shadows" forKey:@"name"];
+	}
+	return self;
+}
+
+/*+ (Class)inspectorClassWithIdentifier:(id)fp8 {
 	return [SoftShadowsUI class];
+}*/
+
+-(BOOL)setup:(QCOpenGLContext*)context {
+	return YES;
 }
 
-- (id)initWithIdentifier:(id)fp8
-{
-	id z=[super initWithIdentifier:fp8];
-	
-
-	return z;
+-(void)cleanup:(QCOpenGLContext*)context {
 }
 
-
-- (id)setup:(QCOpenGLContext *)context
-{
-
-
-	return context;
-}
-- (void)cleanup:(QCOpenGLContext *)context
-{
-
+-(void)enable:(QCOpenGLContext*)context {
 
 }
 
-
-- (void)enable:(QCOpenGLContext *)context
-{
-
-
-}
-- (void)disable:(QCOpenGLContext *)context
-{
-
-
+-(void)disable:(QCOpenGLContext*)context {
 }
 
 
 - (BOOL)execute:(QCOpenGLContext *)context time:(double)time arguments:(NSDictionary *)arguments
 {
+	//   double modifiedMatrix[16],t1,t2,t3;
+	GLint oldMatrixMode;
+
+	
+	if([inputBypass booleanValue])
+	{
+		[self executeSubpatches:time arguments:arguments];
+		return YES;
+	}
+	
+	CGLContextObj cgl_ctx = [context CGLContextObj];
+	
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	
+	GLfloat pos[] = {5.0, 5.0, 7.0, 1.0};
+	GLfloat diff[] = {1.0, 1.0, 1.0, 1.0};
+	
+	glLightfv(GL_LIGHT0, GL_POSITION, pos);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diff);
+
+	
+	/*glGetIntegerv(GL_MATRIX_MODE,&oldMatrixMode);
+	
 	glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-	glColor4f(0.0,0.0,1.0,1.0);
+	glPushMatrix();
+	glLoadIdentity();*/
+
+	glRotatef([inputXRotation doubleValue], 1., 0., 0.);
+	glRotatef([inputYRotation doubleValue], 0., 1., 0.);
+	glRotatef([inputZRotation doubleValue], 0., 0., 1.);
 	
-    // Render the textured quad by mapping the texture coordinates to the vertices
-    glBegin(GL_QUADS);
+	[self executeSubpatches:time arguments:arguments];
 	
-	glVertex3f(0.5, 0.5, 0); // upper right
+	glBegin(GL_QUADS);
+	glColor3f(1.0,0.0,0.0);
+	glVertex3f(0.0,0.0,0.0);
+	glVertex3f(1.0,0.0,0.0);
+	glVertex3f(1.0,1.0,0.0);
+	glVertex3f(0.0,1.0,0.0);
+	glEnd();
 	
-	glVertex3f(-0.5, 0.5, 0); // upper left
 	
-	glVertex3f(-0.5, -0.5, 0); // lower left
 	
-	glVertex3f(0.5, -0.5, 0); // lower right
-    glEnd();
 	
-	glPopMatrix();
+/*	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();   
+	glMatrixMode(oldMatrixMode);*/
+
+	glDisable(GL_LIGHTING);
 	
 	return YES;
 }
-
 @end

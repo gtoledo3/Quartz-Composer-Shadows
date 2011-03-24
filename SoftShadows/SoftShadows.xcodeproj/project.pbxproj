@@ -3,100 +3,39 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A0527110C87B3AD00042510 /* SoftShadowsUI.nib in Resources */ = {isa = PBXBuildFile; fileRef = 2A05270F0C87B3AD00042510 /* SoftShadowsUI.nib */; };
-		55E01E5C11AA2D3900186DFF /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E01E5511AA2D3900186DFF /* AppKit.framework */; };
-		55E01E5D11AA2D3900186DFF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E01E5611AA2D3900186DFF /* CoreData.framework */; };
-		55E01E5E11AA2D3900186DFF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E01E5711AA2D3900186DFF /* Foundation.framework */; };
-		55E01E5F11AA2D3900186DFF /* AppleScriptKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E01E5811AA2D3900186DFF /* AppleScriptKit.framework */; };
-		55E01E6011AA2D3900186DFF /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E01E5911AA2D3900186DFF /* AppKit.framework */; };
-		55E01E6111AA2D3900186DFF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E01E5A11AA2D3900186DFF /* CoreData.framework */; };
-		55E01E6211AA2D3900186DFF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E01E5B11AA2D3900186DFF /* Foundation.framework */; };
+		7533202D10091AF0003756A8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7533202C10091AF0003756A8 /* OpenGL.framework */; };
+		7533202F10091AF0003756A8 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7533202E10091AF0003756A8 /* Quartz.framework */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		8FFFE75013376E0F00A38D0F /* SoftShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FFFE74B13376E0F00A38D0F /* SoftShadows.m */; };
-		8FFFE75113376E0F00A38D0F /* SoftShadowsPrincipal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FFFE74D13376E0F00A38D0F /* SoftShadowsPrincipal.m */; };
-		8FFFE75213376E0F00A38D0F /* SoftShadowsUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FFFE74F13376E0F00A38D0F /* SoftShadowsUI.m */; };
-		F1111F7D089D19DD00C2708E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1111F7C089D19DD00C2708E /* OpenGL.framework */; };
-		F1111F81089D19ED00C2708E /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1111F80089D19ED00C2708E /* Quartz.framework */; };
-		F1111F8B089D1A4100C2708E /* SoftShadows.xml in Resources */ = {isa = PBXBuildFile; fileRef = F1111F89089D1A4100C2708E /* SoftShadows.xml */; };
+		8F0F6BA1133B4D3C00229593 /* SoftShadows.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8F0F6BA0133B4D3C00229593 /* SoftShadows.xml */; };
+		8F0F6BAC133B4D7700229593 /* SoftShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F6BAB133B4D7700229593 /* SoftShadows.m */; };
+		8F0F6BAF133B4D8200229593 /* SoftShadowsPrincipal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F6BAE133B4D8200229593 /* SoftShadowsPrincipal.m */; };
+		8F0F6BB4133B4D9700229593 /* S9FBO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F6BB3133B4D9700229593 /* S9FBO.m */; };
+		8F0F6C72133B61AE00229593 /* SoftShadowsUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F6C71133B61AE00229593 /* SoftShadowsUI.m */; };
+		8F0F6CA0133B627A00229593 /* SoftShadowsUI.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0F6C9E133B627A00229593 /* SoftShadowsUI.nib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		2A0527100C87B3AD00042510 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/SoftShadowsUI.nib; sourceTree = "<group>"; };
-		2AF5D8140CCECC6600E66DE7 /* GFGraph.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GFGraph.h; sourceTree = "<group>"; };
-		2AF5D8150CCECC6600E66DE7 /* GFGraphView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GFGraphView.h; sourceTree = "<group>"; };
-		2AF5D8160CCECC6600E66DE7 /* GFList.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GFList.h; sourceTree = "<group>"; };
-		2AF5D8170CCECC6600E66DE7 /* GFNode.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GFNode.h; sourceTree = "<group>"; };
-		2AF5D8180CCECC6600E66DE7 /* GFNodeActor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GFNodeActor.h; sourceTree = "<group>"; };
-		2AF5D8190CCECC6600E66DE7 /* GFNodeClassDescription.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GFNodeClassDescription.h; sourceTree = "<group>"; };
-		2AF5D81A0CCECC6600E66DE7 /* GFNodeManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GFNodeManager.h; sourceTree = "<group>"; };
-		2AF5D81B0CCECC6600E66DE7 /* GFPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GFPort.h; sourceTree = "<group>"; };
-		2AF5D81C0CCECC6600E66DE7 /* QCBooleanPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCBooleanPort.h; sourceTree = "<group>"; };
-		2AF5D81D0CCECC6600E66DE7 /* QCCache.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCCache.h; sourceTree = "<group>"; };
-		2AF5D81E0CCECC6600E66DE7 /* QCCGLContext.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCCGLContext.h; sourceTree = "<group>"; };
-		2AF5D81F0CCECC6600E66DE7 /* QCColorPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCColorPort.h; sourceTree = "<group>"; };
-		2AF5D8200CCECC6600E66DE7 /* QCContext.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCContext.h; sourceTree = "<group>"; };
-		2AF5D8210CCECC6600E66DE7 /* QCGraphicsContext.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCGraphicsContext.h; sourceTree = "<group>"; };
-		2AF5D8220CCECC6600E66DE7 /* QCImageBuffer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCImageBuffer.h; sourceTree = "<group>"; };
-		2AF5D8230CCECC6600E66DE7 /* QCImageManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCImageManager.h; sourceTree = "<group>"; };
-		2AF5D8240CCECC6600E66DE7 /* QCImagePort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCImagePort.h; sourceTree = "<group>"; };
-		2AF5D8250CCECC6600E66DE7 /* QCImageTextureBuffer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCImageTextureBuffer.h; sourceTree = "<group>"; };
-		2AF5D8260CCECC6600E66DE7 /* QCIndexPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCIndexPort.h; sourceTree = "<group>"; };
-		2AF5D8270CCECC6600E66DE7 /* QCInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCInspector.h; sourceTree = "<group>"; };
-		2AF5D8280CCECC6600E66DE7 /* QCInterpolationPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCInterpolationPort.h; sourceTree = "<group>"; };
-		2AF5D8290CCECC6600E66DE7 /* QCList.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCList.h; sourceTree = "<group>"; };
-		2AF5D82A0CCECC6600E66DE7 /* QCNumberPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCNumberPort.h; sourceTree = "<group>"; };
-		2AF5D82B0CCECC6600E66DE7 /* QCObject.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCObject.h; sourceTree = "<group>"; };
-		2AF5D82C0CCECC6600E66DE7 /* QCObjectPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCObjectPort.h; sourceTree = "<group>"; };
-		2AF5D82D0CCECC6600E66DE7 /* QCOpenGLContext.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCOpenGLContext.h; sourceTree = "<group>"; };
-		2AF5D82E0CCECC6600E66DE7 /* QCOpenGLPort_Blending.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCOpenGLPort_Blending.h; sourceTree = "<group>"; };
-		2AF5D82F0CCECC6600E66DE7 /* QCOpenGLPort_Color.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCOpenGLPort_Color.h; sourceTree = "<group>"; };
-		2AF5D8300CCECC6600E66DE7 /* QCOpenGLPort_Culling.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCOpenGLPort_Culling.h; sourceTree = "<group>"; };
-		2AF5D8310CCECC6600E66DE7 /* QCOpenGLPort_Image.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCOpenGLPort_Image.h; sourceTree = "<group>"; };
-		2AF5D8320CCECC6600E66DE7 /* QCOpenGLPort_ZBuffer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCOpenGLPort_ZBuffer.h; sourceTree = "<group>"; };
-		2AF5D8330CCECC6600E66DE7 /* QCPatch.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCPatch.h; sourceTree = "<group>"; };
-		2AF5D8340CCECC6600E66DE7 /* QCPatchActor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCPatchActor.h; sourceTree = "<group>"; };
-		2AF5D8350CCECC6600E66DE7 /* QCPatchRenderingInfo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCPatchRenderingInfo.h; sourceTree = "<group>"; };
-		2AF5D8360CCECC6600E66DE7 /* QCPatchView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCPatchView.h; sourceTree = "<group>"; };
-		2AF5D8370CCECC6600E66DE7 /* QCPixelFormat.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCPixelFormat.h; sourceTree = "<group>"; };
-		2AF5D8380CCECC6600E66DE7 /* QCPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCPort.h; sourceTree = "<group>"; };
-		2AF5D8390CCECC6600E66DE7 /* QCProtocols.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCProtocols.h; sourceTree = "<group>"; };
-		2AF5D83A0CCECC6600E66DE7 /* QCProxyPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCProxyPort.h; sourceTree = "<group>"; };
-		2AF5D83B0CCECC6600E66DE7 /* QCRenderState.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCRenderState.h; sourceTree = "<group>"; };
-		2AF5D83C0CCECC6600E66DE7 /* QCResource.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCResource.h; sourceTree = "<group>"; };
-		2AF5D83D0CCECC6600E66DE7 /* QCResourcePool.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCResourcePool.h; sourceTree = "<group>"; };
-		2AF5D83E0CCECC6600E66DE7 /* QCStringPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCStringPort.h; sourceTree = "<group>"; };
-		2AF5D83F0CCECC6600E66DE7 /* QCStructure.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCStructure.h; sourceTree = "<group>"; };
-		2AF5D8400CCECC6600E66DE7 /* QCStructurePort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCStructurePort.h; sourceTree = "<group>"; };
-		2AF5D8410CCECC6600E66DE7 /* QCTableView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCTableView.h; sourceTree = "<group>"; };
-		2AF5D8420CCECC6600E66DE7 /* QCTypes.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCTypes.h; sourceTree = "<group>"; };
-		2AF5D8430CCECC6600E66DE7 /* QCVirtualPort.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QCVirtualPort.h; sourceTree = "<group>"; };
-		55E01E5511AA2D3900186DFF /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		55E01E5611AA2D3900186DFF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		55E01E5711AA2D3900186DFF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		55E01E5811AA2D3900186DFF /* AppleScriptKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppleScriptKit.framework; path = System/Library/Frameworks/AppleScriptKit.framework; sourceTree = SDKROOT; };
-		55E01E5911AA2D3900186DFF /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		55E01E5A11AA2D3900186DFF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		55E01E5B11AA2D3900186DFF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		2AA7F9E110D13B7000A2DD16 /* SkankySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkankySDK.framework; path = /Library/Frameworks/SkankySDK.framework; sourceTree = "<absolute>"; };
+		7533202C10091AF0003756A8 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		7533202E10091AF0003756A8 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		8D5B49B6048680CD000E48DA /* SoftShadows.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoftShadows.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8FFFE74913376E0F00A38D0F /* SoftShadows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadows_Prefix.pch; sourceTree = "<group>"; };
-		8FFFE74A13376E0F00A38D0F /* SoftShadows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadows.h; sourceTree = "<group>"; };
-		8FFFE74B13376E0F00A38D0F /* SoftShadows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftShadows.m; sourceTree = "<group>"; };
-		8FFFE74C13376E0F00A38D0F /* SoftShadowsPrincipal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadowsPrincipal.h; sourceTree = "<group>"; };
-		8FFFE74D13376E0F00A38D0F /* SoftShadowsPrincipal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftShadowsPrincipal.m; sourceTree = "<group>"; };
-		8FFFE74E13376E0F00A38D0F /* SoftShadowsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadowsUI.h; sourceTree = "<group>"; };
-		8FFFE74F13376E0F00A38D0F /* SoftShadowsUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftShadowsUI.m; sourceTree = "<group>"; };
-		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		F1111F7C089D19DD00C2708E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		F1111F80089D19ED00C2708E /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
-		F1111F8A089D1A4100C2708E /* English */ = {isa = PBXFileReference; fileEncoding = 0; lastKnownFileType = text.xml; name = English; path = English.lproj/SoftShadows.xml; sourceTree = "<group>"; };
+		8F0F6BA0133B4D3C00229593 /* SoftShadows.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SoftShadows.xml; sourceTree = "<group>"; };
+		8F0F6BAA133B4D7700229593 /* SoftShadows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadows.h; sourceTree = "<group>"; };
+		8F0F6BAB133B4D7700229593 /* SoftShadows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftShadows.m; sourceTree = "<group>"; };
+		8F0F6BAD133B4D8200229593 /* SoftShadowsPrincipal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadowsPrincipal.h; sourceTree = "<group>"; };
+		8F0F6BAE133B4D8200229593 /* SoftShadowsPrincipal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftShadowsPrincipal.m; sourceTree = "<group>"; };
+		8F0F6BB1133B4D8E00229593 /* SoftShadows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadows_Prefix.pch; sourceTree = "<group>"; };
+		8F0F6BB2133B4D9700229593 /* S9FBO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S9FBO.h; sourceTree = "<group>"; };
+		8F0F6BB3133B4D9700229593 /* S9FBO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S9FBO.m; sourceTree = "<group>"; };
+		8F0F6C70133B61AE00229593 /* SoftShadowsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadowsUI.h; sourceTree = "<group>"; };
+		8F0F6C71133B61AE00229593 /* SoftShadowsUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftShadowsUI.m; sourceTree = "<group>"; };
+		8F0F6C9F133B627A00229593 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/SoftShadowsUI.nib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,44 +44,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
-				F1111F7D089D19DD00C2708E /* OpenGL.framework in Frameworks */,
-				F1111F81089D19ED00C2708E /* Quartz.framework in Frameworks */,
-				55E01E5C11AA2D3900186DFF /* AppKit.framework in Frameworks */,
-				55E01E5D11AA2D3900186DFF /* CoreData.framework in Frameworks */,
-				55E01E5E11AA2D3900186DFF /* Foundation.framework in Frameworks */,
-				55E01E5F11AA2D3900186DFF /* AppleScriptKit.framework in Frameworks */,
-				55E01E6011AA2D3900186DFF /* AppKit.framework in Frameworks */,
-				55E01E6111AA2D3900186DFF /* CoreData.framework in Frameworks */,
-				55E01E6211AA2D3900186DFF /* Foundation.framework in Frameworks */,
+				7533202D10091AF0003756A8 /* OpenGL.framework in Frameworks */,
+				7533202F10091AF0003756A8 /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		089C166AFE841209C02AAC07 /* AppleScript */ = {
+		089C166AFE841209C02AAC07 /* HelloWorld */ = {
 			isa = PBXGroup;
 			children = (
-				8FFFE74913376E0F00A38D0F /* SoftShadows_Prefix.pch */,
-				8FFFE74A13376E0F00A38D0F /* SoftShadows.h */,
-				8FFFE74B13376E0F00A38D0F /* SoftShadows.m */,
-				8FFFE74C13376E0F00A38D0F /* SoftShadowsPrincipal.h */,
-				8FFFE74D13376E0F00A38D0F /* SoftShadowsPrincipal.m */,
-				8FFFE74E13376E0F00A38D0F /* SoftShadowsUI.h */,
-				8FFFE74F13376E0F00A38D0F /* SoftShadowsUI.m */,
-				2B65ED580C20190200477116 /* QuartzComposer */,
+				08FB77AFFE84173DC02AAC07 /* Classes */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				32C88E010371C26100C91783 /* Other Sources */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 			);
-			name = AppleScript;
+			name = HelloWorld;
 			sourceTree = "<group>";
 		};
 		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
-				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
 			);
 			name = "Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -150,38 +75,34 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2A05270F0C87B3AD00042510 /* SoftShadowsUI.nib */,
-				F1111F89089D1A4100C2708E /* SoftShadows.xml */,
+				8F0F6C9E133B627A00229593 /* SoftShadowsUI.nib */,
+				8F0F6BA0133B4D3C00229593 /* SoftShadows.xml */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		08FB77AFFE84173DC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8F0F6BB2133B4D9700229593 /* S9FBO.h */,
+				8F0F6BB3133B4D9700229593 /* S9FBO.m */,
+				8F0F6BAD133B4D8200229593 /* SoftShadowsPrincipal.h */,
+				8F0F6BAE133B4D8200229593 /* SoftShadowsPrincipal.m */,
+				75AA971B10093C25000986A3 /* Patches */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F1111F80089D19ED00C2708E /* Quartz.framework */,
-				F1111F7C089D19DD00C2708E /* OpenGL.framework */,
+				2AA7F9E110D13B7000A2DD16 /* SkankySDK.framework */,
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+				7533202C10091AF0003756A8 /* OpenGL.framework */,
+				7533202E10091AF0003756A8 /* Quartz.framework */,
 			);
 			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				55E01E5511AA2D3900186DFF /* AppKit.framework */,
-				55E01E5611AA2D3900186DFF /* CoreData.framework */,
-				55E01E5711AA2D3900186DFF /* Foundation.framework */,
-				55E01E5811AA2D3900186DFF /* AppleScriptKit.framework */,
-				55E01E5911AA2D3900186DFF /* AppKit.framework */,
-				55E01E5A11AA2D3900186DFF /* CoreData.framework */,
-				55E01E5B11AA2D3900186DFF /* Foundation.framework */,
-				089C167FFE841241C02AAC07 /* AppKit.framework */,
-				D2F7E65807B2D6F200F64583 /* CoreData.framework */,
-				089C1672FE841209C02AAC07 /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		19C28FB8FE9D52D311CA2CBB /* Products */ = {
@@ -192,59 +113,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2B65ED580C20190200477116 /* QuartzComposer */ = {
+		32C88E010371C26100C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				2AF5D8140CCECC6600E66DE7 /* GFGraph.h */,
-				2AF5D8150CCECC6600E66DE7 /* GFGraphView.h */,
-				2AF5D8160CCECC6600E66DE7 /* GFList.h */,
-				2AF5D8170CCECC6600E66DE7 /* GFNode.h */,
-				2AF5D8180CCECC6600E66DE7 /* GFNodeActor.h */,
-				2AF5D8190CCECC6600E66DE7 /* GFNodeClassDescription.h */,
-				2AF5D81A0CCECC6600E66DE7 /* GFNodeManager.h */,
-				2AF5D81B0CCECC6600E66DE7 /* GFPort.h */,
-				2AF5D81C0CCECC6600E66DE7 /* QCBooleanPort.h */,
-				2AF5D81D0CCECC6600E66DE7 /* QCCache.h */,
-				2AF5D81E0CCECC6600E66DE7 /* QCCGLContext.h */,
-				2AF5D81F0CCECC6600E66DE7 /* QCColorPort.h */,
-				2AF5D8200CCECC6600E66DE7 /* QCContext.h */,
-				2AF5D8210CCECC6600E66DE7 /* QCGraphicsContext.h */,
-				2AF5D8220CCECC6600E66DE7 /* QCImageBuffer.h */,
-				2AF5D8230CCECC6600E66DE7 /* QCImageManager.h */,
-				2AF5D8240CCECC6600E66DE7 /* QCImagePort.h */,
-				2AF5D8250CCECC6600E66DE7 /* QCImageTextureBuffer.h */,
-				2AF5D8260CCECC6600E66DE7 /* QCIndexPort.h */,
-				2AF5D8270CCECC6600E66DE7 /* QCInspector.h */,
-				2AF5D8280CCECC6600E66DE7 /* QCInterpolationPort.h */,
-				2AF5D8290CCECC6600E66DE7 /* QCList.h */,
-				2AF5D82A0CCECC6600E66DE7 /* QCNumberPort.h */,
-				2AF5D82B0CCECC6600E66DE7 /* QCObject.h */,
-				2AF5D82C0CCECC6600E66DE7 /* QCObjectPort.h */,
-				2AF5D82D0CCECC6600E66DE7 /* QCOpenGLContext.h */,
-				2AF5D82E0CCECC6600E66DE7 /* QCOpenGLPort_Blending.h */,
-				2AF5D82F0CCECC6600E66DE7 /* QCOpenGLPort_Color.h */,
-				2AF5D8300CCECC6600E66DE7 /* QCOpenGLPort_Culling.h */,
-				2AF5D8310CCECC6600E66DE7 /* QCOpenGLPort_Image.h */,
-				2AF5D8320CCECC6600E66DE7 /* QCOpenGLPort_ZBuffer.h */,
-				2AF5D8330CCECC6600E66DE7 /* QCPatch.h */,
-				2AF5D8340CCECC6600E66DE7 /* QCPatchActor.h */,
-				2AF5D8350CCECC6600E66DE7 /* QCPatchRenderingInfo.h */,
-				2AF5D8360CCECC6600E66DE7 /* QCPatchView.h */,
-				2AF5D8370CCECC6600E66DE7 /* QCPixelFormat.h */,
-				2AF5D8380CCECC6600E66DE7 /* QCPort.h */,
-				2AF5D8390CCECC6600E66DE7 /* QCProtocols.h */,
-				2AF5D83A0CCECC6600E66DE7 /* QCProxyPort.h */,
-				2AF5D83B0CCECC6600E66DE7 /* QCRenderState.h */,
-				2AF5D83C0CCECC6600E66DE7 /* QCResource.h */,
-				2AF5D83D0CCECC6600E66DE7 /* QCResourcePool.h */,
-				2AF5D83E0CCECC6600E66DE7 /* QCStringPort.h */,
-				2AF5D83F0CCECC6600E66DE7 /* QCStructure.h */,
-				2AF5D8400CCECC6600E66DE7 /* QCStructurePort.h */,
-				2AF5D8410CCECC6600E66DE7 /* QCTableView.h */,
-				2AF5D8420CCECC6600E66DE7 /* QCTypes.h */,
-				2AF5D8430CCECC6600E66DE7 /* QCVirtualPort.h */,
+				8F0F6BB1133B4D8E00229593 /* SoftShadows_Prefix.pch */,
 			);
-			path = QuartzComposer;
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		75AA971B10093C25000986A3 /* Patches */ = {
+			isa = PBXGroup;
+			children = (
+				8F0F6BAA133B4D7700229593 /* SoftShadows.h */,
+				8F0F6BAB133B4D7700229593 /* SoftShadows.m */,
+				8F0F6C70133B61AE00229593 /* SoftShadowsUI.h */,
+				8F0F6C71133B61AE00229593 /* SoftShadowsUI.m */,
+			);
+			name = Patches;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,12 +137,12 @@
 /* Begin PBXNativeTarget section */
 		8D5B49AC048680CD000E48DA /* SoftShadows */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2BF69CC809F19DD300CAA391 /* Build configuration list for PBXNativeTarget "SoftShadows" */;
+			buildConfigurationList = 1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "SoftShadows" */;
 			buildPhases = (
-				8D5B49AF048680CD000E48DA /* Resources */,
 				8D5B49B1048680CD000E48DA /* Sources */,
 				8D5B49B3048680CD000E48DA /* Frameworks */,
-				2BA4226B0BFBAF8300DE1E36 /* Install */,
+				8D5B49AF048680CD000E48DA /* Resources */,
+				7533205110091C18003756A8 /* PostProcessing */,
 			);
 			buildRules = (
 			);
@@ -265,7 +150,7 @@
 			);
 			name = SoftShadows;
 			productInstallPath = "$(HOME)/Library/Bundles";
-			productName = AppleScript;
+			productName = HelloWorld;
 			productReference = 8D5B49B6048680CD000E48DA /* SoftShadows.plugin */;
 			productType = "com.apple.product-type.bundle";
 		};
@@ -274,8 +159,11 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 2BF69CCC09F19DD300CAA391 /* Build configuration list for PBXProject "SoftShadows" */;
-			compatibilityVersion = "Xcode 2.4";
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "SoftShadows" */;
+			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -284,7 +172,7 @@
 				French,
 				German,
 			);
-			mainGroup = 089C166AFE841209C02AAC07 /* AppleScript */;
+			mainGroup = 089C166AFE841209C02AAC07 /* HelloWorld */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -298,27 +186,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1111F8B089D1A4100C2708E /* SoftShadows.xml in Resources */,
-				2A0527110C87B3AD00042510 /* SoftShadowsUI.nib in Resources */,
+				8F0F6BA1133B4D3C00229593 /* SoftShadows.xml in Resources */,
+				8F0F6CA0133B627A00229593 /* SoftShadowsUI.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2BA4226B0BFBAF8300DE1E36 /* Install */ = {
+		7533205110091C18003756A8 /* PostProcessing */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = Install;
+			name = PostProcessing;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir -p \"$HOME/Library/Graphics/Quartz Composer Patches/\"\nrm -Rf \"$HOME/Library/Graphics/Quartz Composer Patches/$FULL_PRODUCT_NAME/\"\nmv \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\" \"$HOME/Library/Graphics/Quartz Composer Patches/\"\t";
+			shellScript = "php /Library/Frameworks/SkankySDK.framework/Resources/plugin-postprocess.php \"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -327,148 +215,81 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FFFE75013376E0F00A38D0F /* SoftShadows.m in Sources */,
-				8FFFE75113376E0F00A38D0F /* SoftShadowsPrincipal.m in Sources */,
-				8FFFE75213376E0F00A38D0F /* SoftShadowsUI.m in Sources */,
+				8F0F6BAC133B4D7700229593 /* SoftShadows.m in Sources */,
+				8F0F6BAF133B4D8200229593 /* SoftShadowsPrincipal.m in Sources */,
+				8F0F6BB4133B4D9700229593 /* S9FBO.m in Sources */,
+				8F0F6C72133B61AE00229593 /* SoftShadowsUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2A05270F0C87B3AD00042510 /* SoftShadowsUI.nib */ = {
+		8F0F6C9E133B627A00229593 /* SoftShadowsUI.nib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2A0527100C87B3AD00042510 /* English */,
+				8F0F6C9F133B627A00229593 /* English */,
 			);
 			name = SoftShadowsUI.nib;
-			sourceTree = "<group>";
-		};
-		F1111F89089D1A4100C2708E /* SoftShadows.xml */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F1111F8A089D1A4100C2708E /* English */,
-			);
-			name = SoftShadows.xml;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		2BF69CC909F19DD300CAA391 /* Development */ = {
+		1DEB913C08733D840010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = SoftShadows_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = SoftShadows;
+			};
+			name = Release;
+		};
+		1DEB914008733D840010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_AUTO_VECTORIZATION = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_MODEL_TUNING = G5;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_STRICT_ALIASING = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
+				MACH_O_TYPE = mh_bundle;
 				PREBINDING = NO;
-				PRODUCT_NAME = SoftShadows;
-				WRAPPER_EXTENSION = plugin;
-				ZERO_LINK = YES;
-			};
-			name = Development;
-		};
-		2BF69CCA09F19DD300CAA391 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = SoftShadows_Prefix.pch;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
-				PRODUCT_NAME = SoftShadows;
-				WRAPPER_EXTENSION = plugin;
-				ZERO_LINK = NO;
-			};
-			name = Deployment;
-		};
-		2BF69CCB09F19DD300CAA391 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = SoftShadows_Prefix.pch;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PREBINDING = NO;
-				PRODUCT_NAME = SoftShadows;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx10.5;
+				SYMROOT = $TMPDIR/build;
 				WRAPPER_EXTENSION = plugin;
 			};
-			name = Default;
-		};
-		2BF69CCD09F19DD300CAA391 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
-				VALID_ARCHS = "x86_64 i386";
-			};
-			name = Development;
-		};
-		2BF69CCE09F19DD300CAA391 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
-				VALID_ARCHS = "x86_64 i386";
-			};
-			name = Deployment;
-		};
-		2BF69CCF09F19DD300CAA391 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
-				VALID_ARCHS = "x86_64 i386";
-			};
-			name = Default;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2BF69CC809F19DD300CAA391 /* Build configuration list for PBXNativeTarget "SoftShadows" */ = {
+		1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "SoftShadows" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2BF69CC909F19DD300CAA391 /* Development */,
-				2BF69CCA09F19DD300CAA391 /* Deployment */,
-				2BF69CCB09F19DD300CAA391 /* Default */,
+				1DEB913C08733D840010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
-		2BF69CCC09F19DD300CAA391 /* Build configuration list for PBXProject "SoftShadows" */ = {
+		1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "SoftShadows" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2BF69CCD09F19DD300CAA391 /* Development */,
-				2BF69CCE09F19DD300CAA391 /* Deployment */,
-				2BF69CCF09F19DD300CAA391 /* Default */,
+				1DEB914008733D840010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
