@@ -50,7 +50,5 @@ void main()
 	if (RdotV > 0.0)
 		specular = ks * pow(RdotV, shininess);
 	
-
-
 	gl_FragColor = ambient + diffuse + specular;
 } 

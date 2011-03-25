@@ -42,6 +42,7 @@
 
 
 #import "S9Shader.h"
+#import "S9FBO.h"
 
 @interface SoftShadows : QCPatch
 {
@@ -49,12 +50,13 @@
 	QCOpenGLPort_Color	*inputLightColor;
 	QCBooleanPort		*inputBypass;
 	
-	S9Shader*		mPhongShader;
+	S9Shader			*mPhongShader;
+	S9FBO				*mFBO;
 	
 }
 
 @property (nonatomic,retain) S9Shader *mPhongShader;
-
+@property (nonatomic,retain) S9FBO	*mFBO;
 
 +(BOOL)isSafe;
 +(BOOL)allowsSubpatchesWithIdentifier:(id)identifier;

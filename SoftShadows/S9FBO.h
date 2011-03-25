@@ -45,20 +45,33 @@
 // Create, attach, detach and draw a basic framebuffer object
 
 @interface S9FBO : NSObject {
+	QCOpenGLContext *mContext;
+	GLuint			mFBOID;
+	GLuint			mTextureID;
+	NSRect			mBounds;
 	
-	CGLContextObj	context; 	
-	GLuint			fboID;
-	GLuint			textureID;
-	NSRect			bounds;
+	// Previous settings so we can go back
+	
+	GLint mPreviousFBO;
+	GLint mPreviousReadFBO;
+	GLint mPreviousDrawFBO;
+	
+	GLint mPreviousDrawBuffer;
+	GLint mPreviousReadBuffer;
+	
 }
-@property (readwrite, assign) NSRect bounds;
-@property (readonly) GLuint fboID;
-@property (readonly) GLuint textureID;
+@property (readwrite, assign) NSRect mBounds;
+@property (readonly) GLuint	mFBOID;
+@property (readonly) GLuint mTextureID;
+@property (nonatomic,retain) QCOpenGLContext *mContext;
 
-- (id) initWithContext:(CGLContextObj)ctx;
+- (id) initWithContext:(QCOpenGLContext*)context andBounds:(NSRect)bounds;
 
-- (void) attachFBO:(CGLContextObj)cgl_ctx;
-- (void) detachFBO:(CGLContextObj)cgl_ctx;
-- (void) generateNewTexture:(CGLContextObj)cgl_ctx;
+- (void) bindFBO;
+- (void) unbindFBO;
+- (void) generateNewTexture;
+
+-(void) pushFBO;
+-(void) popFBO;
 
 @end

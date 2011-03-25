@@ -42,140 +42,117 @@
 
 
 #import "S9FBO.h"
+#import <OpenGL/gl.h>
+#import <OpenGL/OpenGL.h>
+#import <OpenGL/CGLMacro.h>
 
 @implementation S9FBO
 
-@synthesize fboID;
-@synthesize textureID;
-@synthesize bounds;
+@synthesize mFBOID;
+@synthesize mTextureID;
+@synthesize mBounds;
+@synthesize mContext;
 
-- (id) initWithContext:(CGLContextObj)ctx {
-	GLenum error;
 
+- (id) initWithContext:(QCOpenGLContext*)context andBounds:(NSRect)bounds {	
+	
 	if (self = [super init]) {
 		
-		context = ctx;
-		CGLRetainContext(context);
+		CGLContextObj cgl_ctx = [context CGLContextObj];		
 		
-		NSLog(@"FBO Context: %X\n", &context);
-		
-		bounds =  NSMakeRect(0.0, 0.0, 640.0, 480.0);
-	
-		glGenTextures(1, &textureID);	
-		glBindTexture(GL_TEXTURE_RECTANGLE_ARB, textureID);
-		glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGBA32F_ARB, self.bounds.size.width, self.bounds.size.height, 0, GL_RGBA, GL_FLOAT, NULL);
-		
-		glGenFramebuffersEXT(1, &fboID);
-		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fboID);
-		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_RECTANGLE_ARB, textureID, 0);
-		
-	/*	GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
-		if(status != GL_FRAMEBUFFER_COMPLETE_EXT)
-		{	
-			glDeleteFramebuffersEXT(1, &fboID);
-			glDeleteTextures(1, &textureID);
-			
-			NSLog(@"Cannot create FBO: %08X\n", status);
-			
-			if(error = glGetError())
-				NSLog(@"OpenGL error %04X", error);
-			
-			[self release];
-			return nil;
-		}	*/
+		CGLLockContext(cgl_ctx);
 
+		mContext = context;
+		[self pushFBO];
+		
+		mBounds = NSMakeRect(0.0, 0.0, bounds.size.width, bounds.size.height);
+		
+		GLsizei	width = bounds.size.width,	height = bounds.size.height;
+		
+		glGenTextures(1, &mTextureID);	
+		glBindTexture(GL_TEXTURE_RECTANGLE_EXT, mTextureID);
+		glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, GL_RGBA32F_ARB, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
+
+		glGenFramebuffersEXT(1, &mFBOID);
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
+		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_RECTANGLE_EXT, mTextureID, 0);
+		
+		GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
+		
+		CGLUnlockContext(cgl_ctx);
+		
+		if(status != GL_FRAMEBUFFER_COMPLETE_EXT){
+			glDeleteFramebuffersEXT(1, &mFBOID);
+			glDeleteTextures(1, &mTextureID);
+			[self release];
+			NSLog(@"Failed to create an FBO: %04X\n", status);
+			return nil;
+		}
+		[self popFBO];
 	}
-	NSLog(@"Created an FBO\n");
 	
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0); // Unbind
+	NSLog(@"Created an FBO.\n");
 	
 	return self;
 	
 }
 
-- (void) setBounds:(NSRect)newBounds context:(CGLContextObj)cgl_ctx {
+// In QC, its a good idea to remember where to go back to
 
-	[self willChangeValueForKey:@"bounds"];
-	bounds = newBounds;
-	[self didChangeValueForKey:@"bounds"];
-	[self generateNewTexture:cgl_ctx];
+-(void) pushFBO{
+	CGLContextObj cgl_ctx = [mContext CGLContextObj];	
+	glGetIntegerv(GL_FRAMEBUFFER_BINDING_EXT, &mPreviousFBO);
+	glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING_EXT, &mPreviousReadFBO);
+	glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING_EXT, &mPreviousDrawFBO);
 }
 
-- (void) attachFBO:(CGLContextObj)cgl_ctx {
-	
-	GLenum error;
-		
+-(void) popFBO{
+	CGLContextObj cgl_ctx = [mContext CGLContextObj];
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mPreviousFBO);	
+	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, mPreviousReadFBO);
+	glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, mPreviousDrawFBO);
+}
+
+- (void) bindFBO{
+	CGLContextObj cgl_ctx = [mContext CGLContextObj];
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
 	
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fboID);
-	
-	GLsizei	width = self.bounds.size.width,	height = self.bounds.size.height;
-	
+	GLsizei	width = self.mBounds.size.width,	height = self.mBounds.size.height;
+		
 	glViewport(0, 0,  width, height);
-	glMatrixMode(GL_PROJECTION);
+	/*glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
 	
 	glOrtho(0.0, width,  0.0,  height, -1, 1);		
-	
+		
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
-	glLoadIdentity();
-
-	if(error = glGetError())
-        NSLog(@"OpenGL error %04X", error);
-	
+	glLoadIdentity();*/
+		
 }
 
-- (void) detachFBO:(CGLContextObj)cgl_ctx {
-	glMatrixMode(GL_MODELVIEW);
+
+- (void) unbindFBO {
+	CGLContextObj cgl_ctx = [mContext CGLContextObj];
+	
+/*	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
+	glPopMatrix();*/
 	
-	// restore states // assume this is balanced with above 
+	
 	glPopAttrib();
 	glPopClientAttrib();
-
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);	
-	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, 0);
-	glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, 0);
+	
+	[self popFBO];
 	
 	glFlushRenderAPPLE();	
 }
 
-- (void) generateNewTexture:(CGLContextObj)cgl_ctx
-{	
-	//	glDeleteTextures(1, textureID);
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_RECTANGLE_ARB, textureID);
-	glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGBA32F_ARB, self.bounds.size.width, self.bounds.size.height, 0, GL_RGBA, GL_FLOAT, NULL);
-
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fboID);
-	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_RECTANGLE_ARB, textureID, 0);
-	
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0); // Unbind
+- (void) generateNewTexture {
 }
-
-- (void)cleanupGL {
-	CGLContextObj cgl_ctx = context;
-	CGLLockContext(cgl_ctx);
-	glDeleteFramebuffersEXT(1, &fboID);
-	glDeleteTextures(1, &textureID);
-	CGLUnlockContext(cgl_ctx);	
-	CGLReleaseContext(context);
-}
-
-- (void) dealloc {
-	[self cleanupGL];
-	[super dealloc];
-}
-
-//- (void)finalize {
-//	[self cleanupGL];
-//	[super finalize];
-//}
-
 
 @end

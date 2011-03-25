@@ -1,3 +1,6 @@
-@interface SoftShadowsPrincipal : NSObject <GFPlugInRegistration>
+
+@interface SoftShadowsPrincipal : NSObject <GFPlugInRegistration> 
+
 +(void)registerNodesWithManager:(QCNodeManager*)manager;
+
 @end
