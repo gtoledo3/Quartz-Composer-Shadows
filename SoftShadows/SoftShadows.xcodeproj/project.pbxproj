@@ -17,8 +17,11 @@
 		8F0F6C72133B61AE00229593 /* SoftShadowsUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F6C71133B61AE00229593 /* SoftShadowsUI.m */; };
 		8F0F6CA0133B627A00229593 /* SoftShadowsUI.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0F6C9E133B627A00229593 /* SoftShadowsUI.nib */; };
 		8FB35042133C9A3600A7979C /* S9Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB35041133C9A3600A7979C /* S9Shader.m */; };
-		8FB350E4133CA3BE00A7979C /* phong.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8FB350E2133CA3BE00A7979C /* phong.frag */; };
-		8FB350E5133CA3BE00A7979C /* phong.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8FB350E3133CA3BE00A7979C /* phong.vert */; };
+		8FB35342133CFFF100A7979C /* depthpcf.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8FB3533E133CFFF100A7979C /* depthpcf.frag */; };
+		8FB35343133CFFF100A7979C /* depthpcf.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8FB3533F133CFFF100A7979C /* depthpcf.vert */; };
+		8FB35344133CFFF100A7979C /* phong.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8FB35340133CFFF100A7979C /* phong.frag */; };
+		8FB35345133CFFF100A7979C /* phong.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8FB35341133CFFF100A7979C /* phong.vert */; };
+		8FB35465133D26D500A7979C /* S9Math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FB35464133D26D500A7979C /* S9Math.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +44,12 @@
 		8F0F6C9F133B627A00229593 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/SoftShadowsUI.nib; sourceTree = "<group>"; };
 		8FB35040133C9A3600A7979C /* S9Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S9Shader.h; sourceTree = "<group>"; };
 		8FB35041133C9A3600A7979C /* S9Shader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S9Shader.m; sourceTree = "<group>"; };
-		8FB350E2133CA3BE00A7979C /* phong.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = phong.frag; sourceTree = "<group>"; };
-		8FB350E3133CA3BE00A7979C /* phong.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = phong.vert; sourceTree = "<group>"; };
+		8FB3533E133CFFF100A7979C /* depthpcf.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = depthpcf.frag; path = Resources/depthpcf.frag; sourceTree = "<group>"; };
+		8FB3533F133CFFF100A7979C /* depthpcf.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = depthpcf.vert; path = Resources/depthpcf.vert; sourceTree = "<group>"; };
+		8FB35340133CFFF100A7979C /* phong.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = phong.frag; path = Resources/phong.frag; sourceTree = "<group>"; };
+		8FB35341133CFFF100A7979C /* phong.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = phong.vert; path = Resources/phong.vert; sourceTree = "<group>"; };
+		8FB35463133D26D500A7979C /* S9Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S9Math.h; sourceTree = "<group>"; };
+		8FB35464133D26D500A7979C /* S9Math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = S9Math.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +153,8 @@
 				8FB35041133C9A3600A7979C /* S9Shader.m */,
 				8F0F6BB2133B4D9700229593 /* S9FBO.h */,
 				8F0F6BB3133B4D9700229593 /* S9FBO.m */,
+				8FB35463133D26D500A7979C /* S9Math.h */,
+				8FB35464133D26D500A7979C /* S9Math.c */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -153,8 +162,10 @@
 		8FB350B5133CA06700A7979C /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				8FB350E2133CA3BE00A7979C /* phong.frag */,
-				8FB350E3133CA3BE00A7979C /* phong.vert */,
+				8FB3533E133CFFF100A7979C /* depthpcf.frag */,
+				8FB3533F133CFFF100A7979C /* depthpcf.vert */,
+				8FB35340133CFFF100A7979C /* phong.frag */,
+				8FB35341133CFFF100A7979C /* phong.vert */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -213,8 +224,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FB350E4133CA3BE00A7979C /* phong.frag in Resources */,
-				8FB350E5133CA3BE00A7979C /* phong.vert in Resources */,
+				8FB35342133CFFF100A7979C /* depthpcf.frag in Resources */,
+				8FB35343133CFFF100A7979C /* depthpcf.vert in Resources */,
+				8FB35344133CFFF100A7979C /* phong.frag in Resources */,
+				8FB35345133CFFF100A7979C /* phong.vert in Resources */,
 				8F0F6BA1133B4D3C00229593 /* SoftShadows.xml in Resources */,
 				8F0F6CA0133B627A00229593 /* SoftShadowsUI.nib in Resources */,
 			);
@@ -249,6 +262,7 @@
 				8F0F6BB4133B4D9700229593 /* S9FBO.m in Sources */,
 				8F0F6C72133B61AE00229593 /* SoftShadowsUI.m in Sources */,
 				8FB35042133C9A3600A7979C /* S9Shader.m in Sources */,
+				8FB35465133D26D500A7979C /* S9Math.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

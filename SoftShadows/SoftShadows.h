@@ -47,11 +47,21 @@
 @interface SoftShadows : QCPatch
 {
 	QCNumberPort		*inputLightX;
+	QCNumberPort		*inputLightY;
+	QCNumberPort		*inputLightZ;
+	
+	QCNumberPort		*inputLightLookX;
+	QCNumberPort		*inputLightLookY;
+	QCNumberPort		*inputLightLookZ;
+	
 	QCOpenGLPort_Color	*inputLightColor;
 	QCBooleanPort		*inputBypass;
 	
 	S9Shader			*mPhongShader;
+	S9Shader			*mDepthShader; // Specific to PCF Shadows
 	S9FBO				*mFBO;
+	
+	float				mCamMatrix[16];
 	
 }
 

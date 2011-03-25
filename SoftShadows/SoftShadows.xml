@@ -31,6 +31,47 @@
 			<key>description</key>
 			<string>Light X Position</string>
 		</dict>
+		
+		<key>inputLightY</key>
+		<dict>
+			<key>name</key>
+			<string>lightY</string>
+			<key>description</key>
+			<string>Light Y Position</string>
+		</dict>
+		
+		<key>inputLightZ</key>
+		<dict>
+			<key>name</key>
+			<string>lightZ</string>
+			<key>description</key>
+			<string>Light Z Position</string>
+		</dict>
+		
+		<key>inputLightLookX</key>
+		<dict>
+			<key>name</key>
+			<string>lookX</string>
+			<key>description</key>
+			<string>Light X Look</string>
+		</dict>
+		
+		<key>inputLightLookY</key>
+		<dict>
+			<key>name</key>
+			<string>lookY</string>
+			<key>description</key>
+			<string>Light Y Look</string>
+		</dict>
+		
+		<key>inputLightLookZ</key>
+		<dict>
+			<key>name</key>
+			<string>lookZ</string>
+			<key>description</key>
+			<string>Light Z Look</string>
+		</dict>
+		
 		<key>inputBypass</key>
 		<dict>
 			<key>name</key>

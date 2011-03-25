@@ -1,5 +1,5 @@
 /*
-                       __  .__              ________ 
+					   __  .__              ________ 
    ______ ____   _____/  |_|__| ____   ____/   __   \
   /  ___// __ \_/ ___\   __\  |/  _ \ /    \____    /
   \___ \\  ___/\  \___|  | |  (  <_> )   |  \ /    / 
@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
  
- S9FBO.h | Part of ShaderTest | Created 23/03/2011
+ Math.h | Part of SoftShadows | Created 25/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -40,41 +40,7 @@
  *
  * ***********************************************************************/
 
-#import <Cocoa/Cocoa.h>
-
-// Create, attach, detach and draw a basic framebuffer object
-
-@interface S9FBO : NSObject {
-	QCOpenGLContext *mContext;
-	GLuint			mFBOID;
-	GLuint			mTextureID;
-	GLuint			mDepthID;
-	
-	NSRect			mBounds;
-	
-	// Previous settings so we can go back
-	
-	GLint mPreviousFBO;
-	GLint mPreviousReadFBO;
-	GLint mPreviousDrawFBO;
-	
-	GLint mPreviousDrawBuffer;
-	GLint mPreviousReadBuffer;
-	
-}
-@property (readwrite, assign) NSRect mBounds;
-@property (readonly) GLuint	mFBOID;
-@property (readonly) GLuint mTextureID;
-@property (readonly) GLuint mDepthID;
-@property (nonatomic,retain) QCOpenGLContext *mContext;
-
-- (id) initWithContext:(QCOpenGLContext*)context andBounds:(NSRect)bounds;
-
-- (void) bindFBO;
-- (void) unbindFBO;
-- (void) generateNewTexture;
-
--(void) pushFBO;
--(void) popFBO;
-
-@end
+void  glhLookAtf2( float *matrix, float *eyePosition3D, float *center3D, float *upVector3D );
+void crossVector(float *result, float *v0, float *v1);
+void normalizeVector(float *result, float *v0);
+void multMatrix(float *result, float *m0, float *m1);

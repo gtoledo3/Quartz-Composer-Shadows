@@ -73,9 +73,17 @@
 		glBindTexture(GL_TEXTURE_RECTANGLE_EXT, mTextureID);
 		glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, GL_RGBA32F_ARB, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
 
+		
+		glGenTextures(1, &mDepthID);
+		glBindTexture(GL_TEXTURE_RECTANGLE_EXT, mDepthID);
+		glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, GL_DEPTH_COMPONENT24, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		
+		
 		glGenFramebuffersEXT(1, &mFBOID);
 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
 		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_RECTANGLE_EXT, mTextureID, 0);
+		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_RECTANGLE_EXT, mDepthID, 0);
+
 		
 		GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
 		
