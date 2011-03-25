@@ -17,8 +17,8 @@
 		8F0F6C72133B61AE00229593 /* SoftShadowsUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F6C71133B61AE00229593 /* SoftShadowsUI.m */; };
 		8F0F6CA0133B627A00229593 /* SoftShadowsUI.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0F6C9E133B627A00229593 /* SoftShadowsUI.nib */; };
 		8FB35042133C9A3600A7979C /* S9Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB35041133C9A3600A7979C /* S9Shader.m */; };
-		8FB350B3133CA05B00A7979C /* phong.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8FB350B1133CA05B00A7979C /* phong.frag */; };
-		8FB350B4133CA05B00A7979C /* phong.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8FB350B2133CA05B00A7979C /* phong.vert */; };
+		8FB350E4133CA3BE00A7979C /* phong.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8FB350E2133CA3BE00A7979C /* phong.frag */; };
+		8FB350E5133CA3BE00A7979C /* phong.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8FB350E3133CA3BE00A7979C /* phong.vert */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +41,8 @@
 		8F0F6C9F133B627A00229593 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/SoftShadowsUI.nib; sourceTree = "<group>"; };
 		8FB35040133C9A3600A7979C /* S9Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S9Shader.h; sourceTree = "<group>"; };
 		8FB35041133C9A3600A7979C /* S9Shader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S9Shader.m; sourceTree = "<group>"; };
-		8FB350B1133CA05B00A7979C /* phong.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = phong.frag; path = ../../../Cinder/Section9/ShaderTests/xcode/resources/phong.frag; sourceTree = SOURCE_ROOT; };
-		8FB350B2133CA05B00A7979C /* phong.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = phong.vert; path = ../../../Cinder/Section9/ShaderTests/xcode/resources/phong.vert; sourceTree = SOURCE_ROOT; };
+		8FB350E2133CA3BE00A7979C /* phong.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = phong.frag; sourceTree = "<group>"; };
+		8FB350E3133CA3BE00A7979C /* phong.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = phong.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,8 +153,8 @@
 		8FB350B5133CA06700A7979C /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				8FB350B1133CA05B00A7979C /* phong.frag */,
-				8FB350B2133CA05B00A7979C /* phong.vert */,
+				8FB350E2133CA3BE00A7979C /* phong.frag */,
+				8FB350E3133CA3BE00A7979C /* phong.vert */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -213,8 +213,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FB350B3133CA05B00A7979C /* phong.frag in Resources */,
-				8FB350B4133CA05B00A7979C /* phong.vert in Resources */,
+				8FB350E4133CA3BE00A7979C /* phong.frag in Resources */,
+				8FB350E5133CA3BE00A7979C /* phong.vert in Resources */,
 				8F0F6BA1133B4D3C00229593 /* SoftShadows.xml in Resources */,
 				8F0F6CA0133B627A00229593 /* SoftShadowsUI.nib in Resources */,
 			);

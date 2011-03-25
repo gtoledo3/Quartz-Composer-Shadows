@@ -195,6 +195,9 @@
 			8FB350DF133CA32000A7979C /* PBXTextBookmark */ = 8FB350DF133CA32000A7979C /* PBXTextBookmark */;
 			8FB350E0133CA32000A7979C /* PBXTextBookmark */ = 8FB350E0133CA32000A7979C /* PBXTextBookmark */;
 			8FB350E1133CA37600A7979C /* PBXTextBookmark */ = 8FB350E1133CA37600A7979C /* PBXTextBookmark */;
+			8FB350EE133CA3C700A7979C /* PBXTextBookmark */ = 8FB350EE133CA3C700A7979C /* PBXTextBookmark */;
+			8FB350EF133CA3C700A7979C /* PBXBookmark */ = 8FB350EF133CA3C700A7979C /* PBXBookmark */;
+			8FB350F0133CA3C700A7979C /* PBXTextBookmark */ = 8FB350F0133CA3C700A7979C /* PBXTextBookmark */;
 			8FFB21F2133BAA220099C13E = 8FFB21F2133BAA220099C13E /* PlistBookmark */;
 			8FFB21F5133BAA220099C13E = 8FFB21F5133BAA220099C13E /* PBXTextBookmark */;
 			8FFB21F6133BAA220099C13E = 8FFB21F6133BAA220099C13E /* PBXTextBookmark */;
@@ -231,9 +234,9 @@
 	};
 	8F0F6BAB133B4D7700229593 /* SoftShadows.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {987, 1963}}";
+			sepNavIntBoundsRect = "{{0, 0}, {987, 1820}}";
 			sepNavSelRange = "{3534, 0}";
-			sepNavVisRange = "{3312, 816}";
+			sepNavVisRange = "{3304, 824}";
 		};
 	};
 	8F0F6BAD133B4D8200229593 /* SoftShadowsPrincipal.h */ = {
@@ -1221,13 +1224,25 @@
 		vrLoc = 0;
 	};
 	8FB350B1133CA05B00A7979C /* phong.frag */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = phong.frag;
+		path = /Users/oni/Projects/Cinder/Section9/ShaderTests/xcode/resources/phong.frag;
+		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {987, 741}}";
+			sepNavIntBoundsRect = "{{0, 0}, {987, 728}}";
 			sepNavSelRange = "{208, 0}";
-			sepNavVisRange = "{54, 1105}";
+			sepNavVisRange = "{54, 1044}";
 		};
 	};
 	8FB350B2133CA05B00A7979C /* phong.vert */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = phong.vert;
+		path = /Users/oni/Projects/Cinder/Section9/ShaderTests/xcode/resources/phong.vert;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {987, 592}}";
 			sepNavSelRange = "{0, 0}";
@@ -1513,6 +1528,37 @@
 		rType = 0;
 		vrLen = 816;
 		vrLoc = 3312;
+	};
+	8FB350E2133CA3BE00A7979C /* phong.frag */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {987, 728}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 977}";
+		};
+	};
+	8FB350EE133CA3C700A7979C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8F0F6BAB133B4D7700229593 /* SoftShadows.m */;
+		name = "SoftShadows.m: 114";
+		rLen = 0;
+		rLoc = 3534;
+		rType = 0;
+		vrLen = 824;
+		vrLoc = 3304;
+	};
+	8FB350EF133CA3C700A7979C /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 8FB350E2133CA3BE00A7979C /* phong.frag */;
+	};
+	8FB350F0133CA3C700A7979C /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 8FB350E2133CA3BE00A7979C /* phong.frag */;
+		name = "phong.frag: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 977;
+		vrLoc = 0;
 	};
 	8FFB21F2133BAA220099C13E /* PlistBookmark */ = {
 		isa = PlistBookmark;

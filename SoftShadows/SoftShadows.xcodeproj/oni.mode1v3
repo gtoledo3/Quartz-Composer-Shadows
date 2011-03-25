@@ -229,6 +229,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -272,14 +274,22 @@
 								<string>089C1671FE841209C02AAC07</string>
 								<string>32C88E010371C26100C91783</string>
 								<string>1C37FBAC04509CD000000102</string>
+								<string>8FB35025133C977B00A7979C</string>
+								<string>8FB350ED133CA3C700A7979C</string>
 								<string>1C37FABC05509CD000000102</string>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>11</integer>
-									<integer>9</integer>
-									<integer>1</integer>
+									<integer>16</integer>
+									<integer>15</integer>
+									<integer>14</integer>
+									<integer>0</integer>
+								</array>
+								<array>
+									<integer>17</integer>
+									<integer>15</integer>
+									<integer>14</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -314,14 +324,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>SoftShadows.m</string>
+								<string>phong.frag</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -329,11 +337,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>SoftShadows.m</string>
+										<string>phong.frag</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>8FB350E1133CA37600A7979C</string>
+										<string>8FB350F0133CA3C700A7979C</string>
 										<key>history</key>
 										<array>
 											<string>8F191002133A922500A2A338</string>
@@ -356,14 +364,13 @@
 											<string>8FB3506F133C9DA600A7979C</string>
 											<string>8FB35078133C9E1E00A7979C</string>
 											<string>8FB35088133C9FEA00A7979C</string>
-											<string>8FB350BA133CA10A00A7979C</string>
-											<string>8FB350BB133CA10A00A7979C</string>
 											<string>8FB350DA133CA32000A7979C</string>
 											<string>8FB350DB133CA32000A7979C</string>
 											<string>8FB350DC133CA32000A7979C</string>
 											<string>8FB350DD133CA32000A7979C</string>
 											<string>8FB350DE133CA32000A7979C</string>
-											<string>8FB350DF133CA32000A7979C</string>
+											<string>8FB350EE133CA3C700A7979C</string>
+											<string>8FB350EF133CA3C700A7979C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
