@@ -8,8 +8,8 @@
  
  THE GHOST IN THE CSH
  
-
- SoftShadowsUI.h | Part of SoftShadows | Created 24/03/2011
+ 
+ S9Shader.h | Part of SoftShadows | Created 25/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -40,13 +40,29 @@
  *
  * ***********************************************************************/
 
-#import <Cocoa/Cocoa.h>
+// Adapted from the excellent Vade's v002 Shader - http://vade.info
+
+#pragma once
 
 #import <Cocoa/Cocoa.h>
-#import <SkankySDK/QCPatch.h>
-#import <SkankySDK/QCInspector.h>
 
-@interface SoftShadowsUI : QCInspector
-/* Inspector panel UI code goes here */
+// Loads a shader from both vertex and fragment sources
+
+@interface S9Shader : NSObject {
+@private
+	const GLcharARB    *fragmentShaderSource;
+	const GLcharARB    *vertexShaderSource;
+	GLhandleARB		    programObject;
+	
+	NSBundle * bundleToLoadFrom;
+	CGLContextObj shaderContext;
+}
+
+- (id)initWithShadersInAppBundle:(NSString *)theShadersName forContext:(CGLContextObj)context;
+// Designated initializer
+- (id)initWithShadersInBundle:(NSBundle *)bundle withName:(NSString *)theShadersName forContext:(CGLContextObj)context;
+
+- (GLhandleARB) programObject;
+- (GLint) getUniformLocation:(const GLcharARB *)theUniformName;
 
 @end

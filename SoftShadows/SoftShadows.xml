@@ -38,27 +38,6 @@
 			<key>description</key>
 			<string>Bypass this Patch but execute subpatches</string>
 		</dict>
-		<key>inputXRotation</key>
-		<dict>
-			<key>name</key>
-			<string>X-Rotation</string>
-			<key>description</key>
-			<string>X-Rotation</string>
-		</dict>
-		<key>inputYRotation</key>
-		<dict>
-			<key>name</key>
-			<string>Y-Rotation</string>
-			<key>description</key>
-			<string>Y-Rotation</string>
-		</dict>
-		<key>inputZRotation</key>
-		<dict>
-			<key>name</key>
-			<string>Z-Rotation</string>
-			<key>description</key>
-			<string>Z-Rotation</string>
-		</dict>
 		<key>inputColor</key>
 		<dict>
 			<key>description</key>
