@@ -16,12 +16,17 @@
 		8F0F6BB4133B4D9700229593 /* S9FBO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F6BB3133B4D9700229593 /* S9FBO.m */; };
 		8F0F6C72133B61AE00229593 /* SoftShadowsUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F6C71133B61AE00229593 /* SoftShadowsUI.m */; };
 		8F0F6CA0133B627A00229593 /* SoftShadowsUI.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0F6C9E133B627A00229593 /* SoftShadowsUI.nib */; };
+		8F1A5D2E1341C9CD00085CF0 /* shadowmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F1A5D2C1341C9CD00085CF0 /* shadowmap.frag */; };
+		8F1A5D2F1341C9CD00085CF0 /* shadowmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F1A5D2D1341C9CD00085CF0 /* shadowmap.vert */; };
 		8FB35042133C9A3600A7979C /* S9Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB35041133C9A3600A7979C /* S9Shader.m */; };
 		8FB35342133CFFF100A7979C /* depthpcf.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8FB3533E133CFFF100A7979C /* depthpcf.frag */; };
 		8FB35343133CFFF100A7979C /* depthpcf.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8FB3533F133CFFF100A7979C /* depthpcf.vert */; };
 		8FB35344133CFFF100A7979C /* phong.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8FB35340133CFFF100A7979C /* phong.frag */; };
 		8FB35345133CFFF100A7979C /* phong.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8FB35341133CFFF100A7979C /* phong.vert */; };
 		8FB35465133D26D500A7979C /* S9Math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FB35464133D26D500A7979C /* S9Math.c */; };
+		8FB354B4133D371C00A7979C /* shadow.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8FB354B2133D371C00A7979C /* shadow.frag */; };
+		8FB354B5133D371C00A7979C /* shadow.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8FB354B3133D371C00A7979C /* shadow.vert */; };
+		8FE10DA11340F72E00B56BA6 /* S9FBO2D.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE10DA01340F72E00B56BA6 /* S9FBO2D.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,8 @@
 		8F0F6C70133B61AE00229593 /* SoftShadowsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadowsUI.h; sourceTree = "<group>"; };
 		8F0F6C71133B61AE00229593 /* SoftShadowsUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftShadowsUI.m; sourceTree = "<group>"; };
 		8F0F6C9F133B627A00229593 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/SoftShadowsUI.nib; sourceTree = "<group>"; };
+		8F1A5D2C1341C9CD00085CF0 /* shadowmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shadowmap.frag; sourceTree = "<group>"; };
+		8F1A5D2D1341C9CD00085CF0 /* shadowmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shadowmap.vert; sourceTree = "<group>"; };
 		8FB35040133C9A3600A7979C /* S9Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S9Shader.h; sourceTree = "<group>"; };
 		8FB35041133C9A3600A7979C /* S9Shader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S9Shader.m; sourceTree = "<group>"; };
 		8FB3533E133CFFF100A7979C /* depthpcf.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = depthpcf.frag; path = Resources/depthpcf.frag; sourceTree = "<group>"; };
@@ -50,6 +57,10 @@
 		8FB35341133CFFF100A7979C /* phong.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = phong.vert; path = Resources/phong.vert; sourceTree = "<group>"; };
 		8FB35463133D26D500A7979C /* S9Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S9Math.h; sourceTree = "<group>"; };
 		8FB35464133D26D500A7979C /* S9Math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = S9Math.c; sourceTree = "<group>"; };
+		8FB354B2133D371C00A7979C /* shadow.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadow.frag; path = Resources/shadow.frag; sourceTree = "<group>"; };
+		8FB354B3133D371C00A7979C /* shadow.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadow.vert; path = Resources/shadow.vert; sourceTree = "<group>"; };
+		8FE10D9F1340F72E00B56BA6 /* S9FBO2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S9FBO2D.h; sourceTree = "<group>"; };
+		8FE10DA01340F72E00B56BA6 /* S9FBO2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S9FBO2D.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +166,8 @@
 				8F0F6BB3133B4D9700229593 /* S9FBO.m */,
 				8FB35463133D26D500A7979C /* S9Math.h */,
 				8FB35464133D26D500A7979C /* S9Math.c */,
+				8FE10D9F1340F72E00B56BA6 /* S9FBO2D.h */,
+				8FE10DA01340F72E00B56BA6 /* S9FBO2D.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -162,6 +175,10 @@
 		8FB350B5133CA06700A7979C /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				8F1A5D2C1341C9CD00085CF0 /* shadowmap.frag */,
+				8F1A5D2D1341C9CD00085CF0 /* shadowmap.vert */,
+				8FB354B2133D371C00A7979C /* shadow.frag */,
+				8FB354B3133D371C00A7979C /* shadow.vert */,
 				8FB3533E133CFFF100A7979C /* depthpcf.frag */,
 				8FB3533F133CFFF100A7979C /* depthpcf.vert */,
 				8FB35340133CFFF100A7979C /* phong.frag */,
@@ -224,12 +241,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB354B4133D371C00A7979C /* shadow.frag in Resources */,
+				8FB354B5133D371C00A7979C /* shadow.vert in Resources */,
 				8FB35342133CFFF100A7979C /* depthpcf.frag in Resources */,
 				8FB35343133CFFF100A7979C /* depthpcf.vert in Resources */,
 				8FB35344133CFFF100A7979C /* phong.frag in Resources */,
 				8FB35345133CFFF100A7979C /* phong.vert in Resources */,
 				8F0F6BA1133B4D3C00229593 /* SoftShadows.xml in Resources */,
 				8F0F6CA0133B627A00229593 /* SoftShadowsUI.nib in Resources */,
+				8F1A5D2E1341C9CD00085CF0 /* shadowmap.frag in Resources */,
+				8F1A5D2F1341C9CD00085CF0 /* shadowmap.vert in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +284,7 @@
 				8F0F6C72133B61AE00229593 /* SoftShadowsUI.m in Sources */,
 				8FB35042133C9A3600A7979C /* S9Shader.m in Sources */,
 				8FB35465133D26D500A7979C /* S9Math.c in Sources */,
+				8FE10DA11340F72E00B56BA6 /* S9FBO2D.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

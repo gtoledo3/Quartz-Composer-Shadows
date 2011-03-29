@@ -46,58 +46,8 @@ Math.c | Part of SoftShadows | Created 25/03/2011
 #include <string.h>
 #include <Math.h>
 
-void glhLookAtf2( float *matrix, float *eyePosition3D, float *center3D, float *upVector3D )
-{
-	float forward[3], side[3], up[3];
-	float matrix2[16], resultMatrix[16];
-	//------------------
-	forward[0] = center3D[0] - eyePosition3D[0];
-	forward[1] = center3D[1] - eyePosition3D[1];
-	forward[2] = center3D[2] - eyePosition3D[2];
 
-	normalizeVector(forward,forward);
-	//------------------
-	//Side = forward x up
-	
-	crossVector(side, forward, upVector3D);
-	normalizeVector(side,side);
-	
-	//------------------
-	//Recompute up as: up = side x forward
-	
-	crossVector(up, side, forward);
-	
-	//------------------
-	matrix2[0] = side[0];
-	matrix2[4] = side[1];
-	matrix2[8] = side[2];
-	matrix2[12] = 0.0;
-	//------------------
-	matrix2[1] = up[0];
-	matrix2[5] = up[1];
-	matrix2[9] = up[2];
-	matrix2[13] = 0.0;
-	//------------------
-	matrix2[2] = -forward[0];
-	matrix2[6] = -forward[1];
-	matrix2[10] = -forward[2];
-	matrix2[14] = 0.0;
-	//------------------
-	matrix2[3] = matrix2[7] = matrix2[11] = 0.0;
-	matrix2[15] = 1.0;
-	//------------------
-//	multMatrix(resultMatrix, matrix, matrix2);
-	
-	matrix2[13] = matrix2[13] -eyePosition3D[0];
-	matrix2[14] = matrix2[14] -eyePosition3D[1];
-	matrix2[15] = matrix2[15] -eyePosition3D[2];
-	
-	
-	//------------------
-	memcpy(matrix, matrix2, 16*sizeof(float));
-}
-
-void crossVector(float *result, float *v0, float *v1) {
+void crossVector(double *result, double *v0, double *v1) {
 	
 	result[0] = v0[1] * v1[2] - v1[1] * v0[2];
 	result[1] = v0[2] * v1[0] - v1[2] * v0[0];
@@ -105,9 +55,9 @@ void crossVector(float *result, float *v0, float *v1) {
 }
 
 
-void normalizeVector(float *result, float *v0) {
+void normalizeVector(double *result, double *v0) {
 	
-	float inv  = 1.0 / sqrt( v0[0] * v0[0] +  v0[1] * v0[1]  +  v0[2] * v0[2] ); 
+	double inv  = 1.0 / sqrt( v0[0] * v0[0] +  v0[1] * v0[1]  +  v0[2] * v0[2] ); 
 	
 	result[0] = v0[0] * inv;
 	result[1] = v0[1] * inv;
@@ -115,8 +65,28 @@ void normalizeVector(float *result, float *v0) {
 	
 }
 
-void multMatrix(float *result, float *m0, float *m1) {
+void setEqual(double *result, double *copy){
+	int i;
+	for (i = 0; i < 16; i++)
+		result[i] = copy[i];
+}
 
+void initMatrix(double *result) {
+	int i;
+	for (i = 0; i < 16; i++)
+		result[i] = 0.0;
+	
+}
+
+void floatMatrix(float *result, double *m) {
+	int i;
+	for (i = 0; i < 16; i++)
+		result[i] =(float)m[i];
+	
+}
+
+void multMatrix(double *result, double *m0, double *m1) {
+	
 	result[0] = m0[0]*m1[0] + m0[4]*m1[1] + m0[8]*m1[2] + m0[12]*m1[3];
 	result[1] = m0[1]*m1[0] + m0[5]*m1[1] + m0[9]*m1[2] + m0[13]*m1[3];
 	result[2] = m0[2]*m1[0] + m0[6]*m1[1] + m0[10]*m1[2] + m0[14]*m1[3];
@@ -138,3 +108,90 @@ void multMatrix(float *result, float *m0, float *m1) {
 	result[15] = m0[3]*m1[12] + m0[7]*m1[13] + m0[11]*m1[14] + m0[15]*m1[15];
 
 }
+
+int invertMatrix(double *result, double *m) {
+	
+	double inv[16], det;
+	int i;
+	
+	inv[0] =   m[5]*m[10]*m[15] - m[5]*m[11]*m[14] - m[9]*m[6]*m[15]
+	+ m[9]*m[7]*m[14] + m[13]*m[6]*m[11] - m[13]*m[7]*m[10];
+	inv[4] =  -m[4]*m[10]*m[15] + m[4]*m[11]*m[14] + m[8]*m[6]*m[15]
+	- m[8]*m[7]*m[14] - m[12]*m[6]*m[11] + m[12]*m[7]*m[10];
+	inv[8] =   m[4]*m[9]*m[15] - m[4]*m[11]*m[13] - m[8]*m[5]*m[15]
+	+ m[8]*m[7]*m[13] + m[12]*m[5]*m[11] - m[12]*m[7]*m[9];
+	inv[12] = -m[4]*m[9]*m[14] + m[4]*m[10]*m[13] + m[8]*m[5]*m[14]
+	- m[8]*m[6]*m[13] - m[12]*m[5]*m[10] + m[12]*m[6]*m[9];
+	inv[1] =  -m[1]*m[10]*m[15] + m[1]*m[11]*m[14] + m[9]*m[2]*m[15]
+	- m[9]*m[3]*m[14] - m[13]*m[2]*m[11] + m[13]*m[3]*m[10];
+	inv[5] =   m[0]*m[10]*m[15] - m[0]*m[11]*m[14] - m[8]*m[2]*m[15]
+	+ m[8]*m[3]*m[14] + m[12]*m[2]*m[11] - m[12]*m[3]*m[10];
+	inv[9] =  -m[0]*m[9]*m[15] + m[0]*m[11]*m[13] + m[8]*m[1]*m[15]
+	- m[8]*m[3]*m[13] - m[12]*m[1]*m[11] + m[12]*m[3]*m[9];
+	inv[13] =  m[0]*m[9]*m[14] - m[0]*m[10]*m[13] - m[8]*m[1]*m[14]
+	+ m[8]*m[2]*m[13] + m[12]*m[1]*m[10] - m[12]*m[2]*m[9];
+	inv[2] =   m[1]*m[6]*m[15] - m[1]*m[7]*m[14] - m[5]*m[2]*m[15]
+	+ m[5]*m[3]*m[14] + m[13]*m[2]*m[7] - m[13]*m[3]*m[6];
+	inv[6] =  -m[0]*m[6]*m[15] + m[0]*m[7]*m[14] + m[4]*m[2]*m[15]
+	- m[4]*m[3]*m[14] - m[12]*m[2]*m[7] + m[12]*m[3]*m[6];
+	inv[10] =  m[0]*m[5]*m[15] - m[0]*m[7]*m[13] - m[4]*m[1]*m[15]
+	+ m[4]*m[3]*m[13] + m[12]*m[1]*m[7] - m[12]*m[3]*m[5];
+	inv[14] = -m[0]*m[5]*m[14] + m[0]*m[6]*m[13] + m[4]*m[1]*m[14]
+	- m[4]*m[2]*m[13] - m[12]*m[1]*m[6] + m[12]*m[2]*m[5];
+	inv[3] =  -m[1]*m[6]*m[11] + m[1]*m[7]*m[10] + m[5]*m[2]*m[11]
+	- m[5]*m[3]*m[10] - m[9]*m[2]*m[7] + m[9]*m[3]*m[6];
+	inv[7] =   m[0]*m[6]*m[11] - m[0]*m[7]*m[10] - m[4]*m[2]*m[11]
+	+ m[4]*m[3]*m[10] + m[8]*m[2]*m[7] - m[8]*m[3]*m[6];
+	inv[11] = -m[0]*m[5]*m[11] + m[0]*m[7]*m[9] + m[4]*m[1]*m[11]
+	- m[4]*m[3]*m[9] - m[8]*m[1]*m[7] + m[8]*m[3]*m[5];
+	inv[15] =  m[0]*m[5]*m[10] - m[0]*m[6]*m[9] - m[4]*m[1]*m[10]
+	+ m[4]*m[2]*m[9] + m[8]*m[1]*m[6] - m[8]*m[2]*m[5];
+	
+	det = m[0]*inv[0] + m[1]*inv[4] + m[2]*inv[8] + m[3]*inv[12];
+	if (det == 0)
+		return 0;
+	
+	det = 1.0 / det;
+	
+	for (i = 0; i < 16; i++)
+		result[i] = inv[i] * det;
+	
+	return 1;
+}
+
+void setTextureMatrix(double *result, double *projection, double *modelView) {
+	
+	
+	// This is matrix transform every coordinate x,y,z
+	// x = x* 0.5 + 0.5 
+	// y = y* 0.5 + 0.5 
+	// z = z* 0.5 + 0.5 
+	// Moving from unit cube [-1,1] to [0,1]  
+	double bias[16] = {	
+		0.5, 0.0, 0.0, 0.0, 
+		0.0, 0.5, 0.0, 0.0,
+		0.0, 0.0, 0.5, 0.0,
+		0.5, 0.5, 0.5, 1.0};
+	
+	// Grab modelview and transformation matrices
+	
+	double first[16];
+	multMatrix(first, bias, projection);
+	multMatrix(result,first, modelView);
+	
+}
+
+void setLightMatrix(double *result, double *shadowProjection, double *shadowModelView, double* camModelView) {
+	/*Matrix44f shadowTransMatrix = mShadowCam.getProjectionMatrix();
+	shadowTransMatrix *= mShadowCam.getModelViewMatrix();
+	shadowTransMatrix *= camera.getInverseModelViewMatrix();
+	return shadowTransMatrix;*/
+	
+	double trans[16];
+	multMatrix(trans,shadowProjection,shadowModelView);
+	double inv[16];
+	invertMatrix(inv, camModelView);
+	multMatrix(result, trans, inv);
+	
+}
+

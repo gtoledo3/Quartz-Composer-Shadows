@@ -40,7 +40,15 @@
  *
  * ***********************************************************************/
 
-void  glhLookAtf2( float *matrix, float *eyePosition3D, float *center3D, float *upVector3D );
-void crossVector(float *result, float *v0, float *v1);
-void normalizeVector(float *result, float *v0);
-void multMatrix(float *result, float *m0, float *m1);
+
+// A set of C Maths functions for matrices and vectors
+
+void crossVector(double *result, double *v0, double *v1);
+void normalizeVector(double *result, double *v0);
+void multMatrix(double *result, double *m0, double *m1);
+void setEqual(double *result, double *copy);
+int invertMatrix(double *result, double *m);
+void initMatrix(double *result);
+void floatMatrix(float *result, double *m);
+void setTextureMatrix(double *result, double *projection, double *modelView);
+void setLightMatrix(double *result, double *shadowProjection, double *shadowModelView, double* camModelView);

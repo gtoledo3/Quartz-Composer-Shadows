@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
  
- SoftShadows.h | Part of SoftShadows | Created 25/03/2011
+ S9FBO2D.h | Part of SoftShadows | Created 28/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -40,48 +40,44 @@
  *
  * ***********************************************************************/
 
-#import "S9Shader.h"
-#import "S9FBO.h"
-#import "S9FBO2D.h"
+#import <Cocoa/Cocoa.h>
 
-@interface SoftShadows : QCPatch
-{
-	QCNumberPort		*inputLightX;
-	QCNumberPort		*inputLightY;
-	QCNumberPort		*inputLightZ;
+// Create, attach, detach and draw a basic framebuffer object
+
+@interface S9FBO2D : NSObject {
+	QCOpenGLContext *mContext;
+	GLuint			mFBOID;
+	GLuint			mTextureID;
+	GLuint			mDepthID;
 	
-	QCNumberPort		*inputLightLookX;
-	QCNumberPort		*inputLightLookY;
-	QCNumberPort		*inputLightLookZ;
+	int		size;
 	
-	QCOpenGLPort_Color	*inputLightColor;
-	QCBooleanPort		*inputBypass;
+	// Previous settings so we can go back
 	
-	QCBooleanPort		*inputDrawDepth;
+	GLint mPreviousFBO;
+	GLint mPreviousReadFBO;
+	GLint mPreviousDrawFBO;
 	
-	NSMutableDictionary *mStates;	// Save states to send back to patches
+	GLint mPreviousDrawBuffer;
+	GLint mPreviousReadBuffer;
 	
-	S9Shader			*mPhongShader;
-	S9Shader			*mDepthShader; // Specific to PCF Shadows
-	S9Shader			*mShadowShader;
-	S9Shader			*mShadowMapShader; 
-	S9FBO2D				*mFBO;
-	
-	
-	
-	float				mCamMatrix[16];
+	BOOL mDepthOnly;
 	
 }
 
-@property (nonatomic,retain) S9Shader *mPhongShader;
-@property (nonatomic,retain) S9FBO2D	*mFBO;
+@property (readonly) GLuint	mFBOID;
+@property (readonly) GLuint mTextureID;
+@property (readonly) GLuint mDepthID;
+@property (readwrite) int size;
+@property (nonatomic,retain) QCOpenGLContext *mContext;
 
-+(BOOL)isSafe;
-+(BOOL)allowsSubpatchesWithIdentifier:(id)identifier;
+- (id) initWithContext:(QCOpenGLContext*)context andSize:(int) size depthOnly:(BOOL)depth;
 
--(id)initWithIdentifier:(id)identifier;
--(BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)arguments;
--(void)recallPatches:(QCPatch*) patch context:(QCOpenGLContext *)context time:(double)time arguments:(NSDictionary *)arguments;
--(void)blurShadowMap;
+- (void) bindFBO;
+- (void) unbindFBO;
+- (void) generateNewTexture;
+
+-(void) pushFBO;
+-(void) popFBO;
 
 @end

@@ -48,43 +48,8 @@
 #import <OpenGL/gl.h>
 #import <OpenGL/OpenGL.h>
 #import <OpenGL/CGLMacro.h>
+#import <OpenGL/gluMacro.h>
 #import <SkankySDK/QCOpenGLContext.h>
-
-#pragma mark statics
-
-static void setTextureMatrix (CGLContextObj cgl_ctx ) {
-	static double modelView[16];
-	static double projection[16];
-	
-	// This is matrix transform every coordinate x,y,z
-	// x = x* 0.5 + 0.5 
-	// y = y* 0.5 + 0.5 
-	// z = z* 0.5 + 0.5 
-	// Moving from unit cube [-1,1] to [0,1]  
-	const GLdouble bias[16] = {	
-		0.5, 0.0, 0.0, 0.0, 
-		0.0, 0.5, 0.0, 0.0,
-		0.0, 0.0, 0.5, 0.0,
-		0.5, 0.5, 0.5, 1.0};
-	
-	// Grab modelview and transformation matrices
-	glGetDoublev(GL_MODELVIEW_MATRIX, modelView);
-	glGetDoublev(GL_PROJECTION_MATRIX, projection);
-	
-	
-	glMatrixMode(GL_TEXTURE);
-	glActiveTextureARB(GL_TEXTURE7);
-	
-	glLoadIdentity();	
-	glLoadMatrixd(bias);
-	
-	// concatating all matrice into one.
-	glMultMatrixd (projection);
-	glMultMatrixd (modelView);
-	
-	// Go back to normal matrix mode
-	glMatrixMode(GL_MODELVIEW);
-}
 
 
 #pragma mark SoftShadows
@@ -129,8 +94,10 @@ static void setTextureMatrix (CGLContextObj cgl_ctx ) {
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 
 	if (mFBO == nil){
-		NSRect bounds = NSMakeRect(0.0, 0.0, 640.0, 480.0);
-		mFBO = [[S9FBO alloc] initWithContext:context andBounds:bounds];
+		//NSRect bounds = NSMakeRect(0.0, 0.0, 1024.0, 1024.0); // FIXED SIZE POWER OF TWO FBO!
+		//mFBO = [[S9FBO alloc] initWithContext:context andBounds:bounds];
+		mFBO = [[S9FBO2D alloc] initWithContext:context andSize:1024 depthOnly:TRUE];
+
 	}
 	
 	// Load Shaders
@@ -155,7 +122,35 @@ static void setTextureMatrix (CGLContextObj cgl_ctx ) {
 	}
 	
 	
+	mShadowShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"shadow" forContext:cgl_ctx];
+	if(mShadowShader == nil) {
+		NSLog(@"Cannot compile Shadow Shader.\n");
+		return NO;
+	}
+	else {
+		NSLog(@"Compiled Shadow shader.\n");
+	}
+	
+	mShadowMapShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"shadowmap" forContext:cgl_ctx];
+	if(mShadowMapShader == nil) {
+		NSLog(@"Cannot compile ShadowMap Shader.\n");
+		return NO;
+	}
+	else {
+		NSLog(@"Compiled ShadowMap shader.\n");
+	}
+	
+	
 	return YES;
+}
+
+
+-(void)logMatrix:(float*)matrix {
+	NSLog(@"------------------\n");
+	 NSLog(@"%f,%f,%f,%f\n%f,%f,%f,%f\n%f,%f,%f,%f\n%f,%f,%f,%f\n",matrix[0],matrix[1],
+	 matrix[2],matrix[3],matrix[4],matrix[5],matrix[6],
+	 matrix[7],matrix[8],matrix[9],matrix[10],matrix[11],
+	 matrix[12],matrix[13],matrix[14],matrix[15]);
 }
 
 -(void)cleanup:(QCOpenGLContext*)context {
@@ -170,6 +165,29 @@ static void setTextureMatrix (CGLContextObj cgl_ctx ) {
 -(void)disable:(QCOpenGLContext*)context {
 }
 
+// Recursive call to invalidate all patches and re-excute
+// Likely to be SLOW!
+
+-(void)recallPatches:(QCPatch*) patch context:(QCOpenGLContext *)context time:(double)time arguments:(NSDictionary *)arguments {
+
+	NSArray *subpatches = [patch subpatches];
+	NSEnumerator *e = [subpatches objectEnumerator];
+	id object;
+	
+	while (object = [e nextObject]) {
+		QCPatch *p = (QCPatch*)object;	
+		if ([p _enabled]) {
+			[p execute:context time:time arguments:arguments];
+			[self recallPatches:p context:context time:time arguments:arguments];
+		}
+		
+	}
+}
+
+- (void) blurShadowMap {
+	
+}
+
 
 - (BOOL)execute:(QCOpenGLContext *)context time:(double)time arguments:(NSDictionary *)arguments {
 
@@ -178,77 +196,111 @@ static void setTextureMatrix (CGLContextObj cgl_ctx ) {
 		[self executeSubpatches:time arguments:arguments];
 		return YES;
 	}
-	
-	
-	// Bind Depth Shader and FBO For rendering the moments from the Light
-	CGLContextObj cgl_ctx = [context CGLContextObj];
-	
-	
-	[mFBO bindFBO];
-	
-	float omv[16];
-	glGetFloatv(GL_MODELVIEW_MATRIX, omv);
-	
-	
-	glUseProgramObjectARB([mDepthShader programObject]);
 
-	float pos[3] = {[inputLightX doubleValue], [inputLightY doubleValue], [inputLightZ doubleValue]};
-	float look[3] = {[inputLightLookX doubleValue], [inputLightLookY doubleValue], [inputLightLookZ doubleValue]};
-	float up[3] = {0.0,1.0,0.0};
 	
-	glhLookAtf2(omv,pos,look,up);
+	CGLContextObj cgl_ctx = [context CGLContextObj];
+
+	double shadowProjection[16];
+	double shadowModelview[16];
+	double cameraModelview[16];
+	double finalMatrix[16];
+	float finalFloatMatrix[16];
 	
+	// BIND TO DEPTH/SHADOWMAP
+	// -----------------------
+	glEnable(GL_TEXTURE_2D);
+	[mFBO bindFBO];	
+	
+	//glUseProgramObjectARB([mDepthShader programObject]);
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity(); 
+	gluPerspective(55,1.0, 0.1, 100.0);
+	glGetDoublev(GL_PROJECTION_MATRIX, shadowProjection);
+	
+		
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
+	glLoadIdentity();
+	gluLookAt([inputLightX doubleValue], [inputLightY doubleValue], [inputLightZ doubleValue],
+			  [inputLightLookX doubleValue], [inputLightLookY doubleValue], [inputLightLookZ doubleValue],
+			  0.0,1.0,0.0);
 	
-	glLoadMatrixf(omv);
-	
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity(); 
-	//gluPerspective(55, mFBO.mBounds.size.width / mFBO.mBounds.size.height, 0.1, 500.0);
-	
-	//glMatrixMode(GL_MODELVIEW);
-	//glLoadIdentity(); 
+	glGetDoublev(GL_MODELVIEW_MATRIX, shadowModelview);
 	
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
 	
 	[self executeSubpatches:time arguments:arguments];
-			
+
+	//setTextureMatrix(finalMatrix, shadowProjection, shadowModelview);
 	
-	setTextureMatrix(cgl_ctx);
-	glPopMatrix();
 	glDisable(GL_CULL_FACE);
-	glUseProgramObjectARB(NULL);
+	
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	
+	//glUseProgramObjectARB(NULL);
 	[mFBO unbindFBO];
-	
-
-	// set program vars
-	//glUniform1iARB([mPhongShader getUniformLocation:"tex"], 0); 
-	//glUniform1fARB([mPhongShader getUniformLocation:"shininess"], 128); 	
-	
-	// Now Render our Quad so that we can splat out a texture!
-	glEnable(GL_TEXTURE_RECTANGLE_EXT);
-	glBindTexture(GL_TEXTURE_RECTANGLE_EXT, [mFBO mTextureID]);
-	
-	
-	glColor3f(1.0,1.0,1.0f);
-	
-	// Remember, with rectangle textures, we dont use 0-1
-	
-	GLsizei	width =  mFBO.mBounds.size.width;
-	GLsizei height = mFBO.mBounds.size.height;
 
 	
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0, 0.0);			glVertex3f(-1.0, -1.0, 0.0);
-	glTexCoord2f(width, 0.0);		glVertex3f(1.0, -1.0, 0.0);
-	glTexCoord2f(width, height);	glVertex3f(1.0, 1.0, 0.0);
-	glTexCoord2f(0.0, height);		glVertex3f(-1.0, 1.0, 0.0);
-	glEnd();
+	// UNBIND DEPTH SHADER AND DRAW WITH SHADOW SHADER
+	// -----------------------------------------------
+
+	glUseProgramObjectARB([mShadowMapShader programObject]);
 	
-	glDisable(GL_TEXTURE_RECTANGLE_EXT);
+	glGetDoublev(GL_MODELVIEW_MATRIX, cameraModelview);
 	
+	setLightMatrix(finalMatrix, shadowProjection, shadowModelview, cameraModelview);
+	floatMatrix(finalFloatMatrix,finalMatrix);
+	
+	
+	glUniform1iARB([mShadowMapShader getUniformLocation:"depthTexture"],0);
+	glUniformMatrix4fv([mShadowMapShader getUniformLocation:"shadowTransMatrix"],16,FALSE,finalFloatMatrix);
+	
+	// Activate the GL Light as its used in the shader
+	
+/*	float lightPos[4] = { (float)[inputLightX doubleValue], 
+		(float)[inputLightY doubleValue], (float)[inputLightZ doubleValue], 0.0f};
+	
+	float spec[4] = {0.5f, 0.5f, 0.5f, 1.0f};
+	float dif[4] = {0.3f, 0.3f, 0.3f, 1.0f};
+	float amb[4] = {0.3f, 0.3f, 0.3f, 1.0f};
+	
+	glEnable(GL_LIGHT0);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, spec);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, dif);
+	glLightfv(GL_LIGHT0, GL_AMBIENT_AND_DIFFUSE,amb);*/
+	
+	// Bind Texture and draw our objects (but to which unit? Maybe it should be 1?)
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, [mFBO mDepthID]);
+	
+	[self recallPatches:self context:context time:time arguments:arguments];
+	
+	glUseProgramObjectARB(NULL);
+	
+//	glDisable(GL_LIGHT0);
+	
+
+	if( [inputDrawDepth booleanValue] ) { // there are faster ways to achieve this, but this is a handy way to see the depth map
+		glColor3f(1.0,1.0,1.0f);
+		glBindTexture(GL_TEXTURE_2D, [mFBO mDepthID]);
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE );
+		
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0, 0.0);		glVertex3f(-1.0, -1.0, 0.0);
+		glTexCoord2f(1.0, 0.0);		glVertex3f(1.0, -1.0, 0.0);
+		glTexCoord2f(1.0, 1.0);		glVertex3f(1.0, 1.0, 0.0);
+		glTexCoord2f(0.0, 1.0);		glVertex3f(-1.0, 1.0, 0.0);
+		glEnd();
+		
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE );
+	}
+	
+
 	return YES;
 }
 @end

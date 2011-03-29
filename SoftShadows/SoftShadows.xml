@@ -86,6 +86,13 @@
 			<key>name</key>
 			<string>Colour</string>
 		</dict>
+		<key>inputDrawDepth</key>
+		<dict>
+			<key>description</key>
+			<string>Draw the light depth map</string>
+			<key>name</key>
+			<string>DrawDepth</string>
+		</dict>
 
 	</dict>
 <!--	<key>outputAttributes</key>

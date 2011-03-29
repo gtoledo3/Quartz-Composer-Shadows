@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
  
- S9FBO.m | Part of ShaderTest | Created 23/03/2011
+ S9FBO2D.m | Part of SoftShadows | Created 28/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -40,54 +40,65 @@
  *
  * ***********************************************************************/
 
-
-#import "S9FBO.h"
+#import "S9FBO2D.h"
 #import <OpenGL/gl.h>
 #import <OpenGL/OpenGL.h>
 #import <OpenGL/CGLMacro.h>
 
-@implementation S9FBO
+@implementation S9FBO2D
 
 @synthesize mFBOID;
 @synthesize mTextureID;
-@synthesize mBounds;
+@synthesize mDepthID;
 @synthesize mContext;
+@synthesize size;
 
 
-- (id) initWithContext:(QCOpenGLContext*)context andBounds:(NSRect)bounds {	
+- (id) initWithContext:(QCOpenGLContext*)context andSize:(int)size depthOnly:(BOOL)depth{	
 	
 	if (self = [super init]) {
 		
 		CGLContextObj cgl_ctx = [context CGLContextObj];		
 		
 		CGLLockContext(cgl_ctx);
-
+		
 		mContext = context;
 		[self pushFBO];
 		
-		mBounds = NSMakeRect(0.0, 0.0, bounds.size.width, bounds.size.height);
+		self.size = size;
+		mDepthOnly = depth;
 		
-		GLsizei	width = bounds.size.width,	height = bounds.size.height;
+		GLsizei	width = size;
 		
-		glGenTextures(1, &mTextureID);	
-		glBindTexture(GL_TEXTURE_RECTANGLE_EXT, mTextureID);
-		glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, GL_RGBA32F_ARB, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
-		glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	/*	glTexParameterf(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_WRAP_S, GL_CLAMP );
-		glTexParameterf(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_WRAP_T, GL_CLAMP );*/
-		
+		if (!depth){
+			glGenTextures(1, &mTextureID);	
+			glBindTexture(GL_TEXTURE_2D, mTextureID);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F_ARB, width, width, 0, GL_RGBA, GL_FLOAT, NULL);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			/*	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+			 glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );*/
+		}
 		
 		glGenTextures(1, &mDepthID);
-		glBindTexture(GL_TEXTURE_RECTANGLE_EXT, mDepthID);
-		glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, GL_DEPTH_COMPONENT24, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		glBindTexture(GL_TEXTURE_2D, mDepthID);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, width, width, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 		
+		if (depth){
+			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE );
+			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );	
+		}
 		
 		glGenFramebuffersEXT(1, &mFBOID);
 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
-		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_RECTANGLE_EXT, mTextureID, 0);
-		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_RECTANGLE_EXT, mDepthID, 0);
-
+		if (!depth) 
+			glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, mTextureID, 0);
+		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_2D, mDepthID, 0);
+		
+		if (depth){
+			glDrawBuffer(GL_NONE);
+			glReadBuffer(GL_NONE);
+		}
 		
 		GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
 		
@@ -95,7 +106,9 @@
 		
 		if(status != GL_FRAMEBUFFER_COMPLETE_EXT){
 			glDeleteFramebuffersEXT(1, &mFBOID);
-			glDeleteTextures(1, &mTextureID);
+			if (!mDepthOnly)
+				glDeleteTextures(1, &mTextureID);
+			glDeleteTextures(1, &mDepthID);
 			[self release];
 			NSLog(@"Failed to create an FBO: %04X\n", status);
 			return nil;
@@ -131,30 +144,26 @@
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
 	
-	GLsizei	width = self.mBounds.size.width,	height = self.mBounds.size.height;
-		
-	glViewport(0, 0,  width, height);
-	/*glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
+	GLsizei	width = self.size;
 	
-	glOrtho(0.0, width,  0.0,  height, -1, 1);		
-		
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();*/
-		
+	if (mDepthOnly){
+		glPolygonOffset( 1.0f, 1.0f );
+		glEnable( GL_POLYGON_OFFSET_FILL );
+	}
+	
+	glViewport(0, 0,  width, width);
+	
+	
 }
 
 
 - (void) unbindFBO {
 	CGLContextObj cgl_ctx = [mContext CGLContextObj];
+
 	
-/*	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();*/
-	
+	if (mDepthOnly){
+		glDisable( GL_POLYGON_OFFSET_FILL );
+	}
 	
 	glPopAttrib();
 	glPopClientAttrib();
