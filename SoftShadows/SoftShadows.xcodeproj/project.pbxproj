@@ -18,6 +18,12 @@
 		8F0F6CA0133B627A00229593 /* SoftShadowsUI.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0F6C9E133B627A00229593 /* SoftShadowsUI.nib */; };
 		8F1A5D2E1341C9CD00085CF0 /* shadowmap.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F1A5D2C1341C9CD00085CF0 /* shadowmap.frag */; };
 		8F1A5D2F1341C9CD00085CF0 /* shadowmap.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F1A5D2D1341C9CD00085CF0 /* shadowmap.vert */; };
+		8F1A5E7F1341F25E00085CF0 /* SofterShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1A5E7E1341F25E00085CF0 /* SofterShadows.m */; };
+		8F1A5E921341FB9100085CF0 /* SofterShadowsUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1A5E911341FB9100085CF0 /* SofterShadowsUI.m */; };
+		8F1A5E951341FBF100085CF0 /* SofterShadowsUI.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1A5E931341FBF100085CF0 /* SofterShadowsUI.nib */; };
+		8F1A5EA21341FCCA00085CF0 /* SofterShadows.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8F1A5EA11341FCCA00085CF0 /* SofterShadows.xml */; };
+		8F1A60C91342592C00085CF0 /* blur.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F1A60C71342592C00085CF0 /* blur.frag */; };
+		8F1A60CA1342592C00085CF0 /* blur.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F1A60C81342592C00085CF0 /* blur.vert */; };
 		8FB35042133C9A3600A7979C /* S9Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FB35041133C9A3600A7979C /* S9Shader.m */; };
 		8FB35342133CFFF100A7979C /* depthpcf.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8FB3533E133CFFF100A7979C /* depthpcf.frag */; };
 		8FB35343133CFFF100A7979C /* depthpcf.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8FB3533F133CFFF100A7979C /* depthpcf.vert */; };
@@ -49,6 +55,14 @@
 		8F0F6C9F133B627A00229593 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/SoftShadowsUI.nib; sourceTree = "<group>"; };
 		8F1A5D2C1341C9CD00085CF0 /* shadowmap.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shadowmap.frag; sourceTree = "<group>"; };
 		8F1A5D2D1341C9CD00085CF0 /* shadowmap.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = shadowmap.vert; sourceTree = "<group>"; };
+		8F1A5E7D1341F25E00085CF0 /* SofterShadows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SofterShadows.h; sourceTree = "<group>"; };
+		8F1A5E7E1341F25E00085CF0 /* SofterShadows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SofterShadows.m; sourceTree = "<group>"; };
+		8F1A5E901341FB9100085CF0 /* SofterShadowsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SofterShadowsUI.h; sourceTree = "<group>"; };
+		8F1A5E911341FB9100085CF0 /* SofterShadowsUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SofterShadowsUI.m; sourceTree = "<group>"; };
+		8F1A5E941341FBF100085CF0 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/SofterShadowsUI.nib; sourceTree = "<group>"; };
+		8F1A5EA11341FCCA00085CF0 /* SofterShadows.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SofterShadows.xml; sourceTree = "<group>"; };
+		8F1A60C71342592C00085CF0 /* blur.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blur.frag; sourceTree = "<group>"; };
+		8F1A60C81342592C00085CF0 /* blur.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = blur.vert; sourceTree = "<group>"; };
 		8FB35040133C9A3600A7979C /* S9Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S9Shader.h; sourceTree = "<group>"; };
 		8FB35041133C9A3600A7979C /* S9Shader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S9Shader.m; sourceTree = "<group>"; };
 		8FB3533E133CFFF100A7979C /* depthpcf.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = depthpcf.frag; path = Resources/depthpcf.frag; sourceTree = "<group>"; };
@@ -101,8 +115,10 @@
 			isa = PBXGroup;
 			children = (
 				8FB350B5133CA06700A7979C /* Shaders */,
+				8F1A5E931341FBF100085CF0 /* SofterShadowsUI.nib */,
 				8F0F6C9E133B627A00229593 /* SoftShadowsUI.nib */,
 				8F0F6BA0133B4D3C00229593 /* SoftShadows.xml */,
+				8F1A5EA11341FCCA00085CF0 /* SofterShadows.xml */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 			);
 			name = Resources;
@@ -149,12 +165,32 @@
 		75AA971B10093C25000986A3 /* Patches */ = {
 			isa = PBXGroup;
 			children = (
+				8F1A5FB313421DDB00085CF0 /* Softer */,
+				8F1A5FB213421DCA00085CF0 /* Soft */,
+			);
+			name = Patches;
+			sourceTree = "<group>";
+		};
+		8F1A5FB213421DCA00085CF0 /* Soft */ = {
+			isa = PBXGroup;
+			children = (
 				8F0F6BAA133B4D7700229593 /* SoftShadows.h */,
 				8F0F6BAB133B4D7700229593 /* SoftShadows.m */,
 				8F0F6C70133B61AE00229593 /* SoftShadowsUI.h */,
 				8F0F6C71133B61AE00229593 /* SoftShadowsUI.m */,
 			);
-			name = Patches;
+			name = Soft;
+			sourceTree = "<group>";
+		};
+		8F1A5FB313421DDB00085CF0 /* Softer */ = {
+			isa = PBXGroup;
+			children = (
+				8F1A5E7D1341F25E00085CF0 /* SofterShadows.h */,
+				8F1A5E7E1341F25E00085CF0 /* SofterShadows.m */,
+				8F1A5E901341FB9100085CF0 /* SofterShadowsUI.h */,
+				8F1A5E911341FB9100085CF0 /* SofterShadowsUI.m */,
+			);
+			name = Softer;
 			sourceTree = "<group>";
 		};
 		8FB35044133C9A3C00A7979C /* Utility */ = {
@@ -175,6 +211,8 @@
 		8FB350B5133CA06700A7979C /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				8F1A60C71342592C00085CF0 /* blur.frag */,
+				8F1A60C81342592C00085CF0 /* blur.vert */,
 				8F1A5D2C1341C9CD00085CF0 /* shadowmap.frag */,
 				8F1A5D2D1341C9CD00085CF0 /* shadowmap.vert */,
 				8FB354B2133D371C00A7979C /* shadow.frag */,
@@ -241,6 +279,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F1A60C91342592C00085CF0 /* blur.frag in Resources */,
+				8F1A60CA1342592C00085CF0 /* blur.vert in Resources */,
 				8FB354B4133D371C00A7979C /* shadow.frag in Resources */,
 				8FB354B5133D371C00A7979C /* shadow.vert in Resources */,
 				8FB35342133CFFF100A7979C /* depthpcf.frag in Resources */,
@@ -251,6 +291,8 @@
 				8F0F6CA0133B627A00229593 /* SoftShadowsUI.nib in Resources */,
 				8F1A5D2E1341C9CD00085CF0 /* shadowmap.frag in Resources */,
 				8F1A5D2F1341C9CD00085CF0 /* shadowmap.vert in Resources */,
+				8F1A5E951341FBF100085CF0 /* SofterShadowsUI.nib in Resources */,
+				8F1A5EA21341FCCA00085CF0 /* SofterShadows.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +327,8 @@
 				8FB35042133C9A3600A7979C /* S9Shader.m in Sources */,
 				8FB35465133D26D500A7979C /* S9Math.c in Sources */,
 				8FE10DA11340F72E00B56BA6 /* S9FBO2D.m in Sources */,
+				8F1A5E7F1341F25E00085CF0 /* SofterShadows.m in Sources */,
+				8F1A5E921341FB9100085CF0 /* SofterShadowsUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +341,14 @@
 				8F0F6C9F133B627A00229593 /* English */,
 			);
 			name = SoftShadowsUI.nib;
+			sourceTree = "<group>";
+		};
+		8F1A5E931341FBF100085CF0 /* SofterShadowsUI.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F1A5E941341FBF100085CF0 /* English */,
+			);
+			name = SofterShadowsUI.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

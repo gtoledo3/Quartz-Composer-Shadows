@@ -167,6 +167,8 @@ void setTextureMatrix(double *result, double *projection, double *modelView) {
 	// y = y* 0.5 + 0.5 
 	// z = z* 0.5 + 0.5 
 	// Moving from unit cube [-1,1] to [0,1]  
+	
+	// TODO - Could potentially move this to a shader
 	double bias[16] = {	
 		0.5, 0.0, 0.0, 0.0, 
 		0.0, 0.5, 0.0, 0.0,

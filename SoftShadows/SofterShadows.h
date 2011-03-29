@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
  
- S9FBO2D.h | Part of SoftShadows | Created 28/03/2011
+ SofterShadows.h | Part of SoftShadows | Created 29/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -41,43 +41,36 @@
  * ***********************************************************************/
 
 #import <Cocoa/Cocoa.h>
+#import "S9Shader.h"
+#import "S9FBO2D.h"
+#import "SofterShadowsUI.h"
 
-// Create, attach, detach and draw a basic framebuffer object
-
-@interface S9FBO2D : NSObject {
-	QCOpenGLContext *mContext;
-	GLuint			mFBOID;
-	GLuint			mTextureID;
-	GLuint			mDepthID;
+@interface SofterShadows : QCPatch {
+	QCNumberPort		*inputLightX;
+	QCNumberPort		*inputLightY;
+	QCNumberPort		*inputLightZ;
 	
-	int		mSize;
+	QCNumberPort		*inputLightLookX;
+	QCNumberPort		*inputLightLookY;
+	QCNumberPort		*inputLightLookZ;
 	
-	// Previous settings so we can go back
+	QCBooleanPort		*inputBypass;
+	QCBooleanPort		*inputDrawDepth;
 	
-	GLint mPreviousFBO;
-	GLint mPreviousReadFBO;
-	GLint mPreviousDrawFBO;
+	QCNumberPort		*inputMapSize;
 	
-	GLint mPreviousDrawBuffer;
-	GLint mPreviousReadBuffer;
-	
-	BOOL mDepthOnly;
-	
+	S9Shader			*mDepthShader;
+	S9Shader			*mShadowShader;
+	S9Shader			*mBlurShader;
+	S9FBO2D				*mFBO;
+	S9FBO2D				*mBlurFBO;
 }
 
-@property (readonly) GLuint	mFBOID;
-@property (readonly) GLuint mTextureID;
-@property (readonly) GLuint mDepthID;
-@property (readwrite) int mSize;
-@property (nonatomic,retain) QCOpenGLContext *mContext;
++(BOOL)isSafe;
++(BOOL)allowsSubpatchesWithIdentifier:(id)identifier;
 
-- (id) initWithContext:(QCOpenGLContext*)context andSize:(int) size depthOnly:(BOOL)depth;
-
-- (void) bindFBO;
-- (void) unbindFBO;
-- (void) generateNewTexture;
-
--(void) pushFBO;
--(void) popFBO;
+-(id)initWithIdentifier:(id)identifier;
+-(BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)arguments;
+-(void)recallPatches:(QCPatch*) patch context:(QCOpenGLContext *)context time:(double)time arguments:(NSDictionary *)arguments;
 
 @end

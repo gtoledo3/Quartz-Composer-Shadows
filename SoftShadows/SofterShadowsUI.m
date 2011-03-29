@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
  
- S9FBO2D.h | Part of SoftShadows | Created 28/03/2011
+ SofterShadowsUI.m | Part of SoftShadows | Created 29/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -40,44 +40,23 @@
  *
  * ***********************************************************************/
 
-#import <Cocoa/Cocoa.h>
 
-// Create, attach, detach and draw a basic framebuffer object
+#import "SofterShadowsUI.h"
 
-@interface S9FBO2D : NSObject {
-	QCOpenGLContext *mContext;
-	GLuint			mFBOID;
-	GLuint			mTextureID;
-	GLuint			mDepthID;
-	
-	int		mSize;
-	
-	// Previous settings so we can go back
-	
-	GLint mPreviousFBO;
-	GLint mPreviousReadFBO;
-	GLint mPreviousDrawFBO;
-	
-	GLint mPreviousDrawBuffer;
-	GLint mPreviousReadBuffer;
-	
-	BOOL mDepthOnly;
-	
+
+@implementation SofterShadowsUI
+
+/* This method returns the NIB file to use for the inspector panel */
++(NSString*)viewNibName
+{
+    return @"SofterShadowsUI";
 }
 
-@property (readonly) GLuint	mFBOID;
-@property (readonly) GLuint mTextureID;
-@property (readonly) GLuint mDepthID;
-@property (readwrite) int mSize;
-@property (nonatomic,retain) QCOpenGLContext *mContext;
+/* This method specifies the title for the patch */
++(NSString*)viewTitle
+{
+    return @"SofterShadows";
+}
 
-- (id) initWithContext:(QCOpenGLContext*)context andSize:(int) size depthOnly:(BOOL)depth;
-
-- (void) bindFBO;
-- (void) unbindFBO;
-- (void) generateNewTexture;
-
--(void) pushFBO;
--(void) popFBO;
 
 @end

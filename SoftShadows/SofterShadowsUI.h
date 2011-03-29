@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
  
- S9FBO2D.h | Part of SoftShadows | Created 28/03/2011
+ SofterShadowsUI.h | Part of SoftShadows | Created 29/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -42,42 +42,12 @@
 
 #import <Cocoa/Cocoa.h>
 
-// Create, attach, detach and draw a basic framebuffer object
+#import <Cocoa/Cocoa.h>
+#import <SkankySDK/QCPatch.h>
+#import <SkankySDK/QCInspector.h>
 
-@interface S9FBO2D : NSObject {
-	QCOpenGLContext *mContext;
-	GLuint			mFBOID;
-	GLuint			mTextureID;
-	GLuint			mDepthID;
-	
-	int		mSize;
-	
-	// Previous settings so we can go back
-	
-	GLint mPreviousFBO;
-	GLint mPreviousReadFBO;
-	GLint mPreviousDrawFBO;
-	
-	GLint mPreviousDrawBuffer;
-	GLint mPreviousReadBuffer;
-	
-	BOOL mDepthOnly;
-	
+@interface SofterShadowsUI : QCInspector {
+
 }
-
-@property (readonly) GLuint	mFBOID;
-@property (readonly) GLuint mTextureID;
-@property (readonly) GLuint mDepthID;
-@property (readwrite) int mSize;
-@property (nonatomic,retain) QCOpenGLContext *mContext;
-
-- (id) initWithContext:(QCOpenGLContext*)context andSize:(int) size depthOnly:(BOOL)depth;
-
-- (void) bindFBO;
-- (void) unbindFBO;
-- (void) generateNewTexture;
-
--(void) pushFBO;
--(void) popFBO;
 
 @end

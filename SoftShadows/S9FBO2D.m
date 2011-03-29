@@ -51,7 +51,7 @@
 @synthesize mTextureID;
 @synthesize mDepthID;
 @synthesize mContext;
-@synthesize size;
+@synthesize mSize;
 
 
 - (id) initWithContext:(QCOpenGLContext*)context andSize:(int)size depthOnly:(BOOL)depth{	
@@ -65,7 +65,7 @@
 		mContext = context;
 		[self pushFBO];
 		
-		self.size = size;
+		self.mSize = size;
 		mDepthOnly = depth;
 		
 		GLsizei	width = size;
@@ -76,17 +76,20 @@
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F_ARB, width, width, 0, GL_RGBA, GL_FLOAT, NULL);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			/*	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-			 glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );*/
+		
+			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 		}
 		
 		glGenTextures(1, &mDepthID);
 		glBindTexture(GL_TEXTURE_2D, mDepthID);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, width, width, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );	
+		glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+		glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 		
 		if (depth){
 			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE );
-			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );	
 		}
 		
 		glGenFramebuffersEXT(1, &mFBOID);
@@ -144,7 +147,7 @@
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
 	
-	GLsizei	width = self.size;
+	GLsizei	width = self.mSize;
 	
 	if (mDepthOnly){
 		glPolygonOffset( 1.0f, 1.0f );

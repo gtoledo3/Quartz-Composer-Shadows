@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--required-->
+	<key>nodeAttributes</key>
+	<dict>
+		<key>name</key>
+		<string>Softer Shadows</string>
+		<key>categories</key>
+		<array>
+			<string>Custom Patch</string>
+		</array>
+		<key>copyright</key>
+		<string>Copyright 2011 Section9. All rights reserved.</string>
+		<key>description</key>
+		<string>This patch outputs an FBO Image</string>
+		<key>aliasNames</key>
+		<array>
+			<string>alias for searching</string>
+		</array>
+
+
+	</dict>
+	<key>inputAttributes</key>
+	<dict>
+		<key>inputLightX</key>
+		<dict>
+			<key>name</key>
+			<string>lightX</string>
+			<key>description</key>
+			<string>Light X Position</string>
+		</dict>
+		
+		<key>inputLightY</key>
+		<dict>
+			<key>name</key>
+			<string>lightY</string>
+			<key>description</key>
+			<string>Light Y Position</string>
+		</dict>
+		
+		<key>inputLightZ</key>
+		<dict>
+			<key>name</key>
+			<string>lightZ</string>
+			<key>description</key>
+			<string>Light Z Position</string>
+		</dict>
+		
+		<key>inputLightLookX</key>
+		<dict>
+			<key>name</key>
+			<string>lookX</string>
+			<key>description</key>
+			<string>Light X Look</string>
+		</dict>
+		
+		<key>inputLightLookY</key>
+		<dict>
+			<key>name</key>
+			<string>lookY</string>
+			<key>description</key>
+			<string>Light Y Look</string>
+		</dict>
+		
+		<key>inputLightLookZ</key>
+		<dict>
+			<key>name</key>
+			<string>lookZ</string>
+			<key>description</key>
+			<string>Light Z Look</string>
+		</dict>
+		
+		<key>inputBypass</key>
+		<dict>
+			<key>name</key>
+			<string>bypass</string>
+			<key>description</key>
+			<string>Bypass this Patch but execute subpatches</string>
+		</dict>
+		
+		<key>inputDrawDepth</key>
+		<dict>
+			<key>description</key>
+			<string>Draw the light depth map</string>
+			<key>name</key>
+			<string>DrawDepth</string>
+		</dict>
+
+	</dict>
+</dict>
+</plist>

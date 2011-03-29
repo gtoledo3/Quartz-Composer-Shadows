@@ -59,21 +59,17 @@
 	
 	QCBooleanPort		*inputDrawDepth;
 	
-	NSMutableDictionary *mStates;	// Save states to send back to patches
-	
 	S9Shader			*mPhongShader;
 	S9Shader			*mDepthShader; // Specific to PCF Shadows
 	S9Shader			*mShadowShader;
 	S9Shader			*mShadowMapShader; 
 	S9FBO2D				*mFBO;
 	
-	
-	
 	float				mCamMatrix[16];
 	
 }
 
-@property (nonatomic,retain) S9Shader *mPhongShader;
+@property (nonatomic,retain) S9Shader	*mPhongShader;
 @property (nonatomic,retain) S9FBO2D	*mFBO;
 
 +(BOOL)isSafe;
