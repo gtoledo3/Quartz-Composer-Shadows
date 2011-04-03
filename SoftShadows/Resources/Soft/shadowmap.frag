@@ -14,7 +14,8 @@ void main(void)
 	
 	vec3 coord = 0.5 * (q.xyz / q.w + 1.0);
 	float shadow = shadow2D( depthTexture, coord ).r;
+	
 	//gl_FragColor = (ambient + (0.2 + 0.8 * shadow) * diffuse) + specular * shadow;
 	
-	gl_FragColor = vec4(1.0 * shadow,1.0 * shadow,1.0 * shadow,1.0);
+	gl_FragColor = vec4(shadow,shadow,shadow,1.0);
 }

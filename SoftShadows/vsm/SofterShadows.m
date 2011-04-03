@@ -41,6 +41,19 @@
  * ***********************************************************************/
 
 
+// An implemetation of VSM Shadowing
+// http://http.developer.nvidia.com/GPUGems3/gpugems3_ch08.html
+// http://www.punkuser.net/vsm/
+// http://www.fabiensanglard.net/shadowmappingVSM/index.php
+// http://www.punkuser.net/vsm/vsm_paper.pdf
+// http://forum.beyond3d.com/showthread.php?t=38165
+// http://www.cgl.uwaterloo.ca/poster/andrew_I3D07.pdf
+
+
+// TODO - Antialias FBOs
+//		- Test mipmapping of the FBO textures
+
+
 #import "SofterShadows.h"
 #import "S9Math.h"
 
@@ -73,6 +86,24 @@
 -(id)initWithIdentifier:(id)identifier {
 	if(self = [super initWithIdentifier:identifier]) {
 		[[self userInfo] setObject:@"Softer Shadows" forKey:@"name"];
+		
+		// TODO - If not already set, set these :P
+		// TODO set max and mins
+		
+		[inputVariance setDoubleValue: 0.00002];
+		[inputOrtho setBooleanValue:FALSE];
+		
+		[inputNearLightPlane setDoubleValue: 0.1];
+		[inputFarLightPlane setDoubleValue: 100.0];
+		[inputFieldView setDoubleValue: 55.0];
+		
+		[inputMapSize setMaxDoubleValue:4096.0];
+		[inputMapSize setMinDoubleValue:128.0];
+		
+		mFBOSize = 1024;
+		
+		[inputMapSize setDoubleValue: mFBOSize];
+
 	}
 	return self;
 }
@@ -81,47 +112,58 @@
 	return [SofterShadowsUI class];
 }
 
+-(void)resetFBOSize {
+	
+	float ti = (float)[inputMapSize doubleValue];
+	
+	int c = *(const int *) &ti;  // OR, for portability:  memcpy(&c, &v, sizeof c);
+	c = (c >> 23) - 127;
+	
+	c = pow(2,c);
+	
+	if (mFBOSize != c){
+		mFBOSize = c;
+		NSLog(@"Resizing FBO to %i.\n",mFBOSize);
+		[mFBO generateNewTexture:mFBOSize];
+		[mBlurHorizontalFBO generateNewTexture:mFBOSize];
+		[mBlurVerticalFBO generateNewTexture:mFBOSize];
+	}
+}
+
 -(BOOL)setup:(QCOpenGLContext*)context {
 	
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 	
 	if (mFBO == nil){
 		// Fixed size, power of two as its Texture2D for simplicity
-		mFBO = [[S9FBO2D alloc] initWithContext:context andSize:2048 depthOnly:FALSE];
-		mBlurFBO = [[S9FBO2D alloc] initWithContext:context andSize:2048 depthOnly:FALSE]; 
+		mFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 accuracy:GL_RGB32F_ARB  
+									  depthOnly:FALSE];
+
+		mBlurHorizontalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize 
+												   numTargets:1 accuracy:GL_RGB32F_ARB	depthOnly:FALSE]; 
+		mBlurVerticalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 
+												   accuracy:GL_RGB32F_ARB depthOnly:FALSE]; 
 	}
 	
 	// Load Shaders
 	
 	NSBundle *pluginBundle =[NSBundle bundleForClass:[self class]];	
 		
-	mDepthShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"depthpcf" forContext:cgl_ctx];
-	if(mDepthShader == nil) {
-		NSLog(@"Cannot compile Depth Shader.\n");
-		return NO;
-	}
-	else {
-		NSLog(@"Compiled Depth shader.\n");
-	}
-	
+	mDepthShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"depthvsm" forContext:cgl_ctx];
+	if(mDepthShader == nil) { NSLog(@"Cannot compile Depth Shader.\n"); return NO; }
+	else NSLog(@"Compiled Depth shader.\n");
 	
 	mShadowShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"shadow" forContext:cgl_ctx];
-	if(mShadowShader == nil) {
-		NSLog(@"Cannot compile Shadow Shader.\n");
-		return NO;
-	}
-	else {
-		NSLog(@"Compiled Shadow shader.\n");
-	}
+	if(mShadowShader == nil) { NSLog(@"Cannot compile Shadow Shader.\n"); return NO; }
+	else NSLog(@"Compiled Shadow shader.\n"); 
 	
-	mBlurShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"blur" forContext:cgl_ctx];
-	if(mBlurShader == nil) {
-		NSLog(@"Cannot compile Blur Shader.\n");
-		return NO;
-	}
-	else {
-		NSLog(@"Compiled Blur shader.\n");
-	}
+	mBlurHorizontalShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"blurhoriz" forContext:cgl_ctx];
+	if(mBlurHorizontalShader == nil) { NSLog(@"Cannot compile Blur Horizontal Shader.\n"); return NO; }
+	else NSLog(@"Compiled Blur Horizontal shader.\n");
+	
+	mBlurVerticalShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"blurvertical" forContext:cgl_ctx];
+	if(mBlurVerticalShader == nil) { NSLog(@"Cannot compile Blur Vertical Shader.\n"); return NO; }
+	else NSLog(@"Compiled Blur Vertical shader.\n");
 	
 	
 	return YES;
@@ -139,8 +181,11 @@
 -(void)cleanup:(QCOpenGLContext*)context {
 	[mDepthShader release];
 	[mShadowShader release];
+	[mBlurHorizontalShader release];
+	[mBlurVerticalShader release];
 	[mFBO release];
-	[mBlurFBO release];
+	[mBlurHorizontalFBO release];
+	[mBlurVerticalFBO release];
 }
 
 -(void)enable:(QCOpenGLContext*)context {	
@@ -168,6 +213,62 @@
 }
 
 
+-(void) renderOrthoQuad:(QCOpenGLContext *)context withTex:(GLuint) tex {
+
+	CGLContextObj cgl_ctx = [context CGLContextObj];
+	
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(-1, 1, -1, 1, 0.0, 10.0);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	
+	glColor3f(1.0,1.0,1.0f);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0, 0.0);	glVertex3f(-1.0, -1.0, 0.0);
+	glTexCoord2f(1.0, 0.0);	glVertex3f(1.0, -1.0, 0.0);
+	glTexCoord2f(1.0, 1.0);	glVertex3f(1.0, 1.0, 0.0);
+	glTexCoord2f(0.0, 1.0);	glVertex3f(-1.0, 1.0, 0.0);
+	glEnd();
+	
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	
+}
+
+-(void) blurShadowMap:(QCOpenGLContext *)context {
+	
+	CGLContextObj cgl_ctx = [context CGLContextObj];
+	
+	// Horizontal Blur
+	
+	[mBlurHorizontalFBO bindFBO];
+	glUseProgramObjectARB([mBlurHorizontalShader programObject]);
+	glUniform1iARB([mBlurHorizontalShader getUniformLocation:"RTScene"],0);
+	glUniform1fARB([mBlurVerticalShader getUniformLocation:"blurSize"],(float)[inputBlurAmount doubleValue]);
+	[self renderOrthoQuad:context withTex:[mFBO getTextureAtTarget:0]];
+	[mBlurHorizontalFBO unbindFBO];
+	glUseProgramObjectARB(NULL);
+	
+	// Vertical Blur
+	
+	[mBlurVerticalFBO bindFBO];
+	glUseProgramObjectARB([mBlurVerticalShader programObject]);
+	glUniform1iARB([mBlurVerticalShader getUniformLocation:"RTScene"],0);
+	glUniform1fARB([mBlurVerticalShader getUniformLocation:"blurSize"],(float)[inputBlurAmount doubleValue]);
+	[self renderOrthoQuad:context withTex:[mBlurHorizontalFBO getTextureAtTarget:0]];
+	
+	glUseProgramObjectARB(NULL);
+	[mBlurVerticalFBO unbindFBO];	
+
+}
+
+
 - (BOOL)execute:(QCOpenGLContext *)context time:(double)time arguments:(NSDictionary *)arguments {
 	
 	// Allow Bypassing of this shader	
@@ -175,6 +276,7 @@
 		[self executeSubpatches:time arguments:arguments];
 		return YES;
 	}
+	[self resetFBOSize];
 	
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 	
@@ -192,10 +294,17 @@
 	[mFBO bindFBO];	
 	
 	glUseProgramObjectARB([mDepthShader programObject]);
+	glUniform1fARB([mDepthShader getUniformLocation:"far"],(float)[inputFarLightPlane doubleValue]);
+	
+	
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity(); 
-	gluPerspective(55,1.0, 0.1, 100.0);
+	if ([inputOrtho booleanValue])
+		glOrtho(-1, 1, -1, 1, [inputNearLightPlane doubleValue], [inputFarLightPlane doubleValue]);
+	else 
+		gluPerspective([inputFieldView doubleValue],1.0, [inputNearLightPlane doubleValue], [inputFarLightPlane doubleValue]);
+
 	glGetDoublev(GL_PROJECTION_MATRIX, shadowProjection);
 	
 	
@@ -209,12 +318,10 @@
 	glGetDoublev(GL_MODELVIEW_MATRIX, shadowModelview);
 	
 	glEnable(GL_CULL_FACE);
-	glFrontFace(GL_CW);
 	glCullFace(GL_FRONT);
 	
-	[self executeSubpatches:time arguments:arguments];
-	
-	
+	[self recallPatches:self context:context time:time arguments:arguments];
+
 	glDisable(GL_CULL_FACE);
 	
 	glPopMatrix();
@@ -227,38 +334,9 @@
 	// UNBIND DEPTH AND APPLY BLUR 
 	// ---------------------------
 	
-	[mBlurFBO bindFBO];
-	
-	glUseProgramObjectARB([mBlurShader programObject]);
-	glUniform2fARB([mBlurShader getUniformLocation:"ScaleU"], 1.0/2048.0,  1.0/2048.0);
-	glUniform1iARB([mBlurShader getUniformLocation:"textureSource"],0);
-	
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	glOrtho(-1, 1, -1, 1, 0.0, 10.0);
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-	
-	glColor3f(1.0,1.0,1.0f);
-	glBindTexture(GL_TEXTURE_2D, [mFBO mTextureID]);
-	
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0, 0.0);		glVertex3f(-1.0, -1.0, 0.0);
-	glTexCoord2f(1.0, 0.0);		glVertex3f(1.0, -1.0, 0.0);
-	glTexCoord2f(1.0, 1.0);		glVertex3f(1.0, 1.0, 0.0);
-	glTexCoord2f(0.0, 1.0);		glVertex3f(-1.0, 1.0, 0.0);
-	glEnd();
-	
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	
-	glUseProgramObjectARB(NULL);
-	
-	[mBlurFBO unbindFBO];
-	
+	if ([inputBlur booleanValue]){
+		[self blurShadowMap:context];
+	}
 	
 	// UNBIND BLUR SHADER AND DRAW WITH SHADOW SHADER
 	// -----------------------------------------------
@@ -274,32 +352,23 @@
 	
 	glUniform1iARB([mShadowShader getUniformLocation:"ShadowMap"],0);
 	glUniformMatrix4fv([mShadowShader getUniformLocation:"shadowTransMatrix"], 16, FALSE, finalFloatMatrix);
+	glUniform1fARB([mShadowShader getUniformLocation:"maxVariance"], (float)[inputVariance doubleValue]);
+	glUniform4fARB([mShadowShader getUniformLocation:"lightPosition"],
+				   (float)[inputLightX doubleValue], (float)[inputLightY doubleValue], (float)[inputLightZ doubleValue], 0.0);
+	glUniform4fARB([mShadowShader getUniformLocation:"lightLook"],
+				   (float)[inputLightLookX doubleValue], (float)[inputLightLookY doubleValue], (float)[inputLightLookZ doubleValue], 0.0);
 	
 	
-	// Activate the GL Light as its used in the shader
 	
-	/*	float lightPos[4] = { (float)[inputLightX doubleValue], 
-	 (float)[inputLightY doubleValue], (float)[inputLightZ doubleValue], 0.0f};
-	 
-	 float spec[4] = {0.5f, 0.5f, 0.5f, 1.0f};
-	 float dif[4] = {0.3f, 0.3f, 0.3f, 1.0f};
-	 float amb[4] = {0.3f, 0.3f, 0.3f, 1.0f};
-	 
-	 glEnable(GL_LIGHT0);
-	 glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
-	 glLightfv(GL_LIGHT0, GL_SPECULAR, spec);
-	 glLightfv(GL_LIGHT0, GL_DIFFUSE, dif);
-	 glLightfv(GL_LIGHT0, GL_AMBIENT_AND_DIFFUSE,amb);*/
+
+	if([inputBlur booleanValue])
+		glBindTexture(GL_TEXTURE_2D, [mBlurVerticalFBO getTextureAtTarget:0]);
+	else 
+		glBindTexture(GL_TEXTURE_2D, [mFBO getTextureAtTarget:0]);
 	
-	// Bind Texture and draw our objects (but to which unit? Maybe it should be 1?)
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, [mBlurFBO mTextureID]);
-	
-	
-	[self recallPatches:self context:context time:time arguments:arguments];
-	
-	
-	glDisable(GL_CULL_FACE);
+	[self executeSubpatches:time arguments:arguments];
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 	
 	glUseProgramObjectARB(NULL);
 	
@@ -316,7 +385,10 @@
 		glLoadIdentity();
 		
 		glColor3f(1.0,1.0,1.0f);
-		glBindTexture(GL_TEXTURE_2D, [mBlurFBO mTextureID]);
+		if([inputBlur booleanValue])
+			glBindTexture(GL_TEXTURE_2D, [mBlurVerticalFBO getTextureAtTarget:0]);
+		else 
+			glBindTexture(GL_TEXTURE_2D, [mFBO getTextureAtTarget:0]);
 			
 		glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.0);		glVertex3f(-1.0, -1.0, 0.0);
@@ -332,6 +404,7 @@
 		
 	}
 	
+	glDisable(GL_CULL_FACE);
 	glDisable(GL_TEXTURE_2D);
 	
 	return YES;

@@ -96,7 +96,7 @@
 	if (mFBO == nil){
 		//NSRect bounds = NSMakeRect(0.0, 0.0, 1024.0, 1024.0); // FIXED SIZE POWER OF TWO FBO!
 		//mFBO = [[S9FBO alloc] initWithContext:context andBounds:bounds];
-		mFBO = [[S9FBO2D alloc] initWithContext:context andSize:1024 depthOnly:TRUE];
+		mFBO = [[S9FBO2D alloc] initWithContext:context andSize:1024 numTargets:1 accuracy:GL_RGB32F_ARB depthOnly:TRUE];
 
 	}
 	
@@ -228,15 +228,8 @@
 	
 	glGetDoublev(GL_MODELVIEW_MATRIX, shadowModelview);
 	
-	/*glEnable(GL_CULL_FACE);
-	glFrontFace(GL_CW);
-	glCullFace(GL_FRONT);*/
 	
 	[self executeSubpatches:time arguments:arguments];
-
-	//setTextureMatrix(finalMatrix, shadowProjection, shadowModelview);
-	
-	//glDisable(GL_CULL_FACE);
 	
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
@@ -283,7 +276,7 @@
 	
 	glUseProgramObjectARB(NULL);
 	
-//	glDisable(GL_LIGHT0);
+	//glDisable(GL_LIGHT0);
 	
 
 	if( [inputDrawDepth booleanValue] ) { // there are faster ways to achieve this, but this is a handy way to see the depth map

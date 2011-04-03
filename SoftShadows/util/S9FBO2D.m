@@ -48,60 +48,31 @@
 @implementation S9FBO2D
 
 @synthesize mFBOID;
-@synthesize mTextureID;
 @synthesize mDepthID;
 @synthesize mContext;
 @synthesize mSize;
 
 
-- (id) initWithContext:(QCOpenGLContext*)context andSize:(int)size depthOnly:(BOOL)depth{	
+- (id) initWithContext:(QCOpenGLContext*)context andSize:(int) size numTargets:(int)ntargets accuracy:(GLuint) acc depthOnly:(BOOL)depth {
 	
 	if (self = [super init]) {
+		mAllocated = FALSE;
 		
 		CGLContextObj cgl_ctx = [context CGLContextObj];		
-		
 		CGLLockContext(cgl_ctx);
 		
 		mContext = context;
 		[self pushFBO];
-		
+	
 		self.mSize = size;
 		mDepthOnly = depth;
-		
-		GLsizei	width = size;
-		
-		if (!depth){
-			glGenTextures(1, &mTextureID);	
-			glBindTexture(GL_TEXTURE_2D, mTextureID);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F_ARB, width, width, 0, GL_RGBA, GL_FLOAT, NULL);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		
-			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
-		}
-		
-		glGenTextures(1, &mDepthID);
-		glBindTexture(GL_TEXTURE_2D, mDepthID);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, width, width, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );	
-		glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-		glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
-		
-		if (depth){
-			glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE );
-		}
+		mAccuracy = acc;
+		mNumTargets = ntargets;
+	
 		
 		glGenFramebuffersEXT(1, &mFBOID);
-		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
-		if (!depth) 
-			glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, mTextureID, 0);
-		glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_2D, mDepthID, 0);
 		
-		if (depth){
-			glDrawBuffer(GL_NONE);
-			glReadBuffer(GL_NONE);
-		}
+		[self generateNewTexture:size];
 		
 		GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
 		
@@ -109,8 +80,11 @@
 		
 		if(status != GL_FRAMEBUFFER_COMPLETE_EXT){
 			glDeleteFramebuffersEXT(1, &mFBOID);
-			if (!mDepthOnly)
-				glDeleteTextures(1, &mTextureID);
+			if (!mDepthOnly){
+				for (int i=0; i< ntargets; i++){
+					glDeleteTextures(1, &mColourTargets);
+				}
+			}
 			glDeleteTextures(1, &mDepthID);
 			[self release];
 			NSLog(@"Failed to create an FBO: %04X\n", status);
@@ -124,6 +98,10 @@
 	return self;
 	
 }
+- (GLuint) getTextureAtTarget:(int)target {
+	return mColourTargets[target];
+}
+
 
 // In QC, its a good idea to remember where to go back to
 
@@ -156,7 +134,6 @@
 	
 	glViewport(0, 0,  width, width);
 	
-	
 }
 
 
@@ -176,7 +153,60 @@
 	glFlushRenderAPPLE();	
 }
 
-- (void) generateNewTexture {
+- (void) generateNewTexture:(GLuint) size {
+	CGLContextObj cgl_ctx = [mContext CGLContextObj];
+	
+	mSize = size;
+	
+	/*if (mAllocated){
+		glDeleteTextures(mNumTargets, mColourTargets);
+	}else {
+		mAllocated = TRUE;
+	}*/
+
+	if (!mDepthOnly){
+		
+		glGenTextures(mNumTargets, mColourTargets);
+		
+		for (int i=0; i< mNumTargets; i++){
+			
+			glBindTexture(GL_TEXTURE_2D, mColourTargets[i]);
+			glTexImage2D(GL_TEXTURE_2D, 0, mAccuracy, size, size, 0, GL_RGB, GL_FLOAT, NULL);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			
+			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+		}
+	}
+	
+	glGenTextures(1, &mDepthID);
+	glBindTexture(GL_TEXTURE_2D, mDepthID);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, size, size, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );	
+	
+	if (mDepthOnly){
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE );
+	}
+	
+	
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
+	
+	if (!mDepthOnly){
+		for (int i=0; i< mNumTargets; i++){
+			glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT + i, GL_TEXTURE_2D, mColourTargets[i], 0);
+		}
+	}
+	
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_2D, mDepthID, 0);
+	
+	if (mDepthOnly){
+		glDrawBuffer(GL_NONE);
+		glReadBuffer(GL_NONE);
+	}
+	
+	
+	
 }
 
 @end

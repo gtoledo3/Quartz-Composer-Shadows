@@ -1,13 +1,11 @@
 #import "SoftShadowsPrincipal.h"
-#import "SoftShadows.h"
-#import "SofterShadows.h"
+#import "PCSSShadows.h"
 
 @implementation SoftShadowsPrincipal
 
 
 +(void)registerNodesWithManager:(QCNodeManager*)manager {
-	KIRegisterPatch(SoftShadows);
-	KIRegisterPatch(SofterShadows); 
+	KIRegisterPatch(PCSSShadows); 
 	//[manager registerNodeWithClass:[SoftShadows class]];
 }
 
