@@ -202,6 +202,46 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
+				<string>8F986AB813490FCE00F65839</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>PCSSShadows.m</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>8F986AB913490FCE00F65839</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>PCSSShadows.m</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>8F986B30134919DF00F65839</string>
+						<key>history</key>
+						<array>
+							<string>8F986ADB1349133D00F65839</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {978, 709}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>435 169 978 750 0 0 1680 1028 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
 				<string>8F0BC2091348ADAB00BC2522</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>SoftShadows.m</string>
@@ -216,7 +256,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>8F986A521349059A00F65839</string>
+						<string>8F986B31134919DF00F65839</string>
 						<key>history</key>
 						<array>
 							<string>8F1E96151348F2D400E29B3D</string>
@@ -256,7 +296,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>8F986A531349059A00F65839</string>
+						<string>8F986B32134919DF00F65839</string>
 						<key>history</key>
 						<array>
 							<string>8F1E96171348F2D400E29B3D</string>
@@ -296,7 +336,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>8F986A541349059A00F65839</string>
+						<string>8F986B33134919DF00F65839</string>
 						<key>history</key>
 						<array>
 							<string>8F0BC1E21348A90C00BC2522</string>
@@ -337,7 +377,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>8F986A551349059A00F65839</string>
+						<string>8F986B34134919DF00F65839</string>
 						<key>history</key>
 						<array>
 							<string>8F1E961B1348F2D400E29B3D</string>
@@ -377,7 +417,7 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>8F986A561349059A00F65839</string>
+						<string>8F986B35134919DF00F65839</string>
 						<key>history</key>
 						<array>
 							<string>8F1E961D1348F2D400E29B3D</string>
@@ -475,6 +515,7 @@
 								<string>089C167CFE841241C02AAC07</string>
 								<string>8FB350B5133CA06700A7979C</string>
 								<string>8F26D2FE1343754F002AE096</string>
+								<string>089C1671FE841209C02AAC07</string>
 								<string>32C88E010371C26100C91783</string>
 								<string>19C28FB8FE9D52D311CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
@@ -483,15 +524,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>27</integer>
-									<integer>26</integer>
-									<integer>25</integer>
-									<integer>23</integer>
+									<integer>16</integer>
+									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {367, 818}}</string>
+							<string>{{0, 32}, {367, 818}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -528,7 +567,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>shadowcombine.frag</string>
+								<string>PCSSShadowsUI.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -536,11 +575,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>shadowcombine.frag</string>
+										<string>PCSSShadowsUI.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>8F986A511349059A00F65839</string>
+										<string>8F986B2F134919DF00F65839</string>
 										<key>history</key>
 										<array>
 											<string>8F191002133A922500A2A338</string>
@@ -587,34 +626,35 @@
 											<string>8FD423E913464ED000BFE804</string>
 											<string>8FD423EE13464ED000BFE804</string>
 											<string>8F6FC477134742120038086C</string>
-											<string>8F1794091347850100D1B6D0</string>
 											<string>8F17940B1347850100D1B6D0</string>
 											<string>8F0BBEF3134875F700BC2522</string>
 											<string>8F0BC00D134884E800BC2522</string>
 											<string>8F0BC00E134884E800BC2522</string>
 											<string>8F0BC010134884E800BC2522</string>
-											<string>8F0BC11113489F9700BC2522</string>
-											<string>8F0BC11213489F9700BC2522</string>
-											<string>8F0BC11313489F9700BC2522</string>
-											<string>8F0BC2421348B17A00BC2522</string>
 											<string>8F0BC3911348C74E00BC2522</string>
-											<string>8F0BC5D91348E6CC00BC2522</string>
-											<string>8F0BC5DB1348E6CC00BC2522</string>
-											<string>8F0BC5DC1348E6CC00BC2522</string>
-											<string>8F0BC66B1348F01300BC2522</string>
-											<string>8F0BC6861348F0D300BC2522</string>
-											<string>8F0BC68B1348F0D300BC2522</string>
-											<string>8F0BC6CA1348F21200BC2522</string>
-											<string>8F0BC6CB1348F21200BC2522</string>
-											<string>8F0BC6CC1348F21200BC2522</string>
-											<string>8F0BC6CD1348F21200BC2522</string>
-											<string>8F9868D51348F40800F65839</string>
-											<string>8F9869DA1349013B00F65839</string>
-											<string>8F986A2C1349051D00F65839</string>
-											<string>8F986A2E1349051D00F65839</string>
-											<string>8F986A2F1349051D00F65839</string>
-											<string>8F986A3F1349056600F65839</string>
-											<string>8F986A401349056600F65839</string>
+											<string>8F986B0D1349191200F65839</string>
+											<string>8F986B0E1349191200F65839</string>
+											<string>8F986B0F1349191200F65839</string>
+											<string>8F986B101349191200F65839</string>
+											<string>8F986B111349191200F65839</string>
+											<string>8F986B121349191200F65839</string>
+											<string>8F986B131349191200F65839</string>
+											<string>8F986B151349191200F65839</string>
+											<string>8F986B171349191200F65839</string>
+											<string>8F986B181349191200F65839</string>
+											<string>8F986B191349191200F65839</string>
+											<string>8F986B1A1349191200F65839</string>
+											<string>8F986B1B1349191200F65839</string>
+											<string>8F986B1C1349191200F65839</string>
+											<string>8F986B1D1349191200F65839</string>
+											<string>8F986B1E1349191200F65839</string>
+											<string>8F986B1F1349191200F65839</string>
+											<string>8F986B201349191200F65839</string>
+											<string>8F986B211349191200F65839</string>
+											<string>8F986B2C134919DF00F65839</string>
+											<string>8F986B2D134919DF00F65839</string>
+											<string>8F986B2E134919DF00F65839</string>
+											<string>8F986B141349191200F65839</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -812,12 +852,14 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>8F986B36134919DF00F65839</string>
 		<string>8F958601132D83B4009268D4</string>
 		<string>8F0BC021134884E800BC2522</string>
 		<string>8F0BC016134884E800BC2522</string>
 		<string>8F0BC01C134884E800BC2522</string>
 		<string>8F6FC482134742120038086C</string>
 		<string>8F0BC2091348ADAB00BC2522</string>
+		<string>8F986AB813490FCE00F65839</string>
 		<string>/Users/oni/Projects/XcodeTemplateForCustomQuartzComposerPatches/Section9/SoftShadows/SoftShadows.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

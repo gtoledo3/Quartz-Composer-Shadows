@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
 
- SoftShadows.m | Part of SoftShadows | Created 25/03/2011
+ PCSSShadows.m | Part of SoftShadows | Created 25/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -52,13 +52,9 @@
 #import <OpenGL/gluMacro.h>
 #import <SkankySDK/QCOpenGLContext.h>
 
-
 #pragma mark PCSSShadows
 
-
 @implementation PCSSShadows
-
-
 
 +(BOOL)isSafe {
 	return YES;
@@ -116,7 +112,7 @@
 	if (mFBOSize != c){
 		mFBOSize = c;
 		NSLog(@"Resizing FBO to %i.\n",mFBOSize);
-		[mFBO generateNewTexture:mFBOSize];
+		[mShadowFBO generateNewTexture:mFBOSize];
 		[mBlurHorizontalFBO generateNewTexture:mFBOSize];
 		[mBlurVerticalFBO generateNewTexture:mFBOSize];
 		[mDepthOnlyFBO generateNewTexture:mFBOSize];
@@ -128,8 +124,11 @@
 	
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 
-	if (mFBO == nil){
-		mFBO = [[S9FBO2D alloc] initWithContext:context andSize:1024 numTargets:1 accuracy:GL_RGB16F_ARB depthOnly:FALSE];
+	if (mShadowFBO == nil){
+		
+		mScreenFBO = [[S9FBO2D alloc] initWithContext:context andSize:2048 numTargets:1 accuracy:GL_RGB16F_ARB depthOnly:FALSE];
+		
+		mShadowFBO = [[S9FBO2D alloc] initWithContext:context andSize:1024 numTargets:1 accuracy:GL_RGB16F_ARB depthOnly:FALSE];
 		
 		mBlurHorizontalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize 
 												   numTargets:1 accuracy:GL_RGB16F_ARB	depthOnly:FALSE]; 
@@ -145,33 +144,21 @@
 	// Load Shaders
 	
 	NSBundle *pluginBundle =[NSBundle bundleForClass:[self class]];	
-	
-	mDepthShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"depthpcss" forContext:cgl_ctx];
-	if(mDepthShader == nil) {
-		NSLog(@"Cannot compile Depth Shader.\n");
-		return NO;
-	}
-	else {
-		NSLog(@"Compiled Depth shader.\n");
-	}
-	
-	
+
 	mShadowShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"shadowpcss" forContext:cgl_ctx];
 	if(mShadowShader == nil) { NSLog(@"Cannot compile Shadow Shader.\n"); return NO;}
-	
-	mShadowLinearShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"shadowlinear" forContext:cgl_ctx];
-	if(mShadowLinearShader == nil) { NSLog(@"Cannot compile Shadow Linear Shader.\n"); return NO;}
-
 		
 	mBlurHorizontalShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"blurhoriz" forContext:cgl_ctx];
 	if(mBlurHorizontalShader == nil) { NSLog(@"Cannot compile Blur Horizontal Shader.\n"); return NO; }
-
 	
 	mBlurVerticalShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"blurvertical" forContext:cgl_ctx];
 	if(mBlurVerticalShader == nil) { NSLog(@"Cannot compile Blur Vertical Shader.\n"); return NO; }
 	
 	mCombineShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"shadowcombine" forContext:cgl_ctx];
 	if(mCombineShader == nil) { NSLog(@"Cannot compile Shadow Combine Shader.\n"); return NO; }
+	
+	mLightShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"basiclight" forContext:cgl_ctx];
+	if(mLightShader == nil) { NSLog(@"Cannot compile Basic Lighting Shader.\n"); return NO; }
 	
 	
 	return YES;
@@ -187,10 +174,15 @@
 }
 
 -(void)cleanup:(QCOpenGLContext*)context {
-//	[mPhongShader release];
-//	[mFBO release];
+
+	if (mShadowFBO == nil){
+		[mShadowFBO release];
+		[mBlurHorizontalFBO release];
+		[mBlurVerticalFBO release];
+		[mDepthOnlyFBO release];
+	}
 	
-	// One of these releases is causing a crash!
+
 }
 
 -(void)enable:(QCOpenGLContext*)context {
@@ -230,7 +222,7 @@
 	glUseProgramObjectARB([mBlurHorizontalShader programObject]);
 	glUniform1iARB([mBlurHorizontalShader getUniformLocation:"RTScene"],0);
 	glUniform1fARB([mBlurVerticalShader getUniformLocation:"blurSize"],(float)[inputBlurAmount doubleValue]);
-	[self renderOrthoQuad:context withTex:[mFBO getTextureAtTarget:0]];
+	[self renderOrthoQuad:context withTex:[mShadowFBO getTextureAtTarget:0]];
 	[mBlurHorizontalFBO unbindFBO];
 	glUseProgramObjectARB(NULL);
 	
@@ -302,8 +294,8 @@
 	
 	[mDepthOnlyFBO bindFBO];	
 	
-	/*glPolygonOffset(1.0f, 1.0f);
-	glEnable(GL_POLYGON_OFFSET_FILL);*/
+	glPolygonOffset(1.0f, 1.0f);
+	glEnable(GL_POLYGON_OFFSET_FILL);
 	
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
@@ -338,7 +330,7 @@
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	
-	//glDisable(GL_POLYGON_OFFSET_FILL);
+	glDisable(GL_POLYGON_OFFSET_FILL);
 	glDisable(GL_CULL_FACE);
 	
 
@@ -348,7 +340,7 @@
 	// UNBIND DEPTH SHADER AND DRAW SHADOWS WITH SHADOW SHADER
 	// -------------------------------------------------------
 	
-	[mFBO bindFBO];
+	[mShadowFBO bindFBO];
 	
 	glGetDoublev(GL_MODELVIEW_MATRIX, cameraModelview);
 	
@@ -373,32 +365,50 @@
 	[self recallPatches:self context:context time:time arguments:arguments];
 	
 	glUseProgramObjectARB(NULL);
-	[mFBO unbindFBO];
+	[mShadowFBO unbindFBO];
 	
 	// BLUR THE SHADOW
 	// ---------------
-	[self blurShadowMap:context];
+	
+	if( [inputBlur booleanValue])
+		[self blurShadowMap:context];
 	
 	// COMBINE BLUR AND SHADOW - THIRD PASS!! ><
 	// -----------------------------------------
 	
 	// Could attempt to project the texture but this is easier and should be faster when we use multiple render targets.
 	
-	[mFBO bindFBO];
+	[mScreenFBO bindFBO];
+	glUseProgramObjectARB([mLightShader programObject]);
+	glUniform3fARB([mLightShader getUniformLocation:"lightPosition"], [inputLightX doubleValue], [inputLightY doubleValue],[inputLightZ doubleValue]);
+	glUniform3fARB([mLightShader getUniformLocation:"lightLook"], [inputLightLookX doubleValue], [inputLightLookY doubleValue],[inputLightLookZ doubleValue]);
+	
 	[self recallPatches:self context:context time:time arguments:arguments];
 	glUseProgramObjectARB(NULL);
-	[mFBO unbindFBO];
+	[mScreenFBO unbindFBO];
 
+	
 	glUseProgramObjectARB([mCombineShader programObject]);
 
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D,[mBlurVerticalFBO getTextureAtTarget:0]);
-	glUniform1iARB([mCombineShader getUniformLocation:"shadowTexture"],1);
+	if ([inputBlur booleanValue]){
+	
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D,[mBlurVerticalFBO getTextureAtTarget:0]);
+		glUniform1iARB([mCombineShader getUniformLocation:"shadowTexture"],1);
+	}
+	else {
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D,[mShadowFBO getTextureAtTarget:0]);
+		glUniform1iARB([mCombineShader getUniformLocation:"shadowTexture"],1);
+	}
+
 	
 	glActiveTexture(GL_TEXTURE0);
-	[self renderOrthoQuad:context withTex: [mFBO getTextureAtTarget:0]];
+	[self renderOrthoQuad:context withTex: [mScreenFBO getTextureAtTarget:0]];
 	glUniform1iARB([mCombineShader getUniformLocation:"baseTexture"],0);
-	
+
+
+
 	
 	// FINISHED - Draw Depth from the light view
 	

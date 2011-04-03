@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
  
- SoftShadows.h | Part of SoftShadows | Created 25/03/2011
+ PCSSShadows.h | Part of SoftShadows | Created 25/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -72,15 +72,15 @@
 	QCNumberPort		*inputMapSize;
 	
 
-	S9Shader			*mDepthShader; // Specific to PCF Shadows
 	S9Shader			*mShadowShader;
-	S9Shader			*mShadowLinearShader;
+	S9Shader			*mLightShader;
 	S9Shader			*mBlurHorizontalShader;
 	S9Shader			*mBlurVerticalShader;
 	S9Shader			*mCombineShader;
 	
-	S9FBO2D				*mFBO;
+	S9FBO2D				*mScreenFBO;
 	S9FBO2D				*mDepthOnlyFBO;
+	S9FBO2D				*mShadowFBO;
 	S9FBO2D				*mBlurHorizontalFBO;
 	S9FBO2D				*mBlurVerticalFBO;
 	

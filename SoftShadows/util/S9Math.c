@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
  
-Math.c | Part of SoftShadows | Created 25/03/2011
+ S9Math.c | Part of SoftShadows | Created 25/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
