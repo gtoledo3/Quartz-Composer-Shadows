@@ -11,7 +11,7 @@ varying vec4		q;
 float computeBasic() {
 	vec3 coord = 0.5 * (q.xyz / q.w + 1.0);
 	float qw = q.z/q.w;
-	if ( qw - shadow2D( depthTexture, coord ).r < bottomLine){
+	if ( qw <= shadow2D( depthTexture, coord ).r){
 		return 1.0;
 	}
 	return 0.0;
@@ -59,7 +59,6 @@ void main(void) {
 	float shadow = computePCF();
 	
 	gl_FragColor = (0.2 + 0.8 * shadow) * diffuse;
-	
 	//gl_FragColor = gl_Color * shadow;
 
 }

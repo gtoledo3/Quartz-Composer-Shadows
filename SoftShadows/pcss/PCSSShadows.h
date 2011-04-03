@@ -64,7 +64,6 @@
 	
 	QCBooleanPort		*inputBypass;
 	QCBooleanPort		*inputOrtho;
-	QCBooleanPort		*inputLinear;
 	
 	QCBooleanPort		*inputBlur;
 	QCNumberPort		*inputBlurAmount;
@@ -78,6 +77,7 @@
 	S9Shader			*mShadowLinearShader;
 	S9Shader			*mBlurHorizontalShader;
 	S9Shader			*mBlurVerticalShader;
+	S9Shader			*mCombineShader;
 	
 	S9FBO2D				*mFBO;
 	S9FBO2D				*mDepthOnlyFBO;

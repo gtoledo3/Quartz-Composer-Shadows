@@ -136,16 +136,8 @@
 			<key>name</key>
 			<string>useOrtho</string>
 		</dict>
-		
-		<key>inputLinear</key>
-		<dict>
-			<key>description</key>
-			<string>Use Linear Depth</string>
-			<key>name</key>
-			<string>useLinear</string>
-		</dict>
 
-			<key>inputBlur</key>
+		<key>inputBlur</key>
 		<dict>
 			<key>description</key>
 			<string>Blur the Depth Map</string>

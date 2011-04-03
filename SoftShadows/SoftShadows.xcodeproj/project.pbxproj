@@ -10,12 +10,12 @@
 		7533202D10091AF0003756A8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7533202C10091AF0003756A8 /* OpenGL.framework */; };
 		7533202F10091AF0003756A8 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7533202E10091AF0003756A8 /* Quartz.framework */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		8F0BBE4513486EE700BC2522 /* depthpcss.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BBE4113486EE700BC2522 /* depthpcss.frag */; };
-		8F0BBE4613486EE700BC2522 /* depthpcss.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BBE4213486EE700BC2522 /* depthpcss.vert */; };
 		8F0BBE4713486EE700BC2522 /* shadowpcss.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BBE4313486EE700BC2522 /* shadowpcss.frag */; };
 		8F0BBE4813486EE700BC2522 /* shadowpcss.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BBE4413486EE700BC2522 /* shadowpcss.vert */; };
 		8F0BC2331348B0D700BC2522 /* shadowlinear.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BC2311348B0D700BC2522 /* shadowlinear.frag */; };
 		8F0BC2341348B0D700BC2522 /* shadowlinear.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BC2321348B0D700BC2522 /* shadowlinear.vert */; };
+		8F0BC6211348EC2100BC2522 /* shadowcombine.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BC6201348EC2100BC2522 /* shadowcombine.vert */; };
+		8F0BC6231348EC8800BC2522 /* shadowcombine.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BC6221348EC8800BC2522 /* shadowcombine.frag */; };
 		8F0F6BAF133B4D8200229593 /* SoftShadowsPrincipal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F6BAE133B4D8200229593 /* SoftShadowsPrincipal.m */; };
 		8F1793D91347838000D1B6D0 /* S9Utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F1793D81347838000D1B6D0 /* S9Utils.c */; };
 		8F26D32B13437735002AE096 /* PCSSShadowsUI.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F26D32513437735002AE096 /* PCSSShadowsUI.nib */; };
@@ -35,12 +35,12 @@
 		7533202E10091AF0003756A8 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		8D5B49B6048680CD000E48DA /* SoftShadows.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoftShadows.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8F0BBE4113486EE700BC2522 /* depthpcss.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = depthpcss.frag; path = Resources/PCSS/depthpcss.frag; sourceTree = "<group>"; };
-		8F0BBE4213486EE700BC2522 /* depthpcss.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = depthpcss.vert; path = Resources/PCSS/depthpcss.vert; sourceTree = "<group>"; };
 		8F0BBE4313486EE700BC2522 /* shadowpcss.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowpcss.frag; path = Resources/PCSS/shadowpcss.frag; sourceTree = "<group>"; };
 		8F0BBE4413486EE700BC2522 /* shadowpcss.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowpcss.vert; path = Resources/PCSS/shadowpcss.vert; sourceTree = "<group>"; };
 		8F0BC2311348B0D700BC2522 /* shadowlinear.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowlinear.frag; path = Resources/PCSS/shadowlinear.frag; sourceTree = "<group>"; };
 		8F0BC2321348B0D700BC2522 /* shadowlinear.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowlinear.vert; path = Resources/PCSS/shadowlinear.vert; sourceTree = "<group>"; };
+		8F0BC6201348EC2100BC2522 /* shadowcombine.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowcombine.vert; path = Resources/PCSS/shadowcombine.vert; sourceTree = "<group>"; };
+		8F0BC6221348EC8800BC2522 /* shadowcombine.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowcombine.frag; path = Resources/PCSS/shadowcombine.frag; sourceTree = "<group>"; };
 		8F0F6BAD133B4D8200229593 /* SoftShadowsPrincipal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadowsPrincipal.h; sourceTree = "<group>"; };
 		8F0F6BAE133B4D8200229593 /* SoftShadowsPrincipal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftShadowsPrincipal.m; sourceTree = "<group>"; };
 		8F0F6BB1133B4D8E00229593 /* SoftShadows_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftShadows_Prefix.pch; sourceTree = "<group>"; };
@@ -189,10 +189,10 @@
 		8F26D2FE1343754F002AE096 /* pcss */ = {
 			isa = PBXGroup;
 			children = (
+				8F0BC6221348EC8800BC2522 /* shadowcombine.frag */,
+				8F0BC6201348EC2100BC2522 /* shadowcombine.vert */,
 				8F0BC2311348B0D700BC2522 /* shadowlinear.frag */,
 				8F0BC2321348B0D700BC2522 /* shadowlinear.vert */,
-				8F0BBE4113486EE700BC2522 /* depthpcss.frag */,
-				8F0BBE4213486EE700BC2522 /* depthpcss.vert */,
 				8F0BBE4313486EE700BC2522 /* shadowpcss.frag */,
 				8F0BBE4413486EE700BC2522 /* shadowpcss.vert */,
 			);
@@ -272,10 +272,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F0BC6211348EC2100BC2522 /* shadowcombine.vert in Resources */,
+				8F0BC6231348EC8800BC2522 /* shadowcombine.frag in Resources */,
 				8F0BC2331348B0D700BC2522 /* shadowlinear.frag in Resources */,
 				8F0BC2341348B0D700BC2522 /* shadowlinear.vert in Resources */,
-				8F0BBE4513486EE700BC2522 /* depthpcss.frag in Resources */,
-				8F0BBE4613486EE700BC2522 /* depthpcss.vert in Resources */,
 				8F0BBE4713486EE700BC2522 /* shadowpcss.frag in Resources */,
 				8F0BBE4813486EE700BC2522 /* shadowpcss.vert in Resources */,
 				8F26D32B13437735002AE096 /* PCSSShadowsUI.nib in Resources */,

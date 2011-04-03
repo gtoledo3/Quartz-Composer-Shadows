@@ -170,6 +170,8 @@
 	mBlurVerticalShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"blurvertical" forContext:cgl_ctx];
 	if(mBlurVerticalShader == nil) { NSLog(@"Cannot compile Blur Vertical Shader.\n"); return NO; }
 	
+	mCombineShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"shadowcombine" forContext:cgl_ctx];
+	if(mCombineShader == nil) { NSLog(@"Cannot compile Shadow Combine Shader.\n"); return NO; }
 	
 	
 	return YES;
@@ -298,13 +300,11 @@
 	// -----------------------
 	glEnable(GL_TEXTURE_2D);
 	
-	if ([inputLinear booleanValue]){
-		[mDepthOnlyFBO bindFBO];	
-	}else{
-		[mFBO bindFBO];
-		glUseProgramObjectARB([mDepthShader programObject]);
-	}
-		
+	[mDepthOnlyFBO bindFBO];	
+	
+	/*glPolygonOffset(1.0f, 1.0f);
+	glEnable(GL_POLYGON_OFFSET_FILL);*/
+	
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
 	
@@ -338,88 +338,77 @@
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	
+	//glDisable(GL_POLYGON_OFFSET_FILL);
 	glDisable(GL_CULL_FACE);
 	
-	if ([inputLinear booleanValue]){
-		[mDepthOnlyFBO unbindFBO];
-	}else{
-		glUseProgramObjectARB(NULL);
-		[mFBO unbindFBO];
-	}
 
-	
-	// UNBIND DEPTH AND APPLY BLUR 
-	// ---------------------------
-	
-	if ([inputBlur booleanValue] && ![inputLinear booleanValue]){
-		[self blurShadowMap:context];
-	}
+	[mDepthOnlyFBO unbindFBO];
 	
 	
-	// UNBIND DEPTH SHADER AND DRAW WITH SHADOW SHADER
-	// -----------------------------------------------
+	// UNBIND DEPTH SHADER AND DRAW SHADOWS WITH SHADOW SHADER
+	// -------------------------------------------------------
+	
+	[mFBO bindFBO];
 	
 	glGetDoublev(GL_MODELVIEW_MATRIX, cameraModelview);
 	
 	setLightMatrix(finalMatrix, shadowProjection, shadowModelview, cameraModelview);
 	floatMatrix(finalFloatMatrix,finalMatrix);
 	
-	glActiveTexture(GL_TEXTURE0);
+	glUseProgramObjectARB([mShadowShader programObject]);
+	glUniform1iARB([mShadowShader getUniformLocation:"depthTexture"],0);
+	glUniform1iARB([mShadowShader getUniformLocation:"texMapSize"],mFBOSize);
+	glUniform1fARB([mShadowShader getUniformLocation:"bottomLine"],(float)[inputBottomLine doubleValue]);
+	glUniformMatrix4fv([mShadowShader getUniformLocation:"shadowTransMatrix"],16,FALSE,finalFloatMatrix);
+	glUniform1fARB([mShadowShader getUniformLocation:"pcfScale"], (float)[inputPCFScale doubleValue]);
+	glUniform1iARB([mShadowShader getUniformLocation:"pcfSamples"],(int)[inputPCFSamples doubleValue]);
+	glUniform3fARB([mShadowShader getUniformLocation:"lightPosition"], [inputLightX doubleValue], [inputLightY doubleValue],[inputLightZ doubleValue]);
+	glUniform3fARB([mShadowShader getUniformLocation:"lightLook"], [inputLightLookX doubleValue], [inputLightLookY doubleValue],[inputLightLookZ doubleValue]);
 	
-	if ([inputLinear booleanValue]){
-		glUseProgramObjectARB([mShadowLinearShader programObject]);
-		glUniform1iARB([mShadowLinearShader getUniformLocation:"depthTexture"],0);
-		glUniform1iARB([mShadowLinearShader getUniformLocation:"texMapSize"],mFBOSize);
-		glUniform1fARB([mShadowLinearShader getUniformLocation:"bottomLine"],(float)[inputBottomLine doubleValue]);
-		glUniformMatrix4fv([mShadowLinearShader getUniformLocation:"shadowTransMatrix"],16,FALSE,finalFloatMatrix);
-		glUniform1fARB([mShadowLinearShader getUniformLocation:"pcfScale"], (float)[inputPCFScale doubleValue]);
-		glUniform1iARB([mShadowLinearShader getUniformLocation:"pcfSamples"],(int)[inputPCFSamples doubleValue]);
-		glUniform3fARB([mShadowLinearShader getUniformLocation:"lightPosition"], [inputLightX doubleValue], [inputLightY doubleValue],[inputLightZ doubleValue]);
-		glUniform3fARB([mShadowLinearShader getUniformLocation:"lightLook"], [inputLightLookX doubleValue], [inputLightLookY doubleValue],[inputLightLookZ doubleValue]);
-		
-		glBindTexture(GL_TEXTURE_2D, [mDepthOnlyFBO  mDepthID]);
+	glBindTexture(GL_TEXTURE_2D, [mDepthOnlyFBO  mDepthID]);
 
-	}
-	else{
-		
-		glUseProgramObjectARB([mShadowShader programObject]);
-		
-		if([inputBlur booleanValue])
-			glBindTexture(GL_TEXTURE_2D, [mBlurVerticalFBO getTextureAtTarget:0]);
-		else 
-			glBindTexture(GL_TEXTURE_2D, [mFBO getTextureAtTarget:0]);
-		
-		glUniform1iARB([mShadowShader getUniformLocation:"depthTexture"],0);
-		glUniform1iARB([mShadowShader getUniformLocation:"texMapSize"],mFBOSize);
-		glUniform1fARB([mShadowShader getUniformLocation:"bottomLine"],(float)[inputBottomLine doubleValue]);
-		glUniformMatrix4fv([mShadowShader getUniformLocation:"shadowTransMatrix"],16,FALSE,finalFloatMatrix);
-		glUniform1fARB([mShadowShader getUniformLocation:"pcfScale"], (float)[inputPCFScale doubleValue]);
-		glUniform1iARB([mShadowShader getUniformLocation:"pcfSamples"],(int)[inputPCFSamples doubleValue]);
-		glUniform3fARB([mShadowShader getUniformLocation:"lightPosition"], [inputLightX doubleValue], [inputLightY doubleValue],[inputLightZ doubleValue]);
-		glUniform3fARB([mShadowShader getUniformLocation:"lightLook"], [inputLightLookX doubleValue], [inputLightLookY doubleValue],[inputLightLookZ doubleValue]);
-		
-		
-	}
 	
 	// Bind Texture and draw our objects (but to which unit? Maybe it should be 1?)
 		
 	[self recallPatches:self context:context time:time arguments:arguments];
 	
 	glUseProgramObjectARB(NULL);
+	[mFBO unbindFBO];
+	
+	// BLUR THE SHADOW
+	// ---------------
+	[self blurShadowMap:context];
+	
+	// COMBINE BLUR AND SHADOW - THIRD PASS!! ><
+	// -----------------------------------------
+	
+	// Could attempt to project the texture but this is easier and should be faster when we use multiple render targets.
+	
+	[mFBO bindFBO];
+	[self recallPatches:self context:context time:time arguments:arguments];
+	glUseProgramObjectARB(NULL);
+	[mFBO unbindFBO];
 
-	// FINISHED - Draw Depth if need be
+	glUseProgramObjectARB([mCombineShader programObject]);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D,[mBlurVerticalFBO getTextureAtTarget:0]);
+	glUniform1iARB([mCombineShader getUniformLocation:"shadowTexture"],1);
+	
+	glActiveTexture(GL_TEXTURE0);
+	[self renderOrthoQuad:context withTex: [mFBO getTextureAtTarget:0]];
+	glUniform1iARB([mCombineShader getUniformLocation:"baseTexture"],0);
+	
+	
+	// FINISHED - Draw Depth from the light view
 	
 	if( [inputDrawDepth booleanValue] ) { 
 		glColor3f(1.0,1.0,1.0f);
-
-		if([inputBlur booleanValue])
-			[self renderOrthoQuad:context withTex: [mBlurVerticalFBO getTextureAtTarget:0]];
-		else 
-			[self renderOrthoQuad:context withTex: [mFBO getTextureAtTarget:0]];
-		
+		[self renderOrthoQuad:context withTex: [mBlurVerticalFBO getTextureAtTarget:0]];
 	}
-	
+	glUseProgramObjectARB(NULL);
 	// Unbinds
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D,0);
 	glDisable(GL_TEXTURE_2D);
 	
