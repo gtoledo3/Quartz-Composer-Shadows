@@ -6,7 +6,7 @@
 	<key>nodeAttributes</key>
 	<dict>
 		<key>name</key>
-		<string>PCSS Shadows</string>
+		<string>Softer Shadows</string>
 		<key>categories</key>
 		<array>
 			<string>Custom Patch</string>
@@ -14,7 +14,7 @@
 		<key>copyright</key>
 		<string>Copyright 2011 Section9. All rights reserved.</string>
 		<key>description</key>
-		<string>This patch implements the PCSS Algorithm</string>
+		<string>This patch outputs an FBO Image</string>
 		<key>aliasNames</key>
 		<array>
 			<string>alias for searching</string>
@@ -72,57 +72,6 @@
 			<string>Light Z Look</string>
 		</dict>
 		
-		<key>inputBypass</key>
-		<dict>
-			<key>name</key>
-			<string>bypass</string>
-			<key>description</key>
-			<string>Bypass this Patch but execute subpatches</string>
-		</dict>
-		
-			
-		<key>inputPCFSamples</key>
-		<dict>
-			<key>description</key>
-			<string>Number of PCFSamples to take</string>
-			<key>name</key>
-			<string>PCFSamples</string>
-		</dict>
-		
-		<key>inputLightSize</key>
-		<dict>
-			<key>description</key>
-			<string>The Size of the Light in PCSS</string>
-			<key>name</key>
-			<string>lightSize</string>
-		</dict>
-		
-		
-		<key>inputAttenuation</key>
-		<dict>
-			<key>description</key>
-			<string>The falloff factor for the shadows</string>
-			<key>name</key>
-			<string>attenuation</string>
-		</dict>
-		
-		<key>inputBottomLine</key>
-		<dict>
-			<key>description</key>
-			<string>Adjust the level for depth comparison</string>
-			<key>name</key>
-			<string>BottomLine</string>
-		</dict>
-		
-		
-		<key>inputDrawDepth</key>
-		<dict>
-			<key>description</key>
-			<string>Draw the light depth map</string>
-			<key>name</key>
-			<string>DrawDepth</string>
-		</dict>
-		
 		<key>inputNearPlane</key>
 		<dict>
 			<key>name</key>
@@ -139,14 +88,15 @@
 			<string>Set the far plane for the light</string>
 		</dict>
 		
-		<key>inputOrtho</key>
+		
+		<key>inputBypass</key>
 		<dict>
-			<key>description</key>
-			<string>Use Orthographic Projection for Light</string>
 			<key>name</key>
-			<string>useOrtho</string>
+			<string>bypass</string>
+			<key>description</key>
+			<string>Bypass this Patch but execute subpatches</string>
 		</dict>
-
+		
 		<key>inputBlur</key>
 		<dict>
 			<key>description</key>
@@ -162,7 +112,33 @@
 			<key>name</key>
 			<string>blurAmount</string>
 		</dict>
+	
+		
+		<key>inputOrtho</key>
+		<dict>
+			<key>description</key>
+			<string>Use Orthographic Projection for Light</string>
+			<key>name</key>
+			<string>useOrtho</string>
+		</dict>
 
+		
+		
+		<key>inputVariance</key>
+		<dict>
+			<key>description</key>
+			<string>Variance value in the VSM Shader</string>
+			<key>name</key>
+			<string>Variance</string>
+		</dict>
+		
+		<key>inputDrawDepth</key>
+		<dict>
+			<key>description</key>
+			<string>Draw the light depth map</string>
+			<key>name</key>
+			<string>DrawDepth</string>
+		</dict>
 
 	</dict>
 </dict>

@@ -55,8 +55,9 @@
 	QCNumberPort		*inputLightLookZ;
 	
 	QCNumberPort		*inputPCFSamples;
-	QCNumberPort		*inputPCFScale;
 	QCNumberPort		*inputBottomLine;
+	QCNumberPort		*inputLightSize;
+	QCNumberPort		*inputAttenuation;
 	
 	QCNumberPort		*inputNearLightPlane;
 	QCNumberPort		*inputFarLightPlane;

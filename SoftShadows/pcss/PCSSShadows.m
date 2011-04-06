@@ -126,16 +126,16 @@
 
 	if (mShadowFBO == nil){
 		
-		mScreenFBO = [[S9FBO2D alloc] initWithContext:context andSize:2048 numTargets:1 accuracy:GL_RGB16F_ARB depthOnly:FALSE];
+		mScreenFBO = [[S9FBO2D alloc] initWithContext:context andSize:2048 numTargets:1 accuracy:GL_RGB32F_ARB depthOnly:FALSE];
 		
-		mShadowFBO = [[S9FBO2D alloc] initWithContext:context andSize:1024 numTargets:1 accuracy:GL_RGB16F_ARB depthOnly:FALSE];
+		mShadowFBO = [[S9FBO2D alloc] initWithContext:context andSize:1024 numTargets:1 accuracy:GL_RGB32F_ARB depthOnly:FALSE];
 		
 		mBlurHorizontalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize 
-												   numTargets:1 accuracy:GL_RGB16F_ARB	depthOnly:FALSE]; 
+												   numTargets:1 accuracy:GL_RGB32F_ARB	depthOnly:FALSE]; 
 		mBlurVerticalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 
-												   accuracy:GL_RGB16F_ARB depthOnly:FALSE]; 
+												   accuracy:GL_RGB32F_ARB depthOnly:FALSE]; 
 	
-		mDepthOnlyFBO =  [[S9FBO2D alloc] initWithContext:context andSize:1024 numTargets:1 accuracy:GL_RGB16F_ARB depthOnly:TRUE];
+		mDepthOnlyFBO =  [[S9FBO2D alloc] initWithContext:context andSize:1024 numTargets:1 accuracy:GL_RGB32F_ARB depthOnly:TRUE];
 	}
 	
 	// Create Jitter Texture - Probably not needed after all?
@@ -331,7 +331,8 @@
 	glPopMatrix();
 	
 	glDisable(GL_POLYGON_OFFSET_FILL);
-	glDisable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	//glDisable(GL_CULL_FACE);
 	
 
 	[mDepthOnlyFBO unbindFBO];
@@ -348,20 +349,34 @@
 	floatMatrix(finalFloatMatrix,finalMatrix);
 	
 	glUseProgramObjectARB([mShadowShader programObject]);
-	glUniform1iARB([mShadowShader getUniformLocation:"depthTexture"],0);
+	glUniform1iARB([mShadowShader getUniformLocation:"depthTexture"],1);
+	glUniform1iARB([mShadowShader getUniformLocation:"rawDepth"],0);
 	glUniform1iARB([mShadowShader getUniformLocation:"texMapSize"],mFBOSize);
 	glUniform1fARB([mShadowShader getUniformLocation:"bottomLine"],(float)[inputBottomLine doubleValue]);
 	glUniformMatrix4fv([mShadowShader getUniformLocation:"shadowTransMatrix"],16,FALSE,finalFloatMatrix);
-	glUniform1fARB([mShadowShader getUniformLocation:"pcfScale"], (float)[inputPCFScale doubleValue]);
+	
 	glUniform1iARB([mShadowShader getUniformLocation:"pcfSamples"],(int)[inputPCFSamples doubleValue]);
+	glUniform1fARB([mShadowShader getUniformLocation:"lightSize"],(float)[inputLightSize doubleValue]);
+	glUniform1fARB([mShadowShader getUniformLocation:"attenuation"],(float)[inputAttenuation doubleValue]);
 	glUniform3fARB([mShadowShader getUniformLocation:"lightPosition"], [inputLightX doubleValue], [inputLightY doubleValue],[inputLightZ doubleValue]);
 	glUniform3fARB([mShadowShader getUniformLocation:"lightLook"], [inputLightLookX doubleValue], [inputLightLookY doubleValue],[inputLightLookZ doubleValue]);
 	
-	glBindTexture(GL_TEXTURE_2D, [mDepthOnlyFBO  mDepthID]);
 
+	// We need the actual values for the depth for PCSS so we cant use shadow2D functions with the COMPARE_R step :(
 	
-	// Bind Texture and draw our objects (but to which unit? Maybe it should be 1?)
+	glActiveTexture(GL_TEXTURE0);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, [mDepthOnlyFBO  mDepthID]);
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE); // No compare on our second step
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		
+	// Sadly we cant have different samples on the same texture, even if they are different units! ><
+	
+/*	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, [mDepthOnlyFBO  mDepthID]);
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);*/
+	
 	[self recallPatches:self context:context time:time arguments:arguments];
 	
 	glUseProgramObjectARB(NULL);
@@ -407,19 +422,28 @@
 	[self renderOrthoQuad:context withTex: [mScreenFBO getTextureAtTarget:0]];
 	glUniform1iARB([mCombineShader getUniformLocation:"baseTexture"],0);
 
-
-
+	glUseProgramObjectARB(NULL);
+	glDisable(GL_CULL_FACE);
 	
 	// FINISHED - Draw Depth from the light view
 	
 	if( [inputDrawDepth booleanValue] ) { 
-		glColor3f(1.0,1.0,1.0f);
-		[self renderOrthoQuad:context withTex: [mBlurVerticalFBO getTextureAtTarget:0]];
+		glColor3f(0.0,0.0,0.0f);
+		if ([inputBlur booleanValue]){
+			[self renderOrthoQuad:context withTex: [mBlurVerticalFBO getTextureAtTarget:0]];
+		}
+		else {
+			[self renderOrthoQuad:context withTex: [mShadowFBO getTextureAtTarget:0]];
+		}
+
 	}
-	glUseProgramObjectARB(NULL);
+	
+	
 	// Unbinds
-	glActiveTexture(GL_TEXTURE0);
+	glActiveTexture(GL_TEXTURE1);
+	glDisable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D,0);
+	glActiveTexture(GL_TEXTURE0);
 	glDisable(GL_TEXTURE_2D);
 	
 	return YES;

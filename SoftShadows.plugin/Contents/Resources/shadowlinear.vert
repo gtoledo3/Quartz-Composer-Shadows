@@ -1,5 +1,5 @@
-varying vec3		N, V, L;
-varying vec4		q,E;
+varying vec3		N, V, L, M;
+varying vec4		q;
 
 uniform mat4		shadowTransMatrix;
 uniform vec3		lightPosition;
@@ -11,7 +11,7 @@ void main(void)
 	V = normalize( -eyeCoord.xyz );
 	L = normalize(  lightPosition - lightLook);
 	N = gl_NormalMatrix * gl_Normal;
-	E = eyeCoord;
+	M = gl_Normal;
 	q = shadowTransMatrix * eyeCoord;
 	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
 	gl_FrontColor = gl_Color;

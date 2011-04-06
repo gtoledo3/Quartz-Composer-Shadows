@@ -189,11 +189,24 @@ void setLightMatrix(double *result, double *shadowProjection, double *shadowMode
 	shadowTransMatrix *= camera.getInverseModelViewMatrix();
 	return shadowTransMatrix;*/
 	
+	// Adding the BIAS means we can use shadow2DProj which is good for linear filtering on the FBO for free with NVidia cards
+	
+	double bias[16] = {	
+		0.5, 0.0, 0.0, 0.0, 
+		0.0, 0.5, 0.0, 0.0,
+		0.0, 0.0, 0.5, 0.0,
+		0.5, 0.5, 0.5, 1.0};
+	
+	
 	double trans[16];
-	multMatrix(trans,shadowProjection,shadowModelView);
+	multMatrix(trans, bias, shadowProjection);
+	double trans2[16];
+	
+	multMatrix(trans2,trans,shadowModelView);
+	//setEqual(trans, shadowModelView);
 	double inv[16];
 	invertMatrix(inv, camModelView);
-	multMatrix(result, trans, inv);
+	multMatrix(result, trans2, inv);
 	
 }
 
