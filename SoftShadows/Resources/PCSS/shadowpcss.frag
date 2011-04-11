@@ -3,15 +3,16 @@ uniform int					pcfSamples;
 uniform int					texMapSize;
 uniform sampler2DShadow		depthTexture;
 uniform sampler2D			rawDepth;
-uniform float				bottomLine;	// We really shouldnt need this but we do :(
+uniform float				bottomLine;
 uniform float				lightSize;
 
-varying vec3		N, V, L, M;
-varying vec4		q,E;
+varying vec3		L, M;
+varying vec4		q;
 
 uniform float attenuation;
 
 float att = attenuation * attenuation;
+float pcfSamples2 = float(pcfSamples * pcfSamples);
 
 vec4 qw = q / q.w;
 float InvShadowSize = 1.0/float(texMapSize);
@@ -25,7 +26,6 @@ vec2 rand(in vec2 coord) //generating random noise
 	float noiseY = (fract(sin(dot(coord ,vec2(12.9898,78.233)*2.0)) * 43758.5453));
 	return vec2(noiseX,noiseY)*0.004;
 }
-
 
 
 // BASIC SHADOW MAP
@@ -57,29 +57,29 @@ float computePCF(float filterWidth) {
 	
 	float tpcf = float(pcfSamples) /2.0 - 0.5;	
 	float sum = 0.0;
+	float step = InvShadowSize * filterWidth;
 	
 	//tpcf = int( ceil(float(pcfSamples) * filterWidth));
 	
 	for (float i=-tpcf; i <= tpcf; i+= 1.0){
 		for (float j=-tpcf; j <= tpcf; j+=1.0){
-			vec2 r = vec2( i * InvShadowSize * filterWidth, j * InvShadowSize * filterWidth);
+			vec2 r = vec2( i * step, j * step);
 			
 			vec4 coord = qw;
 			coord.x += r.x;
 			coord.y += r.y;
 			
-			if ( qw.z <= texture2D(rawDepth,coord.xy).z + bottomLine)  {
+			float dd = texture2D(rawDepth,coord.xy).z;
+			
+			if ( qw.z <= dd + bottomLine)  {
 				sum += 1.0;
 			}
 			else {
-				sum += filterWidth * att;
+				sum += 1.0 / dd * att;
 			}
-
-			
 		}
-		
 	}
-	return sum / float(pcfSamples * pcfSamples);
+	return sum / pcfSamples2;
 }
 
 
@@ -157,17 +157,25 @@ float computePCSS() {
 	if(blocker == 0.0)
 		return 1.0;
 		
-	
 	float penumbra = EstimatePenumbra(blocker);
+	
+	return min(computePCF(penumbra),1.0);
+}
 
-	//return penumbra;
 
-	return computePCF(penumbra);
+// LIGHTING FUNCTIONS
+// ------------------
+
+float lighting () {
+	return max(dot( M, L), 0.0);
 }
 
 
 void main(void) {
 
 	float shadow = computePCSS();
-	gl_FragColor = vec4(shadow,shadow,shadow,1.0);
+	float light =  lighting();
+	gl_FragData[0] = vec4(shadow * light,shadow * light,shadow * light,1.0); // First Colour buffer is shadow
+	gl_FragData[1] = gl_Color * light; // Second Colour buffer is the lighting pass
+
 }

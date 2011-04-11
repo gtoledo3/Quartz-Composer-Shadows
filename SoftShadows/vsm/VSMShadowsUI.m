@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
  
- SofterShadows.h | Part of SoftShadows | Created 29/03/2011
+ SofterShadowsUI.m | Part of SoftShadows | Created 29/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -40,57 +40,23 @@
  *
  * ***********************************************************************/
 
-#import <Cocoa/Cocoa.h>
-#import "S9Shader.h"
-#import "S9FBO2D.h"
-#import "SofterShadowsUI.h"
 
-@interface SofterShadows : QCPatch {
-	QCNumberPort		*inputLightX;
-	QCNumberPort		*inputLightY;
-	QCNumberPort		*inputLightZ;
-	
-	QCNumberPort		*inputLightLookX;
-	QCNumberPort		*inputLightLookY;
-	QCNumberPort		*inputLightLookZ;
-	
-	QCNumberPort		*inputNearLightPlane;
-	QCNumberPort		*inputFarLightPlane;
-	QCNumberPort		*inputFieldView;
-	
-	QCBooleanPort		*inputBlur;
-	QCNumberPort		*inputBlurAmount;
-	QCBooleanPort		*inputBypass;
-	QCBooleanPort		*inputDrawDepth;
-	QCBooleanPort		*inputOrtho;
-	
-	
-	QCNumberPort		*inputVariance;
-	QCNumberPort		*inputMapSize;
-	
-	S9Shader			*mDepthShader;
-	S9Shader			*mShadowShader;
-	S9Shader			*mBlurShader;
-	S9Shader			*mBlurHorizontalShader;
-	S9Shader			*mBlurVerticalShader;
-	
-	S9FBO2D				*mFBO;
-	S9FBO2D				*mBlurFBO; 
-	
-	// TODO - Change to use two render targets rather than two FBOs
-	S9FBO2D				*mBlurHorizontalFBO;
-	S9FBO2D				*mBlurVerticalFBO;
-	
-	GLuint				mFBOSize;
+#import "VSMShadowsUI.h"
+
+
+@implementation VSMShadowsUI
+
+/* This method returns the NIB file to use for the inspector panel */
++(NSString*)viewNibName
+{
+    return @"SofterShadowsUI";
 }
 
-+(BOOL)isSafe;
-+(BOOL)allowsSubpatchesWithIdentifier:(id)identifier;
+/* This method specifies the title for the patch */
++(NSString*)viewTitle
+{
+    return @"SofterShadows";
+}
 
--(id)initWithIdentifier:(id)identifier;
--(BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)arguments;
--(void)recallPatches:(QCPatch*) patch context:(QCOpenGLContext *)context time:(double)time arguments:(NSDictionary *)arguments;
--(void)blurShadowMap:(QCOpenGLContext*)context;
--(void) renderOrthoQuad:(QCOpenGLContext *)context withTex:(GLuint)tex;
 
 @end

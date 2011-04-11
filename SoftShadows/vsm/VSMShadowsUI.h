@@ -9,7 +9,7 @@
  THE GHOST IN THE CSH
  
  
- SofterShadowsUI.m | Part of SoftShadows | Created 29/03/2011
+ SofterShadowsUI.h | Part of SoftShadows | Created 29/03/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -40,23 +40,14 @@
  *
  * ***********************************************************************/
 
+#import <Cocoa/Cocoa.h>
 
-#import "SofterShadowsUI.h"
+#import <Cocoa/Cocoa.h>
+#import <SkankySDK/QCPatch.h>
+#import <SkankySDK/QCInspector.h>
 
+@interface VSMShadowsUI : QCInspector {
 
-@implementation SofterShadowsUI
-
-/* This method returns the NIB file to use for the inspector panel */
-+(NSString*)viewNibName
-{
-    return @"SofterShadowsUI";
 }
-
-/* This method specifies the title for the patch */
-+(NSString*)viewTitle
-{
-    return @"SofterShadows";
-}
-
 
 @end

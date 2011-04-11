@@ -17,6 +17,17 @@
 		8F0F6BAF133B4D8200229593 /* SoftShadowsPrincipal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F0F6BAE133B4D8200229593 /* SoftShadowsPrincipal.m */; };
 		8F1793D91347838000D1B6D0 /* S9Utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F1793D81347838000D1B6D0 /* S9Utils.c */; };
 		8F26D32B13437735002AE096 /* PCSSShadowsUI.nib in Resources */ = {isa = PBXBuildFile; fileRef = 8F26D32513437735002AE096 /* PCSSShadowsUI.nib */; };
+		8F37AA611351FDA0007A8238 /* VSMShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F37AA5D1351FDA0007A8238 /* VSMShadows.m */; };
+		8F37AA621351FDA0007A8238 /* VSMShadows.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8F37AA5E1351FDA0007A8238 /* VSMShadows.xml */; };
+		8F37AA631351FDA0007A8238 /* VSMShadowsUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F37AA601351FDA0007A8238 /* VSMShadowsUI.m */; };
+		8F37AA891351FF92007A8238 /* blurhoriz.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F37AA811351FF92007A8238 /* blurhoriz.frag */; };
+		8F37AA8A1351FF92007A8238 /* blurhoriz.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F37AA821351FF92007A8238 /* blurhoriz.vert */; };
+		8F37AA8B1351FF92007A8238 /* blurvertical.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F37AA831351FF92007A8238 /* blurvertical.frag */; };
+		8F37AA8C1351FF92007A8238 /* blurvertical.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F37AA841351FF92007A8238 /* blurvertical.vert */; };
+		8F37AA8D1351FF92007A8238 /* depth.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F37AA851351FF92007A8238 /* depth.frag */; };
+		8F37AA8E1351FF92007A8238 /* depth.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F37AA861351FF92007A8238 /* depth.vert */; };
+		8F37AA8F1351FF92007A8238 /* shadowvsm.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F37AA871351FF92007A8238 /* shadowvsm.frag */; };
+		8F37AA901351FF92007A8238 /* shadowvsm.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F37AA881351FF92007A8238 /* shadowvsm.vert */; };
 		8F6FC48E134742510038086C /* S9Math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8F6FC48C134742510038086C /* S9Math.c */; };
 		8F6FC4951347425D0038086C /* S9FBO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6FC4901347425D0038086C /* S9FBO.m */; };
 		8F6FC4961347425D0038086C /* S9FBO2D.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6FC4921347425D0038086C /* S9FBO2D.m */; };
@@ -45,6 +56,19 @@
 		8F1793D71347838000D1B6D0 /* S9Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S9Utils.h; sourceTree = "<group>"; };
 		8F1793D81347838000D1B6D0 /* S9Utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = S9Utils.c; sourceTree = "<group>"; };
 		8F26D32613437735002AE096 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Resources/English.lproj/PCSSShadowsUI.nib; sourceTree = "<group>"; };
+		8F37AA5C1351FDA0007A8238 /* VSMShadows.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSMShadows.h; path = vsm/VSMShadows.h; sourceTree = "<group>"; };
+		8F37AA5D1351FDA0007A8238 /* VSMShadows.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSMShadows.m; path = vsm/VSMShadows.m; sourceTree = "<group>"; };
+		8F37AA5E1351FDA0007A8238 /* VSMShadows.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = VSMShadows.xml; path = vsm/VSMShadows.xml; sourceTree = "<group>"; };
+		8F37AA5F1351FDA0007A8238 /* VSMShadowsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSMShadowsUI.h; path = vsm/VSMShadowsUI.h; sourceTree = "<group>"; };
+		8F37AA601351FDA0007A8238 /* VSMShadowsUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VSMShadowsUI.m; path = vsm/VSMShadowsUI.m; sourceTree = "<group>"; };
+		8F37AA811351FF92007A8238 /* blurhoriz.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = blurhoriz.frag; path = Resources/VSM/blurhoriz.frag; sourceTree = "<group>"; };
+		8F37AA821351FF92007A8238 /* blurhoriz.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = blurhoriz.vert; path = Resources/VSM/blurhoriz.vert; sourceTree = "<group>"; };
+		8F37AA831351FF92007A8238 /* blurvertical.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = blurvertical.frag; path = Resources/VSM/blurvertical.frag; sourceTree = "<group>"; };
+		8F37AA841351FF92007A8238 /* blurvertical.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = blurvertical.vert; path = Resources/VSM/blurvertical.vert; sourceTree = "<group>"; };
+		8F37AA851351FF92007A8238 /* depth.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = depth.frag; path = Resources/VSM/depth.frag; sourceTree = "<group>"; };
+		8F37AA861351FF92007A8238 /* depth.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = depth.vert; path = Resources/VSM/depth.vert; sourceTree = "<group>"; };
+		8F37AA871351FF92007A8238 /* shadowvsm.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowvsm.frag; path = Resources/VSM/shadowvsm.frag; sourceTree = "<group>"; };
+		8F37AA881351FF92007A8238 /* shadowvsm.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowvsm.vert; path = Resources/VSM/shadowvsm.vert; sourceTree = "<group>"; };
 		8F6FC48C134742510038086C /* S9Math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = S9Math.c; path = util/S9Math.c; sourceTree = "<group>"; };
 		8F6FC48D134742510038086C /* S9Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = S9Math.h; path = util/S9Math.h; sourceTree = "<group>"; };
 		8F6FC48F1347425D0038086C /* S9FBO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = S9FBO.h; path = util/S9FBO.h; sourceTree = "<group>"; };
@@ -99,6 +123,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8F37AA5E1351FDA0007A8238 /* VSMShadows.xml */,
 				8F6FC498134742830038086C /* PCSSShadows.xml */,
 				8FB350B5133CA06700A7979C /* Shaders */,
 				8F26D32513437735002AE096 /* PCSSShadowsUI.nib */,
@@ -148,6 +173,7 @@
 		75AA971B10093C25000986A3 /* Patches */ = {
 			isa = PBXGroup;
 			children = (
+				8F37AA4E1351FD03007A8238 /* VSM */,
 				8F26D2EC13436EF8002AE096 /* PCSS */,
 			);
 			name = Patches;
@@ -199,6 +225,32 @@
 			name = pcss;
 			sourceTree = "<group>";
 		};
+		8F37AA4E1351FD03007A8238 /* VSM */ = {
+			isa = PBXGroup;
+			children = (
+				8F37AA5C1351FDA0007A8238 /* VSMShadows.h */,
+				8F37AA5D1351FDA0007A8238 /* VSMShadows.m */,
+				8F37AA5F1351FDA0007A8238 /* VSMShadowsUI.h */,
+				8F37AA601351FDA0007A8238 /* VSMShadowsUI.m */,
+			);
+			name = VSM;
+			sourceTree = "<group>";
+		};
+		8F37AA761351FF19007A8238 /* vsm */ = {
+			isa = PBXGroup;
+			children = (
+				8F37AA811351FF92007A8238 /* blurhoriz.frag */,
+				8F37AA821351FF92007A8238 /* blurhoriz.vert */,
+				8F37AA831351FF92007A8238 /* blurvertical.frag */,
+				8F37AA841351FF92007A8238 /* blurvertical.vert */,
+				8F37AA851351FF92007A8238 /* depth.frag */,
+				8F37AA861351FF92007A8238 /* depth.vert */,
+				8F37AA871351FF92007A8238 /* shadowvsm.frag */,
+				8F37AA881351FF92007A8238 /* shadowvsm.vert */,
+			);
+			name = vsm;
+			sourceTree = "<group>";
+		};
 		8FB35044133C9A3C00A7979C /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +265,7 @@
 		8FB350B5133CA06700A7979C /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				8F37AA761351FF19007A8238 /* vsm */,
 				8F26D2FE1343754F002AE096 /* pcss */,
 			);
 			name = Shaders;
@@ -272,6 +325,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F37AA891351FF92007A8238 /* blurhoriz.frag in Resources */,
+				8F37AA8A1351FF92007A8238 /* blurhoriz.vert in Resources */,
+				8F37AA8B1351FF92007A8238 /* blurvertical.frag in Resources */,
+				8F37AA8C1351FF92007A8238 /* blurvertical.vert in Resources */,
+				8F37AA8D1351FF92007A8238 /* depth.frag in Resources */,
+				8F37AA8E1351FF92007A8238 /* depth.vert in Resources */,
+				8F37AA8F1351FF92007A8238 /* shadowvsm.frag in Resources */,
+				8F37AA901351FF92007A8238 /* shadowvsm.vert in Resources */,
 				8F986A7B13490E0400F65839 /* basiclight.frag in Resources */,
 				8F986A7C13490E0400F65839 /* basiclight.vert in Resources */,
 				8F0BC6211348EC2100BC2522 /* shadowcombine.vert in Resources */,
@@ -280,6 +341,7 @@
 				8F0BBE4813486EE700BC2522 /* shadowpcss.vert in Resources */,
 				8F26D32B13437735002AE096 /* PCSSShadowsUI.nib in Resources */,
 				8F6FC499134742830038086C /* PCSSShadows.xml in Resources */,
+				8F37AA621351FDA0007A8238 /* VSMShadows.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +377,8 @@
 				8F6FC49E134742900038086C /* PCSSShadows.m in Sources */,
 				8F6FC49F134742900038086C /* PCSSShadowsUI.m in Sources */,
 				8F1793D91347838000D1B6D0 /* S9Utils.c in Sources */,
+				8F37AA611351FDA0007A8238 /* VSMShadows.m in Sources */,
+				8F37AA631351FDA0007A8238 /* VSMShadowsUI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

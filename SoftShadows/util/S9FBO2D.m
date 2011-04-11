@@ -121,16 +121,18 @@
 
 - (void) bindFBO{
 	CGLContextObj cgl_ctx = [mContext CGLContextObj];
+	
+	// TODO - This is causing crashes!
+//	[self pushFBO];
+	
+	
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
+
+	GLsizei	width = self.mSize;	
 	
-	GLsizei	width = self.mSize;
-	
-	if (mDepthOnly){
-		glPolygonOffset( 1.0f, 1.0f );
-		glEnable( GL_POLYGON_OFFSET_FILL );
-	}
+	glDrawBuffers(mNumTargets,mBuffers);
 	
 	glViewport(0, 0,  width, width);
 	
@@ -140,11 +142,6 @@
 - (void) unbindFBO {
 	CGLContextObj cgl_ctx = [mContext CGLContextObj];
 
-	
-	if (mDepthOnly){
-		glDisable( GL_POLYGON_OFFSET_FILL );
-	}
-	
 	glPopAttrib();
 	glPopClientAttrib();
 	
@@ -158,7 +155,7 @@
 	
 	mSize = size;
 	
-	/*if (mAllocated){
+/*	if (mAllocated){
 		glDeleteTextures(mNumTargets, mColourTargets);
 	}else {
 		mAllocated = TRUE;
@@ -177,22 +174,25 @@
 			
 			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
 			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+			
+			mBuffers[i] = GL_COLOR_ATTACHMENT0_EXT + i;
 		}
+		
 	}
 	
 	glGenTextures(1, &mDepthID);
 	glBindTexture(GL_TEXTURE_2D, mDepthID);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, size, size, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );	
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	
 	// Linear should give better results on NVidia but apparently we can get that from using shadow2DProj as well?
 	
-	if (mDepthOnly){
+	/*if (mDepthOnly){
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE );
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
 		glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE, GL_INTENSITY); 	
-	}
+	}*/
 	
 	
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
@@ -209,7 +209,6 @@
 		glDrawBuffer(GL_NONE);
 		glReadBuffer(GL_NONE);
 	}
-	
 	
 	
 }

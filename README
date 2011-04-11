@@ -1,0 +1,13 @@
+SoftShadows Plugin for Quartz Composer by Benjamin Blundell / Section9
+----------------------------------------------------------------------
+
+This plugin should be placed within the ~/Library/Graphics/Quartz Composer Plugins directory. To build this you'll need XCode and the Skanky.sdk which can be found at Kineme.net
+
+This patch also inlcudes a TestPCSS composer file that shows how it should be used. It needs the Kineme3D plugins which aren't free sadly. 
+
+It is a consumer Macro Patch that applies soft shadows to anything within it. The variables are generally self explanatory but careful attention should be paid to how they are set. 1024 shadowmap with 4 samples for the PCF, size 10 light and 0.1 on the Attentuation is a good start.
+
+Ben
+
+http://www.section9.co.uk
+

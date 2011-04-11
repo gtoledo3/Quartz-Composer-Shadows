@@ -87,7 +87,7 @@
 		[inputMapSize setMaxDoubleValue:4096.0];
 		[inputMapSize setMinDoubleValue:128.0];
 		
-		mFBOSize = 1024;
+		mFBOSize = 2048;
 		
 		[inputMapSize setDoubleValue: mFBOSize];
 		
@@ -99,6 +99,17 @@
 	return [PCSSShadowsUI class];
 }
 
+
+-(void) glError:(QCOpenGLContext*)context {
+	
+	CGLContextObj cgl_ctx = [context CGLContextObj];
+	
+	GLenum err = glGetError();
+	while (err != GL_NO_ERROR) {
+		NSLog(@"glError: %s caught!\n", (char *)gluErrorString(err));
+		err = glGetError();
+	}
+}
 
 -(void)resetFBOSize {
 	
@@ -125,21 +136,19 @@
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 
 	if (mShadowFBO == nil){
-		
-		mScreenFBO = [[S9FBO2D alloc] initWithContext:context andSize:2048 numTargets:1 accuracy:GL_RGB32F_ARB depthOnly:FALSE];
-		
-		mShadowFBO = [[S9FBO2D alloc] initWithContext:context andSize:1024 numTargets:1 accuracy:GL_RGB32F_ARB depthOnly:FALSE];
+				
+		mShadowFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:2 accuracy:GL_RGB16 depthOnly:FALSE];
 		
 		mBlurHorizontalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize 
-												   numTargets:1 accuracy:GL_RGB32F_ARB	depthOnly:FALSE]; 
+												   numTargets:1 accuracy:GL_RGB16	depthOnly:FALSE]; 
 		mBlurVerticalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 
-												   accuracy:GL_RGB32F_ARB depthOnly:FALSE]; 
+												   accuracy:GL_RGB16 depthOnly:FALSE]; 
 	
-		mDepthOnlyFBO =  [[S9FBO2D alloc] initWithContext:context andSize:1024 numTargets:1 accuracy:GL_RGB32F_ARB depthOnly:TRUE];
+		mDepthOnlyFBO =  [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 accuracy:GL_RGB16 depthOnly:TRUE];
 	}
 	
 	// Create Jitter Texture - Probably not needed after all?
-	generateJitterTexture(&mJitterTexture, 128, 8, 8);
+	//generateJitterTexture(&mJitterTexture, 128, 8, 8);
 	
 	// Load Shaders
 	
@@ -291,11 +300,11 @@
 	// BIND TO DEPTH/SHADOWMAP
 	// -----------------------
 	glEnable(GL_TEXTURE_2D);
-	
+
 	[mDepthOnlyFBO bindFBO];	
 	
-	glPolygonOffset(1.0f, 1.0f);
-	glEnable(GL_POLYGON_OFFSET_FILL);
+	//glPolygonOffset(1.0f, 1.0f);
+	//glEnable(GL_POLYGON_OFFSET_FILL);
 	
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
@@ -325,21 +334,18 @@
 	
 	[self executeSubpatches:time arguments:arguments];
 	
-
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
 	
-	glDisable(GL_POLYGON_OFFSET_FILL);
-	glCullFace(GL_BACK);
-	//glDisable(GL_CULL_FACE);
-	
-
 	[mDepthOnlyFBO unbindFBO];
 	
+	glCullFace(GL_BACK);
 	
-	// UNBIND DEPTH SHADER AND DRAW SHADOWS WITH SHADOW SHADER
-	// -------------------------------------------------------
+	// UNBIND DEPTH SHADER AND DRAW SHADOWS AND LIGHTING WITH SHADOW SHADER
+	// --------------------------------------------------------------------
+	
+	// This is MRT / Deferred Shading pass
 	
 	[mShadowFBO bindFBO];
 	
@@ -365,77 +371,53 @@
 	// We need the actual values for the depth for PCSS so we cant use shadow2D functions with the COMPARE_R step :(
 	
 	glActiveTexture(GL_TEXTURE0);
-	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, [mDepthOnlyFBO  mDepthID]);
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE); // No compare on our second step
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		
-	// Sadly we cant have different samples on the same texture, even if they are different units! ><
-	
-/*	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, [mDepthOnlyFBO  mDepthID]);
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);*/
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_NONE); // No compare on our second step - not using glsl shadow functions
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 	
 	[self recallPatches:self context:context time:time arguments:arguments];
 	
 	glUseProgramObjectARB(NULL);
 	[mShadowFBO unbindFBO];
 	
+	
+
 	// BLUR THE SHADOW
 	// ---------------
 	
-	if( [inputBlur booleanValue])
+	if( [inputBlur booleanValue]) {
 		[self blurShadowMap:context];
-	
-	// COMBINE BLUR AND SHADOW - THIRD PASS!! ><
-	// -----------------------------------------
-	
-	// Could attempt to project the texture but this is easier and should be faster when we use multiple render targets.
-	
-	[mScreenFBO bindFBO];
-	glUseProgramObjectARB([mLightShader programObject]);
-	glUniform3fARB([mLightShader getUniformLocation:"lightPosition"], [inputLightX doubleValue], [inputLightY doubleValue],[inputLightZ doubleValue]);
-	glUniform3fARB([mLightShader getUniformLocation:"lightLook"], [inputLightLookX doubleValue], [inputLightLookY doubleValue],[inputLightLookZ doubleValue]);
-	
-	[self recallPatches:self context:context time:time arguments:arguments];
-	glUseProgramObjectARB(NULL);
-	[mScreenFBO unbindFBO];
-
-	
-	glUseProgramObjectARB([mCombineShader programObject]);
-
-	if ([inputBlur booleanValue]){
-	
+		glUseProgramObjectARB([mCombineShader programObject]);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D,[mBlurVerticalFBO getTextureAtTarget:0]);
 		glUniform1iARB([mCombineShader getUniformLocation:"shadowTexture"],1);
+	
 	}
 	else {
+		glUseProgramObjectARB([mCombineShader programObject]);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D,[mShadowFBO getTextureAtTarget:0]);
 		glUniform1iARB([mCombineShader getUniformLocation:"shadowTexture"],1);
-	}
-
 	
-	glActiveTexture(GL_TEXTURE0);
-	[self renderOrthoQuad:context withTex: [mScreenFBO getTextureAtTarget:0]];
+	}
 	glUniform1iARB([mCombineShader getUniformLocation:"baseTexture"],0);
 
+	glActiveTexture(GL_TEXTURE0);
+	[self renderOrthoQuad:context withTex: [mShadowFBO getTextureAtTarget:1]];
+	
+	
 	glUseProgramObjectARB(NULL);
 	glDisable(GL_CULL_FACE);
 	
-	// FINISHED - Draw Depth from the light view
+	// FINISHED - Draw the blurred shadow
 	
 	if( [inputDrawDepth booleanValue] ) { 
 		glColor3f(0.0,0.0,0.0f);
-		if ([inputBlur booleanValue]){
-			[self renderOrthoQuad:context withTex: [mBlurVerticalFBO getTextureAtTarget:0]];
-		}
-		else {
-			[self renderOrthoQuad:context withTex: [mShadowFBO getTextureAtTarget:0]];
-		}
-
+		
+		[self renderOrthoQuad:context withTex: [mDepthOnlyFBO mDepthID]];
+	
 	}
 	
 	

@@ -43,6 +43,8 @@
 #import <Cocoa/Cocoa.h>
 
 // Create, attach, detach and draw a basic framebuffer object
+// http://www.gamedev.net/page/resources/_/reference/programming/opengl/opengl-frame-buffer-object-201-r2333
+// Above link is good for Multiple Render Targets
 
 @interface S9FBO2D : NSObject {
 	QCOpenGLContext *mContext;
@@ -53,6 +55,8 @@
 	int		mSize;
 	
 	GLuint mColourTargets[10]; // Assume a Max of 10, naughty!
+	GLenum mBuffers[10]; // Can actually be tested for. Its *probably* 4! :P
+	
 	
 	GLuint mNumTargets;
 	// Previous settings so we can go back
@@ -64,6 +68,8 @@
 	GLint mPreviousDrawBuffer;
 	GLint mPreviousReadBuffer;
 	GLuint	mAccuracy;
+	
+	
 	
 	BOOL mDepthOnly;
 	BOOL mAllocated;

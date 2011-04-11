@@ -6,7 +6,7 @@
 	<key>nodeAttributes</key>
 	<dict>
 		<key>name</key>
-		<string>Softer Shadows</string>
+		<string>VSM Soft Shadows</string>
 		<key>categories</key>
 		<array>
 			<string>Custom Patch</string>
@@ -88,6 +88,22 @@
 			<string>Set the far plane for the light</string>
 		</dict>
 		
+		<key>inputAmbient</key>
+		<dict>
+			<key>name</key>
+			<string>ambientLevel</string>
+			<key>description</key>
+			<string>Set the ambient light level</string>
+		</dict>
+		
+		<key>inputLightAttenuation</key>
+		<dict>
+			<key>name</key>
+			<string>lightAttenuation</string>
+			<key>description</key>
+			<string>Set the light attenuation</string>
+		</dict>
+		
 		
 		<key>inputBypass</key>
 		<dict>
@@ -95,6 +111,14 @@
 			<string>bypass</string>
 			<key>description</key>
 			<string>Bypass this Patch but execute subpatches</string>
+		</dict>
+		
+		<key>inputBlurAmount</key>
+		<dict>
+			<key>description</key>
+			<string>Blur the Shadow Map Amount</string>
+			<key>name</key>
+			<string>blurAmount</string>
 		</dict>
 		
 		<key>inputBlur</key>
@@ -105,12 +129,12 @@
 			<string>blurDepth</string>
 		</dict>
 	
-		<key>inputBlurAmount</key>
+		<key>inputBlurDepthAmount</key>
 		<dict>
 			<key>description</key>
 			<string>Blur the Depth Map Amount</string>
 			<key>name</key>
-			<string>blurAmount</string>
+			<string>blurDepthAmount</string>
 		</dict>
 	
 		

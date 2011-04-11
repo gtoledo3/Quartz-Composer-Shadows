@@ -54,7 +54,7 @@
 //		- Test mipmapping of the FBO textures
 
 
-#import "SofterShadows.h"
+#import "VSMShadows.h"
 #import "S9Math.h"
 
 #import <OpenGL/gl.h>
@@ -63,7 +63,7 @@
 #import <OpenGL/gluMacro.h>
 #import <SkankySDK/QCOpenGLContext.h>
 
-@implementation SofterShadows
+@implementation VSMShadows
 
 +(BOOL)isSafe {
 	return YES;
@@ -85,7 +85,7 @@
 
 -(id)initWithIdentifier:(id)identifier {
 	if(self = [super initWithIdentifier:identifier]) {
-		[[self userInfo] setObject:@"Softer Shadows" forKey:@"name"];
+		[[self userInfo] setObject:@"VSM Shadows" forKey:@"name"];
 		
 		// TODO - If not already set, set these :P
 		// TODO set max and mins
@@ -100,17 +100,27 @@
 		[inputMapSize setMaxDoubleValue:4096.0];
 		[inputMapSize setMinDoubleValue:128.0];
 		
-		mFBOSize = 1024;
-		
-		[inputMapSize setDoubleValue: mFBOSize];
-
+		mFBOSize = 2048;
 	}
 	return self;
 }
 
 + (Class)inspectorClassWithIdentifier:(id)fp8 {
-	return [SofterShadowsUI class];
+	return [VSMShadowsUI class];
 }
+
+
+-(void) glError:(QCOpenGLContext*)context {
+	
+	CGLContextObj cgl_ctx = [context CGLContextObj];
+	
+	GLenum err = glGetError();
+	while (err != GL_NO_ERROR) {
+		NSLog(@"glError: %s caught!\n", (char *)gluErrorString(err));
+		err = glGetError();
+	}
+}
+
 
 -(void)resetFBOSize {
 	
@@ -127,6 +137,7 @@
 		[mFBO generateNewTexture:mFBOSize];
 		[mBlurHorizontalFBO generateNewTexture:mFBOSize];
 		[mBlurVerticalFBO generateNewTexture:mFBOSize];
+		
 	}
 }
 
@@ -149,11 +160,11 @@
 	
 	NSBundle *pluginBundle =[NSBundle bundleForClass:[self class]];	
 		
-	mDepthShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"depthvsm" forContext:cgl_ctx];
+	mDepthShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"depth" forContext:cgl_ctx];
 	if(mDepthShader == nil) { NSLog(@"Cannot compile Depth Shader.\n"); return NO; }
 	else NSLog(@"Compiled Depth shader.\n");
 	
-	mShadowShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"shadow" forContext:cgl_ctx];
+	mShadowShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"shadowvsm" forContext:cgl_ctx];
 	if(mShadowShader == nil) { NSLog(@"Cannot compile Shadow Shader.\n"); return NO; }
 	else NSLog(@"Compiled Shadow shader.\n"); 
 	
@@ -250,7 +261,7 @@
 	[mBlurHorizontalFBO bindFBO];
 	glUseProgramObjectARB([mBlurHorizontalShader programObject]);
 	glUniform1iARB([mBlurHorizontalShader getUniformLocation:"RTScene"],0);
-	glUniform1fARB([mBlurVerticalShader getUniformLocation:"blurSize"],(float)[inputBlurAmount doubleValue]);
+	glUniform1fARB([mBlurVerticalShader getUniformLocation:"blurSize"],(float)[inputBlurDepthAmount doubleValue]);
 	[self renderOrthoQuad:context withTex:[mFBO getTextureAtTarget:0]];
 	[mBlurHorizontalFBO unbindFBO];
 	glUseProgramObjectARB(NULL);
@@ -260,7 +271,7 @@
 	[mBlurVerticalFBO bindFBO];
 	glUseProgramObjectARB([mBlurVerticalShader programObject]);
 	glUniform1iARB([mBlurVerticalShader getUniformLocation:"RTScene"],0);
-	glUniform1fARB([mBlurVerticalShader getUniformLocation:"blurSize"],(float)[inputBlurAmount doubleValue]);
+	glUniform1fARB([mBlurVerticalShader getUniformLocation:"blurSize"],(float)[inputBlurDepthAmount doubleValue]);
 	[self renderOrthoQuad:context withTex:[mBlurHorizontalFBO getTextureAtTarget:0]];
 	
 	glUseProgramObjectARB(NULL);
@@ -276,9 +287,11 @@
 		[self executeSubpatches:time arguments:arguments];
 		return YES;
 	}
+	
 	[self resetFBOSize];
 	
 	CGLContextObj cgl_ctx = [context CGLContextObj];
+
 	
 	double shadowProjection[16];
 	double shadowModelview[16];
@@ -301,7 +314,7 @@
 	glPushMatrix();
 	glLoadIdentity(); 
 	if ([inputOrtho booleanValue])
-		glOrtho(-1, 1, -1, 1, [inputNearLightPlane doubleValue], [inputFarLightPlane doubleValue]);
+		glOrtho(-1.0, 1.0, -1.0, 1.0, [inputNearLightPlane doubleValue], [inputFarLightPlane doubleValue]);
 	else 
 		gluPerspective([inputFieldView doubleValue],1.0, [inputNearLightPlane doubleValue], [inputFarLightPlane doubleValue]);
 
@@ -317,12 +330,18 @@
 	
 	glGetDoublev(GL_MODELVIEW_MATRIX, shadowModelview);
 	
+
+//	glPolygonOffset(1.0f, 1.0f);
+//	glEnable(GL_POLYGON_OFFSET_FILL);
+	
 	glEnable(GL_CULL_FACE);
+	glFrontFace(GL_CW);
 	glCullFace(GL_FRONT);
 	
 	[self recallPatches:self context:context time:time arguments:arguments];
-
-	glDisable(GL_CULL_FACE);
+	
+	
+//	glDisable(GL_POLYGON_OFFSET_FILL);
 	
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
@@ -340,35 +359,39 @@
 	
 	// UNBIND BLUR SHADER AND DRAW WITH SHADOW SHADER
 	// -----------------------------------------------
+
 	
 	glUseProgramObjectARB([mShadowShader programObject]);
 	
 	//multMatrix(finalMatrix, shadowProjection, shadowModelview);
 	
 	glGetDoublev(GL_MODELVIEW_MATRIX, cameraModelview);
-	setLightMatrix(finalMatrix, shadowProjection, shadowModelview, cameraModelview);	
+	setLightMatrixNoBias(finalMatrix, shadowProjection, shadowModelview, cameraModelview);	
 	
 	floatMatrix(finalFloatMatrix,finalMatrix);
 	
 	glUniform1iARB([mShadowShader getUniformLocation:"ShadowMap"],0);
 	glUniformMatrix4fv([mShadowShader getUniformLocation:"shadowTransMatrix"], 16, FALSE, finalFloatMatrix);
-	glUniform1fARB([mShadowShader getUniformLocation:"maxVariance"], (float)[inputVariance doubleValue]);
+	glUniform1fARB([mShadowShader getUniformLocation:"minVariance"], (float)[inputVariance doubleValue]);
+	glUniform1fARB([mShadowShader getUniformLocation:"blurAmount"], (float)[inputBlurAmount doubleValue]);
+	glUniform1fARB([mShadowShader getUniformLocation:"ambientLevel"], (float)[inputAmbient doubleValue]);
+	glUniform1fARB([mShadowShader getUniformLocation:"lightAttenuation"], (float)[inputLightAttenuation doubleValue]);
 	glUniform4fARB([mShadowShader getUniformLocation:"lightPosition"],
 				   (float)[inputLightX doubleValue], (float)[inputLightY doubleValue], (float)[inputLightZ doubleValue], 0.0);
 	glUniform4fARB([mShadowShader getUniformLocation:"lightLook"],
 				   (float)[inputLightLookX doubleValue], (float)[inputLightLookY doubleValue], (float)[inputLightLookZ doubleValue], 0.0);
 	
 	
-	
-
 	if([inputBlur booleanValue])
 		glBindTexture(GL_TEXTURE_2D, [mBlurVerticalFBO getTextureAtTarget:0]);
 	else 
 		glBindTexture(GL_TEXTURE_2D, [mFBO getTextureAtTarget:0]);
 	
-	[self executeSubpatches:time arguments:arguments];
-	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+	
+	[self executeSubpatches:time arguments:arguments];
+
+	glDisable(GL_CULL_FACE);
 	
 	glUseProgramObjectARB(NULL);
 	
@@ -404,8 +427,10 @@
 		
 	}
 	
-	glDisable(GL_CULL_FACE);
+	
 	glDisable(GL_TEXTURE_2D);
+	
+	[self glError:context];
 	
 	return YES;
 }

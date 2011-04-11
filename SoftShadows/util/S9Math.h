@@ -52,3 +52,4 @@ void initMatrix(double *result);
 void floatMatrix(float *result, double *m);
 void setTextureMatrix(double *result, double *projection, double *modelView);
 void setLightMatrix(double *result, double *shadowProjection, double *shadowModelView, double* camModelView);
+void setLightMatrixNoBias(double *result, double *shadowProjection, double *shadowModelView, double* camModelView);

@@ -63,6 +63,7 @@
 	QCNumberPort		*inputFarLightPlane;
 	QCNumberPort		*inputFieldView;
 	
+	
 	QCBooleanPort		*inputBypass;
 	QCBooleanPort		*inputOrtho;
 	
@@ -97,4 +98,5 @@
 -(BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)arguments;
 -(void)recallPatches:(QCPatch*) patch context:(QCOpenGLContext *)context time:(double)time arguments:(NSDictionary *)arguments;
 -(void) blurShadowMap:(QCOpenGLContext *)context;
+-(void) renderOrthoQuad:(QCOpenGLContext *)context withTex:(GLuint) tex;
 @end

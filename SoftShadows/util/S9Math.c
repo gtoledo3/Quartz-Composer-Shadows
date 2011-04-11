@@ -210,3 +210,19 @@ void setLightMatrix(double *result, double *shadowProjection, double *shadowMode
 	
 }
 
+void setLightMatrixNoBias(double *result, double *shadowProjection, double *shadowModelView, double* camModelView) {
+	/*Matrix44f shadowTransMatrix = mShadowCam.getProjectionMatrix();
+	 shadowTransMatrix *= mShadowCam.getModelViewMatrix();
+	 shadowTransMatrix *= camera.getInverseModelViewMatrix();
+	 return shadowTransMatrix;*/
+	
+	double trans2[16];
+	
+	multMatrix(trans2,shadowProjection,shadowModelView);
+	//setEqual(trans, shadowModelView);
+	double inv[16];
+	invertMatrix(inv, camModelView);
+	multMatrix(result, trans2, inv);
+	
+}
+

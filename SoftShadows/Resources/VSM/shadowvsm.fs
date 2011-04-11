@@ -3,13 +3,34 @@ uniform float maxVariance;
 varying vec4 ShadowCoord;
 varying vec4 lightDir, eyeVec;
 varying vec3 vertexNormal;
+varying vec3 vertexNormalWorld;
 
 vec3 ShadowCoordPostW;
 
 // This is somewhat specific to the sub objects within our QC File so might need to be changed
+// TODO  - Minus light dir do we think?
+
 float lighting() {
-	return  max(dot(vertexNormal, lightDir.xyz), 0.0);
+	return  max(dot(vertexNormalWorld, -lightDir.xyz), 0.0);
 }
+
+// Box Sample Blur
+
+vec4 btex2D(sampler2D map, vec2 uv, float radius, float steps)
+{
+  float stepSize = 2.0 * radius / steps;
+  uv.xy -= radius;
+
+  vec4 total = vec4(0, 0, 0, 0);
+  for (float x = 0.0; x < steps; x+=1.0)
+	 for (float y = 0.0; y < steps; y+=1.0)
+		total += texture2D(ShadowMap, vec2(uv.xy + vec2(x * stepSize, y * stepSize)));
+
+  return total / (steps * steps);
+}
+
+
+// Upper Bound VSM Shadow code
 
 float chebyshevUpperBound()
 {
@@ -19,7 +40,7 @@ float chebyshevUpperBound()
 	// Surface is fully lit. as the current fragment is before the light occluder
 	// Hardly ever occurs because the distances will always be greater or very close to equal
 	if (ShadowCoordPostW.z <= moments.x)
-		return 0.0 ;
+		return 1.0 ;
 
 	// The fragment is either in shadow or penumbra. We now use chebyshev's upperBound to check
 	// How likely this pixel is to be lit (p_max)
@@ -39,6 +60,6 @@ void main()
 
 	float shadow = chebyshevUpperBound();
 	float diffuse = lighting();
-	gl_FragColor = gl_Color * (1.0 - shadow);
+	gl_FragColor = gl_Color * diffuse * shadow;
   
 }
