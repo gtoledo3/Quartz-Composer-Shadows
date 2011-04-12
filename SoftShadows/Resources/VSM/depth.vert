@@ -5,9 +5,8 @@ uniform float far;
 
 void main()
 {
-		vec4 viewPos = gl_ModelViewMatrix * gl_Vertex;
-		tDepth = -viewPos.z/far;
-
+		//v_position = gl_ModelViewMatrix * gl_Vertex;
+		tDepth = -v_position.z/far;
 		gl_Position = ftransform();
 		v_position = gl_Position;
 }

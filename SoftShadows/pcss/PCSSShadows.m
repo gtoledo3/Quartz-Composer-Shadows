@@ -137,14 +137,14 @@
 
 	if (mShadowFBO == nil){
 				
-		mShadowFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:2 accuracy:GL_RGB16 depthOnly:FALSE];
+		mShadowFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:2 accuracy:GL_RGB16  mipMap:FALSE depthOnly:FALSE];
 		
 		mBlurHorizontalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize 
-												   numTargets:1 accuracy:GL_RGB16	depthOnly:FALSE]; 
+												   numTargets:1 accuracy:GL_RGB16 mipMap:FALSE	depthOnly:FALSE]; 
 		mBlurVerticalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 
-												   accuracy:GL_RGB16 depthOnly:FALSE]; 
+												   accuracy:GL_RGB16 mipMap:FALSE depthOnly:FALSE]; 
 	
-		mDepthOnlyFBO =  [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 accuracy:GL_RGB16 depthOnly:TRUE];
+		mDepthOnlyFBO =  [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 accuracy:GL_RGB16 mipMap:FALSE depthOnly:TRUE];
 	}
 	
 	// Create Jitter Texture - Probably not needed after all?

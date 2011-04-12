@@ -1,15 +1,15 @@
 /*
-                       __  .__              ________ 
+					   __  .__              ________ 
    ______ ____   _____/  |_|__| ____   ____/   __   \
   /  ___// __ \_/ ___\   __\  |/  _ \ /    \____    /
   \___ \\  ___/\  \___|  | |  (  <_> )   |  \ /    / 
  /____  >\___  >\___  >__| |__|\____/|___|  //____/  .co.uk
-      \/     \/     \/                    \/         
+	  \/     \/     \/                    \/         
  
  THE GHOST IN THE CSH
  
  
- SofterShadows.h | Part of SoftShadows | Created 29/03/2011
+ DepthofField.h | Part of DepthofField | Created 11/04/2011
  
  Copyright (c) 2010 Benjamin Blundell, www.section9.co.uk
  *** Section9 ***
@@ -40,65 +40,8 @@
  *
  * ***********************************************************************/
 
-#import <Cocoa/Cocoa.h>
-#import "S9Shader.h"
-#import "S9FBO2D.h"
-#import "VSMShadowsUI.h"
+@interface DepthofFieldPrincipal : NSObject <GFPlugInRegistration> 
 
-@interface VSMShadows : QCPatch {
-	QCNumberPort		*inputLightX;
-	QCNumberPort		*inputLightY;
-	QCNumberPort		*inputLightZ;
-	
-	QCNumberPort		*inputLightLookX;
-	QCNumberPort		*inputLightLookY;
-	QCNumberPort		*inputLightLookZ;
-	
-	QCNumberPort		*inputNearLightPlane;
-	QCNumberPort		*inputFarLightPlane;
-	QCNumberPort		*inputFieldView;
-	QCNumberPort		*inputAmbient;
-	QCNumberPort		*inputLightAttenuation;
-	QCNumberPort		*inputFilterSize;
-	
-	QCBooleanPort		*inputBlur;
-	QCNumberPort		*inputBlurAmount;
-	QCNumberPort		*inputBlurDepthAmount;
-	QCBooleanPort		*inputBypass;
-	QCBooleanPort		*inputDrawDepth;
-	QCBooleanPort		*inputOrtho;
-	
-	
-	QCNumberPort		*inputVariance;
-	QCNumberPort		*inputMapSize;
-	
-	S9Shader			*mDepthShader;
-	S9Shader			*mShadowShader;
-	S9Shader			*mBlurShader;
-	S9Shader			*mBlurHorizontalShader;
-	S9Shader			*mBlurVerticalShader;
-	S9Shader			*mSummedTableShader;
-	S9Shader			*mSummedTableVShader;
-	S9Shader			*mSummedReverseShader;
-	
-	S9FBO2D				*mFBO;
-	S9FBO2D				*mSummedFBO;
-	
-	// TODO - Change to use two render targets rather than two FBOs
-	S9FBO2D				*mBlurHorizontalFBO;
-	S9FBO2D				*mBlurVerticalFBO;
-	
-	GLuint				mFBOSize;
-}
-
-+(BOOL)isSafe;
-+(BOOL)allowsSubpatchesWithIdentifier:(id)identifier;
-
--(id)initWithIdentifier:(id)identifier;
--(BOOL)execute:(QCOpenGLContext*)context time:(double)time arguments:(NSDictionary*)arguments;
--(void)recallPatches:(QCPatch*) patch context:(QCOpenGLContext *)context time:(double)time arguments:(NSDictionary *)arguments;
--(void)blurShadowMap:(QCOpenGLContext*)context;
--(void) renderOrthoQuad:(QCOpenGLContext *)context withTex:(GLuint)tex;
--(void) generateSummedTables:(QCOpenGLContext *)context withTex:(GLuint) tex;
++(void)registerNodesWithManager:(QCNodeManager*)manager;
 
 @end

@@ -1,8 +1,10 @@
 uniform sampler2D ShadowMap;
 uniform float minVariance;
-uniform float blurAmount;
+
 uniform float ambientLevel;
 uniform float lightAttenuation;
+uniform int shadowMapSize;
+uniform float filterSize;
 varying vec4 ShadowCoord;
 uniform vec4 lightPosition;
 varying vec4 lightDir, eyeVec;
@@ -10,6 +12,8 @@ varying vec3 vertexNormal;
 varying vec3 vertexNormalWorld;
 
 vec3 ShadowCoordPostW;
+
+float step = 1.0 / float(shadowMapSize);
 
 // This is somewhat specific to the sub objects within our QC File so might need to be changed
 // TODO  - Minus light dir do we think?
@@ -31,19 +35,20 @@ float ReduceLightBleeding(float p_max, float Amount)
    return linstep(Amount, 1.0, p_max);  
 }  
 
-// Box Sample Blur
+// Box Sample Blur - WITH SUMMED TABLES!
 
-vec4 btex2D(vec2 uv, float radius, float steps)
-{
-  float stepSize = 2.0 * radius / steps;
-  uv.xy -= radius;
+vec4 btex2D(vec2 uv) {
+	float ss = step * filterSize;
+	float xmax = uv.x - ss;
+	float xmin = uv.x;
+	
+	float ymax = uv.y - ss;
+	float ymin = uv.y;
 
-  vec4 total = vec4(0, 0, 0, 0);
-  for (float x = 0.0; x < steps; x+=1.0)
-	 for (float y = 0.0; y < steps; y+=1.0)
-		total += texture2D(ShadowMap, vec2(uv.xy + vec2(x * stepSize, y * stepSize)));
-
-  return total / (steps * steps);
+	vec4 total = texture2D(ShadowMap, vec2(xmax,ymax)) -  texture2D(ShadowMap, vec2(xmax,ymin)) 
+	- texture2D(ShadowMap, vec2(xmin,ymax)) + texture2D(ShadowMap, vec2(xmin,ymin));
+	
+	return total / (filterSize * filterSize);
 }
 
 
@@ -53,7 +58,7 @@ float chebyshevUpperBound()
 {
 	// We retrive the two moments previously stored (depth and depth*depth)
 	
-	vec4 moments = btex2D(ShadowCoordPostW.xy,blurAmount,8.0);
+	vec4 moments = btex2D(ShadowCoordPostW.xy);
 	
 	//vec2 moments = texture2D(ShadowMap,ShadowCoordPostW.xy).rg;
 	
@@ -69,7 +74,10 @@ float chebyshevUpperBound()
 
 	float d = ShadowCoordPostW.z - moments.x ;
 	float p_max = variance / (variance + d * d);
+	
 	return p_max;
+	
+	//return max (1.0 - p_max, 0.0);
 }
 
 

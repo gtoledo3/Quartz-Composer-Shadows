@@ -10,6 +10,10 @@
 		7533202D10091AF0003756A8 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7533202C10091AF0003756A8 /* OpenGL.framework */; };
 		7533202F10091AF0003756A8 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7533202E10091AF0003756A8 /* Quartz.framework */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		8F058D78135375C500489FCB /* summedtables.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F058D77135375C500489FCB /* summedtables.vert */; };
+		8F058D9D135375F600489FCB /* summedtables.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F058D9C135375F600489FCB /* summedtables.frag */; };
+		8F058EAB1353980900489FCB /* summedtablesv.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F058EA91353980900489FCB /* summedtablesv.frag */; };
+		8F058EAC1353980900489FCB /* summedtablesv.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F058EAA1353980900489FCB /* summedtablesv.vert */; };
 		8F0BBE4713486EE700BC2522 /* shadowpcss.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BBE4313486EE700BC2522 /* shadowpcss.frag */; };
 		8F0BBE4813486EE700BC2522 /* shadowpcss.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BBE4413486EE700BC2522 /* shadowpcss.vert */; };
 		8F0BC6211348EC2100BC2522 /* shadowcombine.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F0BC6201348EC2100BC2522 /* shadowcombine.vert */; };
@@ -37,6 +41,8 @@
 		8F6FC49F134742900038086C /* PCSSShadowsUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6FC49D134742900038086C /* PCSSShadowsUI.m */; };
 		8F986A7B13490E0400F65839 /* basiclight.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8F986A7913490E0400F65839 /* basiclight.frag */; };
 		8F986A7C13490E0400F65839 /* basiclight.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8F986A7A13490E0400F65839 /* basiclight.vert */; };
+		8FF2830C135453FD001CCD93 /* summedreverse.frag in Resources */ = {isa = PBXBuildFile; fileRef = 8FF28308135453EF001CCD93 /* summedreverse.frag */; };
+		8FF2830D135453FD001CCD93 /* summedreverse.vert in Resources */ = {isa = PBXBuildFile; fileRef = 8FF28309135453EF001CCD93 /* summedreverse.vert */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +52,10 @@
 		7533202E10091AF0003756A8 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		8D5B49B6048680CD000E48DA /* SoftShadows.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoftShadows.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F058D77135375C500489FCB /* summedtables.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = summedtables.vert; path = Resources/VSM/summedtables.vert; sourceTree = "<group>"; };
+		8F058D9C135375F600489FCB /* summedtables.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = summedtables.frag; path = Resources/VSM/summedtables.frag; sourceTree = "<group>"; };
+		8F058EA91353980900489FCB /* summedtablesv.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = summedtablesv.frag; path = Resources/VSM/summedtablesv.frag; sourceTree = "<group>"; };
+		8F058EAA1353980900489FCB /* summedtablesv.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = summedtablesv.vert; path = Resources/VSM/summedtablesv.vert; sourceTree = "<group>"; };
 		8F0BBE4313486EE700BC2522 /* shadowpcss.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowpcss.frag; path = Resources/PCSS/shadowpcss.frag; sourceTree = "<group>"; };
 		8F0BBE4413486EE700BC2522 /* shadowpcss.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowpcss.vert; path = Resources/PCSS/shadowpcss.vert; sourceTree = "<group>"; };
 		8F0BC6201348EC2100BC2522 /* shadowcombine.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shadowcombine.vert; path = Resources/PCSS/shadowcombine.vert; sourceTree = "<group>"; };
@@ -84,6 +94,8 @@
 		8F6FC49D134742900038086C /* PCSSShadowsUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PCSSShadowsUI.m; path = pcss/PCSSShadowsUI.m; sourceTree = "<group>"; };
 		8F986A7913490E0400F65839 /* basiclight.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = basiclight.frag; path = Resources/PCSS/basiclight.frag; sourceTree = "<group>"; };
 		8F986A7A13490E0400F65839 /* basiclight.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = basiclight.vert; path = Resources/PCSS/basiclight.vert; sourceTree = "<group>"; };
+		8FF28308135453EF001CCD93 /* summedreverse.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = summedreverse.frag; path = Resources/VSM/summedreverse.frag; sourceTree = "<group>"; };
+		8FF28309135453EF001CCD93 /* summedreverse.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = summedreverse.vert; path = Resources/VSM/summedreverse.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +251,12 @@
 		8F37AA761351FF19007A8238 /* vsm */ = {
 			isa = PBXGroup;
 			children = (
+				8F058EA91353980900489FCB /* summedtablesv.frag */,
+				8FF28308135453EF001CCD93 /* summedreverse.frag */,
+				8FF28309135453EF001CCD93 /* summedreverse.vert */,
+				8F058EAA1353980900489FCB /* summedtablesv.vert */,
+				8F058D9C135375F600489FCB /* summedtables.frag */,
+				8F058D77135375C500489FCB /* summedtables.vert */,
 				8F37AA811351FF92007A8238 /* blurhoriz.frag */,
 				8F37AA821351FF92007A8238 /* blurhoriz.vert */,
 				8F37AA831351FF92007A8238 /* blurvertical.frag */,
@@ -325,6 +343,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FF2830C135453FD001CCD93 /* summedreverse.frag in Resources */,
+				8FF2830D135453FD001CCD93 /* summedreverse.vert in Resources */,
+				8F058EAB1353980900489FCB /* summedtablesv.frag in Resources */,
+				8F058EAC1353980900489FCB /* summedtablesv.vert in Resources */,
+				8F058D9D135375F600489FCB /* summedtables.frag in Resources */,
+				8F058D78135375C500489FCB /* summedtables.vert in Resources */,
 				8F37AA891351FF92007A8238 /* blurhoriz.frag in Resources */,
 				8F37AA8A1351FF92007A8238 /* blurhoriz.vert in Resources */,
 				8F37AA8B1351FF92007A8238 /* blurvertical.frag in Resources */,

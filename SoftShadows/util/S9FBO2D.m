@@ -53,10 +53,11 @@
 @synthesize mSize;
 
 
-- (id) initWithContext:(QCOpenGLContext*)context andSize:(int) size numTargets:(int)ntargets accuracy:(GLuint) acc depthOnly:(BOOL)depth {
+- (id) initWithContext:(QCOpenGLContext*)context andSize:(int) size numTargets:(int)ntargets accuracy:(GLuint) acc mipMap:(BOOL) mm depthOnly:(BOOL)depth {
 	
 	if (self = [super init]) {
 		mAllocated = FALSE;
+		
 		
 		CGLContextObj cgl_ctx = [context CGLContextObj];		
 		CGLLockContext(cgl_ctx);
@@ -68,6 +69,7 @@
 		mDepthOnly = depth;
 		mAccuracy = acc;
 		mNumTargets = ntargets;
+		mMipMaps = mm;
 	
 		
 		glGenFramebuffersEXT(1, &mFBOID);
@@ -138,6 +140,23 @@
 	
 }
 
+- (void) bindNoDraw {
+	CGLContextObj cgl_ctx = [mContext CGLContextObj];
+	
+	// TODO - This is causing crashes!
+	//	[self pushFBO];
+	
+	
+	glPushAttrib(GL_ALL_ATTRIB_BITS);
+	glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mFBOID);
+	
+	GLsizei	width = self.mSize;	
+	
+	glViewport(0, 0,  width, width);
+
+}
+
 
 - (void) unbindFBO {
 	CGLContextObj cgl_ctx = [mContext CGLContextObj];
@@ -155,23 +174,32 @@
 	
 	mSize = size;
 	
-/*	if (mAllocated){
+	if (mAllocated){
 		glDeleteTextures(mNumTargets, mColourTargets);
 	}else {
 		mAllocated = TRUE;
-	}*/
+	}
 
 	if (!mDepthOnly){
 		
 		glGenTextures(mNumTargets, mColourTargets);
-		
+	
 		for (int i=0; i< mNumTargets; i++){
 			
 			glBindTexture(GL_TEXTURE_2D, mColourTargets[i]);
 			glTexImage2D(GL_TEXTURE_2D, 0, mAccuracy, size, size, 0, GL_RGB, GL_FLOAT, NULL);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			
+			if(mMipMaps) {
+				glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+				glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+				glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+			}
+			else {
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				
+			}
+				
 			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
 			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 			

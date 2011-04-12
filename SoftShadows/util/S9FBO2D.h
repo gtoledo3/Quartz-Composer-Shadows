@@ -70,7 +70,7 @@
 	GLuint	mAccuracy;
 	
 	
-	
+	BOOL mMipMaps;
 	BOOL mDepthOnly;
 	BOOL mAllocated;
 	
@@ -81,11 +81,12 @@
 @property (readwrite) int mSize;
 @property (nonatomic,retain) QCOpenGLContext *mContext;
 
-- (id) initWithContext:(QCOpenGLContext*)context andSize:(int) size numTargets:(int)ntargets accuracy:(GLuint) acc depthOnly:(BOOL)depth;
+- (id) initWithContext:(QCOpenGLContext*)context andSize:(int) size numTargets:(int)ntargets accuracy:(GLuint) acc mipMap:(BOOL) mm depthOnly:(BOOL)depth;
 
 
 - (GLuint) getTextureAtTarget:(int)target;
 - (void) bindFBO;
+- (void) bindNoDraw;
 - (void) unbindFBO;
 - (void) generateNewTexture:(GLuint) size;
 

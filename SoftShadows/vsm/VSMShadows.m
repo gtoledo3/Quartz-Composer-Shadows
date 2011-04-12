@@ -137,6 +137,7 @@
 		[mFBO generateNewTexture:mFBOSize];
 		[mBlurHorizontalFBO generateNewTexture:mFBOSize];
 		[mBlurVerticalFBO generateNewTexture:mFBOSize];
+		[mSummedFBO generateNewTexture:mFBOSize];
 		
 	}
 }
@@ -147,13 +148,17 @@
 	
 	if (mFBO == nil){
 		// Fixed size, power of two as its Texture2D for simplicity
-		mFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 accuracy:GL_RGB32F_ARB  
-									  depthOnly:FALSE];
+		mFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 accuracy:GL_RGB16F_ARB  
+										 mipMap: FALSE depthOnly:FALSE];
 
 		mBlurHorizontalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize 
-												   numTargets:1 accuracy:GL_RGB32F_ARB	depthOnly:FALSE]; 
+												   numTargets:1 accuracy:GL_RGB16F_ARB	 mipMap: FALSE depthOnly:FALSE]; 
 		mBlurVerticalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 
-												   accuracy:GL_RGB32F_ARB depthOnly:FALSE]; 
+												   accuracy:GL_RGB16F_ARB  mipMap: FALSE depthOnly:FALSE]; 
+		
+		mSummedFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:2 
+												   accuracy:GL_RGB32F_ARB  mipMap: FALSE depthOnly:FALSE]; 
+		
 	}
 	
 	// Load Shaders
@@ -176,6 +181,36 @@
 	if(mBlurVerticalShader == nil) { NSLog(@"Cannot compile Blur Vertical Shader.\n"); return NO; }
 	else NSLog(@"Compiled Blur Vertical shader.\n");
 	
+	mSummedTableShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"summedtables" forContext:cgl_ctx];
+	if(mSummedTableShader == nil) { NSLog(@"Cannot compile Summed Table Shader.\n"); return NO; }
+	else NSLog(@"Compiled Summed Table shader.\n");
+	
+	mSummedTableVShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"summedtablesv" forContext:cgl_ctx];
+	if(mSummedTableVShader == nil) { NSLog(@"Cannot compile Summed TableV Shader.\n"); return NO; }
+	else NSLog(@"Compiled Summed TableV shader.\n");
+	
+	mSummedReverseShader = [[S9Shader alloc] initWithShadersInBundle:pluginBundle withName: @"summedreverse" forContext:cgl_ctx];
+	if(mSummedReverseShader == nil) { NSLog(@"Cannot compile Summed Reverse Shader.\n"); return NO; }
+	else NSLog(@"Compiled Summed Reverse shader.\n");
+	
+	
+	// Setup the extras we need for Summed Tables
+	
+	glBindTexture(GL_TEXTURE_2D, [mSummedFBO getTextureAtTarget:0]);
+	GLfloat b[] = {0.0,0.0,0.0,0.0};
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, b);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	
+	
+	glBindTexture(GL_TEXTURE_2D, [mSummedFBO getTextureAtTarget:1]);
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, b);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	
+
+	
+	glBindTexture(GL_TEXTURE_2D, 0);
 	
 	return YES;
 }
@@ -194,7 +229,6 @@
 	[mShadowShader release];
 	[mBlurHorizontalShader release];
 	[mBlurVerticalShader release];
-	[mFBO release];
 	[mBlurHorizontalFBO release];
 	[mBlurVerticalFBO release];
 }
@@ -221,6 +255,121 @@
 			[self recallPatches:p context:context time:time arguments:arguments];
 		}
 	}
+}
+
+// This is a good example of a PING PONG FBO with two texture units
+
+// TODO - Apparently the summed tables method doesnt render all the tex units
+// at once after the first pass; it only includes these that HAVENT been summed
+// That would mean adjusting the tex co-ordinates but we'd still have the same number
+// of fragments :S
+
+-(void) generateSummedTables:(QCOpenGLContext *)context withTex:(GLuint) tex {
+	
+	CGLContextObj cgl_ctx = [context CGLContextObj];
+	// Horizontal Scan
+
+	
+	int nm = ceil(log2(mFBOSize)) + 1;
+	glUseProgramObjectARB([mSummedTableShader programObject]);
+	glUniform1iARB([mSummedTableShader getUniformLocation:"texWidth"],mFBOSize);
+	glUniform1iARB([mSummedTableShader getUniformLocation:"texture"],0);
+	
+	GLuint atex = tex;
+	[mSummedFBO bindNoDraw];
+	
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(-1, 1, -1, 1, 0.0, 10.0);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	glColor3f(1.0,1.0,1.0f);
+
+	unsigned int ni = 1;
+	BOOL usingA = TRUE;
+	for(int i=0; i < nm; i++){
+
+		//glClear(GL_COLOR_BUFFER_BIT);
+
+		if (usingA) {
+			glDrawBuffer(GL_COLOR_ATTACHMENT0_EXT);
+		} else {
+			glDrawBuffer(GL_COLOR_ATTACHMENT1_EXT);
+		}
+
+		// Start off with an input texture A
+		glUniform1iARB([mSummedTableShader getUniformLocation:"Ni"],ni);
+		
+		glBindTexture(GL_TEXTURE_2D, atex);
+		
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0, 0.0);	glVertex3f(-1.0, -1.0, 0.0);
+		glTexCoord2f(1.0, 0.0);	glVertex3f(1.0, -1.0, 0.0);
+		glTexCoord2f(1.0, 1.0);	glVertex3f(1.0, 1.0, 0.0);
+		glTexCoord2f(0.0, 1.0);	glVertex3f(-1.0, 1.0, 0.0);
+		glEnd();
+		
+		ni = ni << 1; // Move up
+	
+		if (usingA) {
+			atex = [mSummedFBO getTextureAtTarget:0];
+		} else {
+			atex = [mSummedFBO getTextureAtTarget:1];
+		}
+		
+		usingA = !usingA;
+	}
+	
+	// Vertical Scan
+	
+	usingA = TRUE; // Sure about that? 
+	ni = 1;
+	atex = [mSummedFBO getTextureAtTarget:1];
+	glUseProgramObjectARB([mSummedTableVShader programObject]);
+	glUniform1iARB([mSummedTableVShader getUniformLocation:"texWidth"],mFBOSize);
+	glUniform1iARB([mSummedTableVShader getUniformLocation:"texture"],0);
+	
+	for(int i=0; i < nm; i++){
+		
+		//glClear(GL_COLOR_BUFFER_BIT);
+		if (usingA) {
+			glDrawBuffer(GL_COLOR_ATTACHMENT0_EXT);
+		} else {
+			glDrawBuffer(GL_COLOR_ATTACHMENT1_EXT);
+		}
+		
+		// Start off with an input texture A
+		glUniform1iARB([mSummedTableVShader getUniformLocation:"Ni"],ni);
+		
+		glBindTexture(GL_TEXTURE_2D, atex);
+		
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0, 0.0);	glVertex3f(-1.0, -1.0, 0.0);
+		glTexCoord2f(1.0, 0.0);	glVertex3f(1.0, -1.0, 0.0);
+		glTexCoord2f(1.0, 1.0);	glVertex3f(1.0, 1.0, 0.0);
+		glTexCoord2f(0.0, 1.0);	glVertex3f(-1.0, 1.0, 0.0);
+		glEnd();
+		
+		ni = ni << 1; // Move up
+		
+		if (usingA) {
+			atex = [mSummedFBO getTextureAtTarget:0];
+		} else {
+			atex = [mSummedFBO getTextureAtTarget:1];
+		}
+		
+		usingA = !usingA;
+	}
+	
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	
+	[mSummedFBO unbindFBO];
+
+	glUseProgramObjectARB(NULL);
 }
 
 
@@ -341,7 +490,7 @@
 	[self recallPatches:self context:context time:time arguments:arguments];
 	
 	
-//	glDisable(GL_POLYGON_OFFSET_FILL);
+	//glDisable(GL_POLYGON_OFFSET_FILL);
 	
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
@@ -350,12 +499,15 @@
 	glUseProgramObjectARB(NULL);
 	[mFBO unbindFBO];
 	
+	[self generateSummedTables:context withTex:[mFBO getTextureAtTarget:0]];
+	
 	// UNBIND DEPTH AND APPLY BLUR 
 	// ---------------------------
 	
 	if ([inputBlur booleanValue]){
 		[self blurShadowMap:context];
 	}
+	
 	
 	// UNBIND BLUR SHADER AND DRAW WITH SHADOW SHADER
 	// -----------------------------------------------
@@ -371,21 +523,26 @@
 	floatMatrix(finalFloatMatrix,finalMatrix);
 	
 	glUniform1iARB([mShadowShader getUniformLocation:"ShadowMap"],0);
+	glUniform1iARB([mShadowShader getUniformLocation:"shadowMapSize"],mFBOSize);
 	glUniformMatrix4fv([mShadowShader getUniformLocation:"shadowTransMatrix"], 16, FALSE, finalFloatMatrix);
 	glUniform1fARB([mShadowShader getUniformLocation:"minVariance"], (float)[inputVariance doubleValue]);
-	glUniform1fARB([mShadowShader getUniformLocation:"blurAmount"], (float)[inputBlurAmount doubleValue]);
+
 	glUniform1fARB([mShadowShader getUniformLocation:"ambientLevel"], (float)[inputAmbient doubleValue]);
 	glUniform1fARB([mShadowShader getUniformLocation:"lightAttenuation"], (float)[inputLightAttenuation doubleValue]);
+	glUniform1fARB([mShadowShader getUniformLocation:"filterSize"], (float)[inputFilterSize doubleValue]);
 	glUniform4fARB([mShadowShader getUniformLocation:"lightPosition"],
 				   (float)[inputLightX doubleValue], (float)[inputLightY doubleValue], (float)[inputLightZ doubleValue], 0.0);
 	glUniform4fARB([mShadowShader getUniformLocation:"lightLook"],
 				   (float)[inputLightLookX doubleValue], (float)[inputLightLookY doubleValue], (float)[inputLightLookZ doubleValue], 0.0);
 	
+
 	
 	if([inputBlur booleanValue])
 		glBindTexture(GL_TEXTURE_2D, [mBlurVerticalFBO getTextureAtTarget:0]);
 	else 
-		glBindTexture(GL_TEXTURE_2D, [mFBO getTextureAtTarget:0]);
+		glBindTexture(GL_TEXTURE_2D, [mSummedFBO getTextureAtTarget:1]);
+	
+	//glGenerateMipmapEXT(GL_TEXTURE_2D);
 	
 	glCullFace(GL_BACK);
 	
@@ -396,6 +553,7 @@
 	glUseProgramObjectARB(NULL);
 	
 	//	glDisable(GL_LIGHT0);
+	
 	
 	if( [inputDrawDepth booleanValue] ) {
 		
@@ -410,8 +568,13 @@
 		glColor3f(1.0,1.0,1.0f);
 		if([inputBlur booleanValue])
 			glBindTexture(GL_TEXTURE_2D, [mBlurVerticalFBO getTextureAtTarget:0]);
-		else 
-			glBindTexture(GL_TEXTURE_2D, [mFBO getTextureAtTarget:0]);
+		else {
+			glUseProgramObjectARB([mSummedReverseShader programObject]);
+			glUniform1iARB([mSummedReverseShader getUniformLocation:"texture"],0);
+			glUniform1iARB([mSummedReverseShader getUniformLocation:"texSize"],mFBOSize);
+			glBindTexture(GL_TEXTURE_2D, [mSummedFBO getTextureAtTarget:1]);
+			
+		}
 			
 		glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.0);		glVertex3f(-1.0, -1.0, 0.0);
@@ -422,9 +585,12 @@
 		
 		glPopMatrix();
 		glMatrixMode(GL_PROJECTION);
-		glPopMatrix();
+		glPopMatrix();		
 		
 		
+		if(![inputBlur booleanValue]){
+			glUseProgramObjectARB(NULL);
+		}
 	}
 	
 	
