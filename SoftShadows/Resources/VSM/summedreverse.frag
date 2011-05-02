@@ -4,6 +4,8 @@ uniform sampler2D texture;
 
 float step = 1.0 / float(texSize);
 
+float g_DistributeFactor = 1024.0;
+
 void main (void) {
 	vec2 s = gl_TexCoord[0].st;		// Four corners of the rectangle
 	vec2 tl = vec2(s.x-step,s.y-step);
@@ -17,10 +19,14 @@ void main (void) {
 	
 	vec4 f = c0 - c1 - c2 + c3;
 
-
-	gl_FragColor = f;
+	float FactorInv =  1.0 / g_DistributeFactor;  
+	//vec4 moments = vec4(f.y * FactorInv + f.x , f.w * FactorInv  + f.z ,0.0,0.0);
+	vec4 moments = f;
 	
-	// Now we SWAP textures
+	moments.x += 0.5;	// Since using SUMMED Tables we need to adjust
+	moments.y += 0.5;
+
+	gl_FragColor = moments;
 
 }
 

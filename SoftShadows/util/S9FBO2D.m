@@ -187,12 +187,16 @@
 		for (int i=0; i< mNumTargets; i++){
 			
 			glBindTexture(GL_TEXTURE_2D, mColourTargets[i]);
-			glTexImage2D(GL_TEXTURE_2D, 0, mAccuracy, size, size, 0, GL_RGB, GL_FLOAT, NULL);
+			glTexImage2D(GL_TEXTURE_2D, 0, mAccuracy, size, size, 0, GL_RGBA, GL_UNSIGNED_INT, NULL);
 			
 			if(mMipMaps) {
 				glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
 				glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 				glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+				GLfloat largest_supported_anisotropy;
+				glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &largest_supported_anisotropy);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, largest_supported_anisotropy);
+				
 			}
 			else {
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -202,7 +206,7 @@
 				
 			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
 			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
-			
+						
 			mBuffers[i] = GL_COLOR_ATTACHMENT0_EXT + i;
 		}
 		

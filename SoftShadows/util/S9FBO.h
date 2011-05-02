@@ -40,6 +40,9 @@
  *
  * ***********************************************************************/
 
+// Adapted from the excellent Vade's v002 FBO class - http://vade.info
+
+
 #import <Cocoa/Cocoa.h>
 
 // Create, attach, detach and draw a basic framebuffer object

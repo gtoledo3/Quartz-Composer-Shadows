@@ -148,16 +148,16 @@
 	
 	if (mFBO == nil){
 		// Fixed size, power of two as its Texture2D for simplicity
-		mFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 accuracy:GL_RGB16F_ARB  
-										 mipMap: FALSE depthOnly:FALSE];
+		mFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 accuracy:GL_RGBA32F_ARB  
+										 mipMap: TRUE depthOnly:FALSE];
 
 		mBlurHorizontalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize 
-												   numTargets:1 accuracy:GL_RGB16F_ARB	 mipMap: FALSE depthOnly:FALSE]; 
+												   numTargets:1 accuracy:GL_RGBA32F_ARB	 mipMap: FALSE depthOnly:FALSE]; 
 		mBlurVerticalFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:1 
-												   accuracy:GL_RGB16F_ARB  mipMap: FALSE depthOnly:FALSE]; 
+												   accuracy:GL_RGBA32F_ARB  mipMap: FALSE depthOnly:FALSE]; 
 		
 		mSummedFBO = [[S9FBO2D alloc] initWithContext:context andSize:mFBOSize numTargets:2 
-												   accuracy:GL_RGB32F_ARB  mipMap: FALSE depthOnly:FALSE]; 
+												   accuracy:GL_RGBA32F_ARB  mipMap: FALSE depthOnly:FALSE]; 
 		
 	}
 	
@@ -409,8 +409,11 @@
 	
 	[mBlurHorizontalFBO bindFBO];
 	glUseProgramObjectARB([mBlurHorizontalShader programObject]);
-	glUniform1iARB([mBlurHorizontalShader getUniformLocation:"RTScene"],0);
-	glUniform1fARB([mBlurVerticalShader getUniformLocation:"blurSize"],(float)[inputBlurDepthAmount doubleValue]);
+	
+	
+	glUniform1iARB([mBlurHorizontalShader getUniformLocation:"sceneTex"],0);
+	glUniform1fARB([mBlurHorizontalShader getUniformLocation:"rt_w"],(float)mFBOSize);
+	glUniform1fARB([mBlurHorizontalShader getUniformLocation:"blurAmount"],(float)[inputBlurDepthAmount doubleValue]);
 	[self renderOrthoQuad:context withTex:[mFBO getTextureAtTarget:0]];
 	[mBlurHorizontalFBO unbindFBO];
 	glUseProgramObjectARB(NULL);
@@ -419,8 +422,9 @@
 	
 	[mBlurVerticalFBO bindFBO];
 	glUseProgramObjectARB([mBlurVerticalShader programObject]);
-	glUniform1iARB([mBlurVerticalShader getUniformLocation:"RTScene"],0);
-	glUniform1fARB([mBlurVerticalShader getUniformLocation:"blurSize"],(float)[inputBlurDepthAmount doubleValue]);
+	glUniform1iARB([mBlurVerticalShader getUniformLocation:"sceneTex"],0);
+	glUniform1fARB([mBlurVerticalShader getUniformLocation:"rt_h"],(float)mFBOSize);
+	glUniform1fARB([mBlurHorizontalShader getUniformLocation:"blurAmount"],(float)[inputBlurDepthAmount doubleValue]);
 	[self renderOrthoQuad:context withTex:[mBlurHorizontalFBO getTextureAtTarget:0]];
 	
 	glUseProgramObjectARB(NULL);
@@ -480,15 +484,14 @@
 	glGetDoublev(GL_MODELVIEW_MATRIX, shadowModelview);
 	
 
-//	glPolygonOffset(1.0f, 1.0f);
-//	glEnable(GL_POLYGON_OFFSET_FILL);
+	//glPolygonOffset(1.0f, 1.0f);
+	//glEnable(GL_POLYGON_OFFSET_FILL);
 	
 	glEnable(GL_CULL_FACE);
 	glFrontFace(GL_CW);
 	glCullFace(GL_FRONT);
 	
 	[self recallPatches:self context:context time:time arguments:arguments];
-	
 	
 	//glDisable(GL_POLYGON_OFFSET_FILL);
 	
@@ -499,7 +502,7 @@
 	glUseProgramObjectARB(NULL);
 	[mFBO unbindFBO];
 	
-	[self generateSummedTables:context withTex:[mFBO getTextureAtTarget:0]];
+	//[self generateSummedTables:context withTex:[mFBO getTextureAtTarget:0]];
 	
 	// UNBIND DEPTH AND APPLY BLUR 
 	// ---------------------------
@@ -526,23 +529,22 @@
 	glUniform1iARB([mShadowShader getUniformLocation:"shadowMapSize"],mFBOSize);
 	glUniformMatrix4fv([mShadowShader getUniformLocation:"shadowTransMatrix"], 16, FALSE, finalFloatMatrix);
 	glUniform1fARB([mShadowShader getUniformLocation:"minVariance"], (float)[inputVariance doubleValue]);
-
 	glUniform1fARB([mShadowShader getUniformLocation:"ambientLevel"], (float)[inputAmbient doubleValue]);
 	glUniform1fARB([mShadowShader getUniformLocation:"lightAttenuation"], (float)[inputLightAttenuation doubleValue]);
 	glUniform1fARB([mShadowShader getUniformLocation:"filterSize"], (float)[inputFilterSize doubleValue]);
+	glUniform1fARB([mShadowShader getUniformLocation:"lightSize"], (float)[inputBlurAmount doubleValue]);
 	glUniform4fARB([mShadowShader getUniformLocation:"lightPosition"],
 				   (float)[inputLightX doubleValue], (float)[inputLightY doubleValue], (float)[inputLightZ doubleValue], 0.0);
 	glUniform4fARB([mShadowShader getUniformLocation:"lightLook"],
 				   (float)[inputLightLookX doubleValue], (float)[inputLightLookY doubleValue], (float)[inputLightLookZ doubleValue], 0.0);
 	
 
-	
 	if([inputBlur booleanValue])
 		glBindTexture(GL_TEXTURE_2D, [mBlurVerticalFBO getTextureAtTarget:0]);
 	else 
-		glBindTexture(GL_TEXTURE_2D, [mSummedFBO getTextureAtTarget:1]);
+		glBindTexture(GL_TEXTURE_2D, [mFBO getTextureAtTarget:0]);
 	
-	//glGenerateMipmapEXT(GL_TEXTURE_2D);
+	glGenerateMipmapEXT(GL_TEXTURE_2D);
 	
 	glCullFace(GL_BACK);
 	
@@ -551,8 +553,6 @@
 	glDisable(GL_CULL_FACE);
 	
 	glUseProgramObjectARB(NULL);
-	
-	//	glDisable(GL_LIGHT0);
 	
 	
 	if( [inputDrawDepth booleanValue] ) {
@@ -569,10 +569,10 @@
 		if([inputBlur booleanValue])
 			glBindTexture(GL_TEXTURE_2D, [mBlurVerticalFBO getTextureAtTarget:0]);
 		else {
-			glUseProgramObjectARB([mSummedReverseShader programObject]);
+		/*	glUseProgramObjectARB([mSummedReverseShader programObject]);
 			glUniform1iARB([mSummedReverseShader getUniformLocation:"texture"],0);
-			glUniform1iARB([mSummedReverseShader getUniformLocation:"texSize"],mFBOSize);
-			glBindTexture(GL_TEXTURE_2D, [mSummedFBO getTextureAtTarget:1]);
+			glUniform1iARB([mSummedReverseShader getUniformLocation:"texSize"],mFBOSize);*/
+			glBindTexture(GL_TEXTURE_2D, [mFBO getTextureAtTarget:0]);
 			
 		}
 			
