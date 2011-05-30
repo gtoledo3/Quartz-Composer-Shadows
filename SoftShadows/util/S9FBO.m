@@ -50,6 +50,7 @@
 
 @synthesize mFBOID;
 @synthesize mTextureID;
+@synthesize mDepthID;//-gt, synthesize depth ID.
 @synthesize mBounds;
 @synthesize mContext;
 
