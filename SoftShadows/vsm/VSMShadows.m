@@ -75,8 +75,16 @@
 
 // It appears that when we have a consumer within this patch, it will convert itself to a consumer! How odd?
 
-+(QCPatchExecutionMode)executionModeWithIdentifier:(id)identifier {
-	return 1;
+//This is defined by the executionModewithIdentifier, and graph execution scheme. A patch that has a processor identifier (looks like a black colored graph node in SL, green in Leopard), will "turn" into a Consumer when consumer patches are placed with that macro. This is a built in function that helps control graph execution. Since all "calls" initiate with Consumers, a Consumer cannot have outputs, only inputs that call upstream. So, if a Consumer patch is placed within an Environment macro (save for Render In Image), it must turn into a Consumer, to prevent output. This patch will always need to have consumers in it, so it should probably always be consumer.-gt
+
+//+(QCPatchExecutionMode)executionModeWithIdentifier:(id)identifier {
+//	return 1;
+//}
+
+//-gt
++(QCPatchExecutionMode)executionModeWithIdentifier:(id)identifier
+{
+	return kQCPatchExecutionModeConsumer;
 }
 
 +(QCPatchTimeMode)timeModeWithIdentifier:(id)identifier {
